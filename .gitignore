@@ -1,0 +1,7 @@
+# ~/.gitignore 
+
+/*
+
+!/.gitignore
+!/.xmonad
+!/.config
