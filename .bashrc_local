@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Set path.
+export PATH=$PATH:/sbin:/usr/sbin:~/.local/bin:~/.cabal/bin:~/bin:~/scripts:/opt/vertica/bin
+
+# Set default terminal programs.
+export VISUAL=vim
+export EDITOR="$VISUAL"
+export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+export LESS=' -R '
+
+# Set prompt to 'user:~/current/dir$ '
+export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;35m\]\w\[\033[01;32m\] 🍀\[\033[00;00m\] '
+
+# Set next-line prompt to '> '
+export PS2='\[\033[01;32m\]⚬\[\033[00;00m\] '
