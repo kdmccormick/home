@@ -25,9 +25,9 @@ selfcheck:
 	@echo "Makefile is well-formed."
 
 install: \
+	bootstrap \
 	source-bashrc-local \
 	root-homedir \
-	bootstrap \
 	ssh \
 	dirs \
 	apt-packages \
@@ -35,13 +35,6 @@ install: \
 	special-install
 
 bootstrap: apt-packages.update apt-packages.install.bootstrap
-
-ssh:
-	ensure-ssh-key
-	cat ~/.ssh/id_rsa.pub
-
-ssh.rm-key:
-	rm -rf ~/.ssh/id_rsa.pub ~/.ssh/id_rsa
 
 .ONESHELL:
 source-bashrc-local: oneshell.strict
@@ -73,6 +66,13 @@ root-homedir: oneshell.strict
 		echo "    . ~/.bashrc_local"           | sudo tee /root/.bashrc
 		echo "fi"                              | sudo tee /root/.bashrc
 	fi
+
+ssh:
+	ensure-ssh-key
+	cat ~/.ssh/id_rsa.pub
+
+ssh.rm-key:
+	rm -rf ~/.ssh/id_rsa.pub ~/.ssh/id_rsa
 
 dirs:
 	LINK_NAME=Documents LINK_TO=docs make dirs.convert-to-link
