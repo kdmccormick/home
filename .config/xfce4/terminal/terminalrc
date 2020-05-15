@@ -39,5 +39,5 @@ ScrollingLines=5000
 TabActivityColor=#0f4999
 ColorBackgroundVary=TRUE
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
-BackgroundDarkness=0.810000
+BackgroundDarkness=0.900000
 
