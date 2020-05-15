@@ -1,0 +1,34 @@
+#!/bin/bash
+# Kyle McCormick
+# 2015-10-29
+# Create output mode and set screen resolution
+
+exename=`basename "$0"`
+log() { echo "$exename: $@" 1>&2; }
+
+output="$1"
+width="$2"
+height="$3"
+if [ -z "$4"]; then
+	rate=60
+else
+	rate="$4"
+fi
+
+modeline=$(cvt $width $height $rate | cut -d "
+" -f 2)
+name=$(echo $modeline | cut -d " " -f 2)
+args=$(echo $modeline | cut -d " " -f 3-)
+newcmd="xrandr --newmode $name $args"
+log "$newcmd"
+$newcmd
+
+addcmd="xrandr --addmode $output $name"
+log "$addcmd"
+$addcmd
+
+setcmd="xrandr --output $output --mode $name"
+log "$setcmd"
+$setcmd
+
+exit $?

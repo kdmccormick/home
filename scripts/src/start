@@ -1,0 +1,7 @@
+#!/bin/bash
+# Kyle McCormick
+# 2015-10-20
+# Start program in background with nohup and ignore output
+
+nohup "$@" &> /dev/null &
+

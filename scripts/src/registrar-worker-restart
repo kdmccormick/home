@@ -1,0 +1,3 @@
+#!/bin/bash
+docker restart edx.devstack.registrar-worker && make registrar-worker-attach
+

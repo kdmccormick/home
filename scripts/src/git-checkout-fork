@@ -1,0 +1,55 @@
+#!/usr/bin/env bash 
+
+set -e
+set -o pipefail
+set -u
+
+fork_arg="${1:-}"
+if [[ -z "$fork_arg" ]]; then
+	echo "Must provide either a forking organization or a branch of a fork." >&2
+	echo "  Examples:" >&2
+	echo "    git-getfork example-org" >&2
+	echo "    git-getfork example-org:some/branch/name" >&2
+	exit 1
+fi
+
+fork_arg_parts_split=( ${fork_arg/:/ } )
+fork_org="${fork_arg_parts_split[0]}"
+fork_branch="${fork_arg_parts_split[1]:-}"
+
+origin=$(git remote get-url origin) || true
+if [[ -z "$origin" ]]; then
+	echo "This script must be run within a git repository." >&2
+	exit 2
+fi
+origin_parts_split=( ${origin//[@:\/]/ } )
+user="${origin_parts_split[0]}"
+host="${origin_parts_split[1]:-}"
+org="${origin_parts_split[2]:-}"
+repo="${origin_parts_split[3]:-}"
+if [[ "$user" != "git" || "$host" != "github.com" || -z "$org" || -z "$repo" ]]; then
+	echo "For now, at least, this script only works on repos" >&2
+	echo "with GitHub as a \`origin\` via SSH." >&2
+	exit 3
+fi
+
+fork_remote="${user}@${host}:${fork_org}/${repo}"
+fork_remote_name=fork_"$fork_org"
+
+fork_existing_remote=$(git remote get-url "$fork_remote_name" || true)
+if [[ -n "$fork_existing_remote" ]]; then
+	echo "Remote ${fork_remote_name} already exists as ${fork_existing_remote}." >&2
+else
+	echo "Adding remote ${fork_remote_name} = ${fork_remote}." >&2
+	set -x
+	git remote add "${fork_remote_name}" "${fork_remote}"
+	set +x
+fi
+
+if [[ -n "$fork_branch" ]]; then
+	echo "Fetching and checking out branch ${fork_branch} from fork."  >&2
+	set -x
+	git fetch "${fork_remote_name}" "${fork_branch}"
+	git checkout "${fork_branch}"
+	set +x
+fi

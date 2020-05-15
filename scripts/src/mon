@@ -1,0 +1,66 @@
+#!/bin/bash
+
+CONFIG=xrandr
+LAPTOP=eDP1
+MONITOR=DP2
+
+show_help() {
+	echo "Expected exactly one single-character argument:"
+	echo "    a => monitor above laptop"
+	echo "    r => monitor right-of laptop"
+	echo "    l => monitor left-of laptop"
+	echo "    b => monitor below laptop"
+	echo "    D => monitor duplicates laptop"
+	echo "    M => only use monitor; disable laptop"
+	echo "    L => only use laptop; disable monitor"
+	echo "    A => automatic; let xrandr decide"
+	exit 1
+}
+
+EXT_MON_UUID=a00b1844-1a00-0100-ffff-ffffffffffff
+
+LOG_FILE=/home/kyle/scripts/mon.log
+echo >> "$LOG_FILE"
+echo "----------------------------------------" >> "$LOG_FILE"
+echo $(date) >> "$LOG_FILE"
+echo " \$ mon $@" >> "$LOG_FILE"
+
+FORCEPOWER="true" # sudo boltctl power ${EXT_MON_UUID} --timeout 1 &>> ${LOG_FILE}"
+
+if [[ $# -ne 1 ]]; then show_help; fi
+
+option=$1
+case $option in
+	a|r|l|b|D)
+		case $option in
+			a) placement=above    ;;
+			r) placement=right-of ;;
+			l) placement=left-of  ;;
+			b) placement=below    ;;
+			D) placement=same-as  ;;
+		esac
+		$FORCEPOWER
+	    ${CONFIG} --output ${LAPTOP} --auto \
+		          --output ${MONITOR} --${placement} ${LAPTOP} --auto \
+		   	&>> "$LOG_FILE"
+		;;
+	M)
+		$FORCEPOWER
+		${CONFIG} --output ${LAPTOP} --off \
+		          --output ${MONITOR} --auto \
+		    &>> "$LOG_FILE"
+		;;
+	L)
+		${CONFIG} --output ${LAPTOP} --auto \
+		          --output ${MONITOR} --off
+		    &>> "$LOG_FILE"
+		;;
+	A)
+		$FORCEPOWER
+		${CONFIG} --auto \
+		     &>> "$LOG_FILE"
+		;;
+	*) show_help
+esac
+
+wallpaper &>> "$LOG_FILE"

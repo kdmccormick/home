@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Kyle McCormick
+# 2015-10-20
+# Set wallpaper to random picture within wallpapers/
+
+set -x
+set -u
+set -o pipefail
+set -e
+
+PIC=$(ls -1 ~/pics/wallpapers/*.jpg | sort -R | tail --lines 1)
+if [ $PIC ]; then
+	feh --bg-fill "$PIC"
+fi
+

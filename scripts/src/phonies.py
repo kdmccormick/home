@@ -1,0 +1,32 @@
+#!/usr/bin/python3
+
+import sys
+from os import popen
+
+
+MAX_LINE_LEN = 80
+
+filename = sys.argv[1] if len(sys.argv) > 1 else 'Makefile'
+
+cmd_template = (
+    "grep '^[^:%]+(?=:)' -Po {filename} | "
+    "grep -v '\t|#' -P | "
+    "grep '[a-z]' | "
+    "sort"
+)
+cmd = cmd_template.format(filename=filename)
+targets = popen(cmd).read().splitlines()
+
+prefix = ".PHONY:"
+max_len = MAX_LINE_LEN - len(prefix) - len("\\ ")
+result_lines = [""]
+for target in targets:
+    to_append = " " + target
+    if len(to_append) + len(result_lines[-1]) <= max_len:
+        result_lines[-1] += to_append
+    else:
+        result_lines.append(to_append)
+
+sep = " \\\n" + (" " * len(prefix))
+result = prefix + sep.join(result_lines)
+print(result)

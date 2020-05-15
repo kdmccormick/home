@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ -z $1 ]; then
+	echo "one argument required: output file name"
+	exit 1
+fi
+scrot "$1.png" -d 3 -c

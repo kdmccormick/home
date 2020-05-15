@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -e
+
+if [ -z "$2" ]; then
+	echo "Usages: "
+	echo "$ add-wifi <name> <ssid>                        # Public"
+	echo "$ add-wifi <name> <ssid> <passkey>              # WPA2 personal"
+	echo "$ add-wifi <name> <ssid> <username> <password>  # WPA2 enterprise"
+	exit 1
+fi
+
+nmcli c a con-name "$1" ifname wlp4s0 type wifi ssid "$2"
+
+if [ -n "$4" ]; then
+	nmcli c m "$1" ipv4.method auto
+	nmcli c m "$1" wifi-sec.key-mgmt wpa-eap 802-1x.eap peap 802-1x.identity "$3" 802-1x.phase2-auth mschapv2
+	nmcli c m "$1" 802-1x.password "$4"
+	echo "Successfully added WPA2-Enterprise connection"
+elif [ -n "$3" ]; then
+	nmcli c m "$1" wifi-sec.key-mgmt wpa-psk
+	nmcli c m "$1" wifi-sec.psk "$3"
+	echo "Successfully added WPA2-Personal connection"
+else 
+	echo "Successfully added public connection."
+fi
+
+echo "Trying to activate..."
+nmcli c u $1
