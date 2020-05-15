@@ -1,3 +1,17 @@
+.PHONY: apt-packages apt-packages.autoremove apt-packages.keys \
+        apt-packages.keys.get-key apt-packages.sources \
+        apt-packages.sources.add apt-packages.sources.disable-dist-docker-repo \
+        apt-packages.update apt-packages.upgrade bootstrap dirs \
+        dirs.convert-to-link install misc-admin oneshell.strict root-homedir \
+        selfcheck source-bashrc-local special-install \
+        special-install.crashplan special-install.crashplan.download \
+        special-install.crashplan.install special-install.postman \
+        special-install.sophos special-install.sophos.download \
+        special-install.sophos.install special-install.xsecurelock \
+        special-install.xsecurelock.configure special-install.xsecurelock.deps \
+        special-install.xsecurelock.install special-install.zoom ssh \
+        ssh.rm-key
+
 SHELL=/bin/bash
 
 KS_USER := $$(get-ksetting KS_USER)
@@ -10,13 +24,15 @@ KS_ROOT_ENV := $$(get-ksetting KS_ROOT_ENV)
 selfcheck:
 	@echo "Makefile is well-formed."
 
-install:
-	sudo make bootstrap
-	make ssh
-	make source-bashrc-local
-	sudo make apt-packages
-	sudo make misc-admin
-	make special-install
+install: \
+	source-bashrc-local \
+	root-homedir \
+	bootstrap \
+	ssh \
+	dirs \
+	apt-packages \
+	misc-admin \
+	special-install
 
 bootstrap: apt-packages.update apt-packages.install.bootstrap
 
@@ -29,16 +45,33 @@ ssh.rm-key:
 
 .ONESHELL:
 source-bashrc-local: oneshell.strict
-	BASHRC=~/.bashrc
-	if cat "$$BASHRC" | grep ".bashrc_local"; then
-		@echo "It looks like $$BASHRC already sources .bashrc_local"
+	if cat ~/.bashrc | grep ".bashrc_local"; then
+		@echo "It looks like ~/.bashrc already sources ~/.bashrc_local"
 	else
-		echo >> "$$BASHRC"
-		echo "# Local bash init commands." >> "$$BASHRC"
-		echo "# Added by ~/Makefile." >> "$$BASHRC"
-		echo "if [ -f ~/.bashrc_local ]; then" >> "$$BASHRC"
-		echo "    . ~/.bashrc_local" >> "$$BASHRC"
-		echo "fi" >> "$$BASHRC"
+		echo >> ~/.bashrc
+		echo "# Local bash init commands." >> ~/.bashrc
+		echo "# Added by ~/Makefile." >> ~/.bashrc
+		echo "if [ -f ~/.bashrc_local ]; then" >> ~/.bashrc
+		echo "    . ~/.bashrc_local" >> ~/.bashrc
+		echo "fi" >> ~/.bashrc
+	fi
+
+.ONESHELL:
+root-homedir: oneshell.strict
+	cd ~/.kinstall/root-homedir
+	src_dir="$$(pwd)"
+	cd ~
+	# sudo mv "$$src_dir"/* /root/  # uncomment if/when there are any non-dotfiles.
+	sudo mv "$$src_dir"/.[!.]* /root/ -f
+	if sudo cat /root/.bashrc | grep ".bashrc_local"; then
+		@echo "It looks like /root/.bashrc already sources /root/.bashrc_local"
+	else
+		echo                                   | sudo tee /root/.bashrc
+		echo "# Local bash init commands."     | sudo tee /root/.bashrc
+		echo "# Added by ~/Makefile."          | sudo tee /root/.bashrc
+		echo "if [ -f ~/.bashrc_local ]; then" | sudo tee /root/.bashrc
+		echo "    . ~/.bashrc_local"           | sudo tee /root/.bashrc
+		echo "fi"                              | sudo tee /root/.bashrc
 	fi
 
 dirs:
@@ -54,18 +87,19 @@ dirs:
 	mkdir -p ~/apps
 	mkdir -p ~/bin
 
-
 .ONESHELL:
 dirs.convert-to-link: oneshell.strict
-	cd "$$HOME"
+	@echo off
+	cd ~
 	if [[ -d "$$LINK_TO" ]] ; then
 		@echo "$$LINK_TO already in $$HOME"
 	else
 		mv "$$LINK_NAME" "$$LINK_TO"
 		ln -s "$$HOME/$$LINK_TO" "$$LINK_NAME"
 	fi
+	@echo on
 
-apt-packages:
+apt-packages: \
 	apt-packages.keys \
 	apt-packages.sources \
 	apt-packages.update \
@@ -81,7 +115,7 @@ apt-packages.keys:
 
 .ONESHELL:
 apt-packages.keys.get-key: oneshell.strict
-	wget -O - $(key_url) | apt-key add -
+	wget -O - $(key_url) | sudo apt-key add -
 	if [[ -n "$(fingerprint)" && -z "$$(apt-key fingerprint '$(fingerprint)')" ]]; then
 		@echo "Fingerprint verification failed for key from $(key_url)"
 		exit 1
@@ -93,19 +127,19 @@ apt-packages.sources: apt-packages.sources.disable-dist-docker-repo
 	deb_line="deb http://repository.spotify.com stable non-free" deb_name="spotify" make apt-packages.sources.add
 
 apt-packages.sources.disable-dist-docker-repo:
-	sed --in-place -E "s/(^deb.*docker.*)/\# \1/" /etc/apt/sources.list
+	sudo sed --in-place -E "s/(^deb.*docker.*)/\# \1/" /etc/apt/sources.list
 
 apt-packages.sources.add:
-	echo "$$deb_line" > /etc/apt/sources.list.d/"$$deb_name".list
+	echo "$$deb_line" | sudo tee /etc/apt/sources.list.d/"$$deb_name".list
 
 apt-packages.update:
-	apt-get update
+	sudo apt-get update
 
 .ONESHELL:
 apt-packages.install.%: oneshell.strict
 	apt_install_list=~/.kinstall/$*.apt-install.list
 	if [[ -f "$$apt_install_list" ]]; then
-		cat "$$apt_install_list" | xargs apt-get install
+		cat "$$apt_install_list" | xargs sudo apt-get install --yes
 	else
 		@echo "No such file $${apt_install_list}."
 	fi
@@ -116,19 +150,19 @@ apt-packages.upgrade:
 apt-packages.autoremove:
 	sudo apt-get autoremove --yes
 
-special-install:
+special-install: \
 	special-install.xsecurelock \
 	special-install.postman \
 	special-install.zoom \
 	special-install.sophos
+	sudo apt-get upgrade --autoremove --yes
 
 special-install.xsecurelock: \
 	special-install.xsecurelock.deps \
 	special-install.xsecurelock.install \
 	special-install.xsecurelock.configure
 
-special-install.xsecurelock.deps:
-	sudo make apt-packages.install.xsecurelock-deps
+special-install.xsecurelock.deps: apt-packages.install.xsecurelock-deps
 
 .ONESHELL:
 special-install.xsecurelock.install: oneshell.strict
@@ -173,7 +207,9 @@ special-install.zoom: oneshell.strict
 	wget https://zoom.us/client/latest/zoom_amd64.deb
 	sudo apt-get install --yes ./zoom_amd64.deb
 
-special-install.sophos: special-install.sophos.download special-install.sophos.install
+special-install.sophos: \
+	special-install.sophos.download \
+	special-install.sophos.install
 
 .ONESHELL:
 special-install.sophos.download: oneshell.strict
@@ -190,7 +226,9 @@ special-install.sophos.install: oneshell.strict
 	cp -f ~/.kinstall/sophos-av_installOptions installOptions
 	sudo ./install.sh
 
-special-install.crashplan: special-install.crashplan.download special-install.crashplan.install
+special-install.crashplan: \
+	special-install.crashplan.download \
+	special-install.crashplan.install
 
 .ONESHELL:
 special-install.crashplan.download: oneshell.strict
@@ -207,9 +245,6 @@ special-install.crashplan.install: oneshell.strict
 	cd ./crashplan-install
 	sudo ./mit-crashplan-install.sh
 
-env.user-pkg.special.cleanup:
-	sudo apt-get autoremove --yes
-
 misc-admin:
 	ufw enable
 	usermod -aG docker
@@ -222,9 +257,3 @@ oneshell.strict:
 	set -e
 	set -o pipefail
 	set -u
-
-############ NOTE: THIS DOESN'T WORK YET ##############
-# .ONESHELL:
-# root-cfg: oneshell.strict
-# 	export dotfiles_dir=$(KSETUP_REPO_DIR)/root-dotfiles
-# 	make cfg.dotfiles cfg.bashrc
