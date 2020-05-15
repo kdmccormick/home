@@ -18,7 +18,7 @@ alias dkdown="docker-compose down"
 alias reown="sudo chown $(whoami) -R"
 
 # Load up environ-specific aliases, if defined.
-ksetup_env=$(cd "$HOME/ksetup" && make settings.ENV)
+ksetup_env=$(get-ksetting KS_ENV)
 . ."$ksetup_env".bash_aliases 2>/dev/null || true
 
 # Load up private (non-version-controlled) aliases, if defined.

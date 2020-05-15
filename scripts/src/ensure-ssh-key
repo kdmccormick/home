@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+set -u
+
+if ls ~/.ssh/id_rsa.pub &>/dev/null; then
+	echo "~/.ssh/id_rsa.pub present. Assuming key is created correctly. Will exit." >&2
+else
+	echo "~/.ssh/id_rsa.pub not present. Creating now." >&2
+	ks_email=$(get-ksetting KS_EMAIL)
+	ks_ssh_pass=$(get-ksetting KS_SSH_PASSPHRASE)
+	cmd_base="ssh-keygen -t rsa -b 4096 -C ${ks_email} -f $HOME/.ssh/id_rsa"
+	echo "+${cmd_base} -N <PASSPHRASE REDACTED>"
+	$cmd_base -N "$ks_ssh_pass"
+	unset ks_ssh_pass
+fi

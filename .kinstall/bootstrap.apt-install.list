@@ -1,0 +1,7 @@
+apt-transport-https
+ca-certificates
+curl
+gnupg-agent
+python-is-python3
+software-properties-common
+wget
