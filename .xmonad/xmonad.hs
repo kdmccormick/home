@@ -46,13 +46,9 @@ myLayout = avoidStruts $ tiled ||| goldenStack ||| Full
 
 onStart :: X ()
 onStart = do
-    spawn "~/.xmonad/start-services.sh"
     spawnWks 1 (cmdSublime False)
     spawnWks 1 cmdTerminal
     spawnWks 2 cmdTerminal
-    spawnWks 3 ("test -f ~/.home_urls && cat ~/.home_urls | xargs " ++ cmdFirefox)
-    spawnWks 3 ("test -f ~/.code_urls && cat ~/.code_urls | xargs " ++ cmdFirefox ++ " -P code")
-    spawnWks 4 ("test -f ~/.logistics_urls && cat ~/.logistics_urls | xargs " ++ cmdFirefox ++ " -P logistics")
 
 spawnWks :: Int -> String -> X ()
 spawnWks wksId cmd = spawnOn (show wksId) cmd
@@ -104,7 +100,6 @@ keybindings =
     , (globalModShift,   xK_x,         spawnMulti [cmdWMQuit, cmdExit])
     , (globalModShift,   xK_r,         spawn cmdReboot)
     , (globalModShift,   xK_s,         spawnMulti [cmdWMQuit, cmdShutdown])
-    , (globalModShift,   xK_m,         spawn cmdFixMouse)
     , (globalMod,        xK_0,         spawn cmdOneMonitor)
     , (globalModShift,   xK_0,         spawn cmdTwoMonitorsVertical)
     ]
@@ -121,7 +116,6 @@ cmdWMQuit                 = "wmquit"
 cmdExit                   = "killall -SIGINT xmonad-x86_64-linux"
 cmdShutdown               = "shutdown -P now"
 cmdReboot                 = "shutdown -r now"
-cmdFixMouse               = "fixmouse"
 cmdOneMonitor             = "mon L"
 cmdTwoMonitorsVertical    = "mon a"
 
