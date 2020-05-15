@@ -47,6 +47,9 @@
       <property name="square-icons" type="bool" value="true"/>
       <property name="size-max" type="uint" value="22"/>
       <property name="names-ordered" type="array">
+        <value type="string" value="network"/>
+        <value type="string" value="bluetooth enabled"/>
+        <value type="string" value="redshift-gtk"/>
         <value type="string" value="onboard"/>
       </property>
     </property>
