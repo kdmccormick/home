@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <channel name="xfce4-panel" version="1.0">
-  <property name="panels" type="uint" value="1">
+  <property name="panels" type="array">
+    <value type="int" value="0"/>
+    <value type="int" value="1"/>
     <property name="panel-0" type="empty">
       <property name="position" type="string" value="p=6;x=0;y=0"/>
       <property name="length" type="uint" value="100"/>
       <property name="position-locked" type="bool" value="true"/>
       <property name="plugin-ids" type="array">
-        <value type="int" value="1"/>
-        <value type="int" value="2"/>
-        <value type="int" value="3"/>
-        <value type="int" value="4"/>
+        <value type="int" value="21"/>
+        <value type="int" value="20"/>
+        <value type="int" value="26"/>
+        <value type="int" value="24"/>
+        <value type="int" value="19"/>
+        <value type="int" value="25"/>
         <value type="int" value="5"/>
         <value type="int" value="6"/>
         <value type="int" value="7"/>
         <value type="int" value="8"/>
         <value type="int" value="9"/>
         <value type="int" value="10"/>
+        <value type="int" value="22"/>
+        <value type="int" value="23"/>
         <value type="int" value="11"/>
         <value type="int" value="12"/>
+        <value type="int" value="28"/>
+        <value type="int" value="15"/>
+        <value type="int" value="27"/>
+        <value type="int" value="29"/>
       </property>
       <property name="background-style" type="uint" value="0"/>
       <property name="size" type="uint" value="24"/>
@@ -27,26 +37,26 @@
       <property name="mode" type="uint" value="0"/>
       <property name="autohide-behavior" type="uint" value="0"/>
     </property>
+    <property name="panel-1" type="empty">
+      <property name="position" type="string" value="p=8;x=96;y=1055"/>
+      <property name="size" type="uint" value="30"/>
+      <property name="mode" type="uint" value="0"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="nrows" type="uint" value="1"/>
+      <property name="length" type="uint" value="100"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="13"/>
+      </property>
+      <property name="autohide-behavior" type="uint" value="0"/>
+    </property>
   </property>
   <property name="plugins" type="empty">
-    <property name="plugin-1" type="string" value="whiskermenu"/>
-    <property name="plugin-2" type="string" value="separator">
-      <property name="style" type="uint" value="0"/>
-      <property name="expand" type="bool" value="false"/>
-    </property>
-    <property name="plugin-3" type="string" value="tasklist">
-      <property name="show-handle" type="bool" value="false"/>
-      <property name="flat-buttons" type="bool" value="true"/>
-    </property>
-    <property name="plugin-4" type="string" value="separator">
-      <property name="style" type="uint" value="0"/>
-      <property name="expand" type="bool" value="true"/>
-    </property>
     <property name="plugin-5" type="string" value="systray">
       <property name="show-frame" type="bool" value="false"/>
       <property name="square-icons" type="bool" value="true"/>
       <property name="size-max" type="uint" value="22"/>
       <property name="names-ordered" type="array">
+        <value type="string" value="task manager"/>
         <value type="string" value="network"/>
         <value type="string" value="bluetooth enabled"/>
         <value type="string" value="redshift-gtk"/>
@@ -95,6 +105,40 @@
       <property name="mode" type="uint" value="2"/>
       <property name="fuzziness" type="uint" value="0"/>
     </property>
+    <property name="plugin-13" type="string" value="tasklist"/>
+    <property name="plugin-15" type="string" value="separator">
+      <property name="expand" type="bool" value="false"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-19" type="string" value="pager"/>
+    <property name="plugin-20" type="string" value="separator">
+      <property name="expand" type="bool" value="false"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-21" type="string" value="whiskermenu"/>
+    <property name="plugin-22" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-23" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-24" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-25" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-26" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-27" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-28" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-29" type="string" value="cpugraph"/>
   </property>
   <property name="configver" type="int" value="2"/>
 </channel>

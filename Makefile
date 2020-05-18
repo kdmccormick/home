@@ -26,7 +26,7 @@ selfcheck:
 
 install: \
 	bootstrap \
-	source-bashrc-local \
+	source-profile-local \
 	root-homedir \
 	ssh \
 	dirs \
@@ -37,18 +37,27 @@ install: \
 bootstrap: apt-packages.update apt-packages.install.bootstrap
 
 .ONESHELL:
-source-bashrc-local: oneshell.strict
-	if cat ~/.bashrc | grep ".bashrc_local"; then
-		@echo "It looks like ~/.bashrc already sources ~/.bashrc_local"
+source-profile-local: oneshell.strict
+	if cat ~/.profile | grep ".profile_local"; then
+		@echo "It looks like ~/.profile already sources ~/.profile_local"
+	else
+		echo >> ~/.profile
+		echo "# Local login shell init commands." >> ~/.profile
+		echo "# Added by ~/Makefile." >> ~/.profile
+		echo "if [ -f ~/.profile_local ]; then" >> ~/.profile
+		echo "    . ~/.profile_local" >> ~/.profile
+		echo "fi" >> ~/.profile
+	fi
+	if cat ~/.bashrc | grep ".profile_local"; then
+		@echo "It looks like ~/.bashrc already sources ~/.profile_local"
 	else
 		echo >> ~/.bashrc
 		echo "# Local bash init commands." >> ~/.bashrc
 		echo "# Added by ~/Makefile." >> ~/.bashrc
-		echo "if [ -f ~/.bashrc_local ]; then" >> ~/.bashrc
-		echo "    . ~/.bashrc_local" >> ~/.bashrc
+		echo "if [ -f ~/.profile_local ]; then" >> ~/.bashrc
+		echo "    . ~/.profile_local" >> ~/.bashrc
 		echo "fi" >> ~/.bashrc
 	fi
-
 .ONESHELL:
 root-homedir: oneshell.strict
 	cd ~/.kinstall/root-homedir

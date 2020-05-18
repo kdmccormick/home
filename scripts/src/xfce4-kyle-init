@@ -5,11 +5,17 @@ set -o pipefail
 set -u
 set -x
 
+# Move this to workspace 9.
+win-set-desktop 9
+
+# Enable natural scrolling.
 invertscroll
 
+# Lock screen automatically after 300 seconds. Poll every 5 milliseconds (?).
 xset s 300 5
 
+# Run screen lock handler (blocks indefinitely).
 xss-lock --notifier=/usr/local/libexec/xsecurelock/dimmer \
          --transfer-sleep-lock -- xsecurelock
 
-echo exiting
+echo "$0: xss-lock process finished - either crashed or was interrupted."
