@@ -51,7 +51,6 @@
       <property name="&lt;Alt&gt;Print" type="string" value="xfce4-screenshooter -w"/>
       <property name="&lt;Shift&gt;Print" type="string" value="xfce4-screenshooter -r"/>
       <property name="override" type="bool" value="true"/>
-      <property name="&lt;Super&gt;space" type="string" value="xfce4-popup-whiskermenu"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;l" type="string" value="xflock4"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;Return" type="string" value="exo-open --launch TerminalEmulator"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;f" type="string" value="exo-open --launch FileManager"/>
@@ -66,6 +65,9 @@
       <property name="&lt;Super&gt;7" type="string" value="xdotool set_desktop 6"/>
       <property name="&lt;Super&gt;8" type="string" value="xdotool set_desktop 7"/>
       <property name="&lt;Super&gt;9" type="string" value="xdotool set_desktop 8"/>
+      <property name="&lt;Super&gt;Return" type="string" value="xfce4-popup-whiskermenu"/>
+      <property name="&lt;Super&gt;space" type="string" value="/home/kyle/scripts/win-maximize"/>
+      <property name="&lt;Super&gt;x" type="string" value="/home/kyle/scripts/win-close"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

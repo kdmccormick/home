@@ -12,6 +12,7 @@ openconnect
 pylint
 python3-pip
 redshift-gtk
+shellcheck
 spotify-client
 sublime-text
 trash-cli

@@ -1,4 +1,4 @@
-.PHONY: apt-packages apt-packages.autoremove apt-packages.keys \
+.PHONY: apt-packages apt-packages.keys \
         apt-packages.keys.get-key apt-packages.sources \
         apt-packages.sources.add apt-packages.sources.disable-dist-docker-repo \
         apt-packages.update apt-packages.upgrade bootstrap dirs \
@@ -105,10 +105,9 @@ apt-packages: \
 	apt-packages.update \
 	apt-packages.install.common \
 	apt-packages.install.$(KS_ENV) \
-	apt-packages.upgrade \
-	apt-packages.autoremove
+	apt-packages.upgrade
 
-apt-packages.keys:
+apt-packages.keys: warn-password
 	key_url="https://download.sublimetext.com/sublimehq-pub.gpg" make apt-packages.keys.get-key
 	key_url="https://download.docker.com/linux/ubuntu/gpg" fingerprint="0EBFCD88" make apt-packages.keys.get-key
 	key_url="https://download.spotify.com/debian/pubkey.gpg" make apt-packages.keys.get-key
@@ -121,7 +120,7 @@ apt-packages.keys.get-key: oneshell.strict
 		exit 1
 	fi
 
-apt-packages.sources: apt-packages.sources.disable-dist-docker-repo
+apt-packages.sources: warn-password apt-packages.sources.disable-dist-docker-repo
 	deb_line="deb https://download.sublimetext.com/ apt/stable/" deb_name="sublime-text" make apt-packages.sources.add
 	deb_line="deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" deb_name="docker" make apt-packages.sources.add
 	deb_line="deb http://repository.spotify.com stable non-free" deb_name="spotify" make apt-packages.sources.add
@@ -132,11 +131,11 @@ apt-packages.sources.disable-dist-docker-repo:
 apt-packages.sources.add:
 	echo "$$deb_line" | sudo tee /etc/apt/sources.list.d/"$$deb_name".list
 
-apt-packages.update:
+apt-packages.update: warn-password
 	sudo apt-get update
 
 .ONESHELL:
-apt-packages.install.%: oneshell.strict
+apt-packages.install.%: warn-password oneshell.strict
 	apt_install_list=~/.kinstall/$*.apt-install.list
 	if [[ -f "$$apt_install_list" ]]; then
 		cat "$$apt_install_list" | xargs sudo apt-get install --yes
@@ -144,11 +143,8 @@ apt-packages.install.%: oneshell.strict
 		@echo "No such file $${apt_install_list}."
 	fi
 
-apt-packages.upgrade:
-	sudo apt-get upgrade --yes
-
-apt-packages.autoremove:
-	sudo apt-get autoremove --yes
+apt-packages.upgrade: warn-password
+	sudo apt-get upgrade --autoremove --yes
 
 special-install: \
 	special-install.xsecurelock \
@@ -181,6 +177,7 @@ special-install.xsecurelock.install: oneshell.strict
 	sudo make install
 
 special-install.xsecurelock.configure:
+	sudo apt-get remove xfce4-screensaver
 	xfconf-query --channel xfce4-session --property /general/LockCommand --reset
 	xfconf-query --channel xfce4-session --property /general/LockCommand --set "xset s activate" --create --type string
 
@@ -251,6 +248,10 @@ misc-admin:
 	systemctl enable --now docker
 	@echo "WARNING: Docker installation may require reboot, in addition to other commands."
 	@echo "         To see if it is working, run 'docker run hello-world'."
+
+warn-password:
+	@echo "Note: If it seems like the Make process has stalled, "
+	@echo "it may just be waiting for you to enter a password."
 
 .ONESHELL:
 oneshell.strict:

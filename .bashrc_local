@@ -14,3 +14,9 @@ export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;35m\]\w\[\033[01;32m\] ð
 
 # Set next-line prompt to '> '
 export PS2='\[\033[01;32m\]âš¬\[\033[00;00m\] '
+
+# Set xsecurelock parameters
+export XSECURELOCK_WAIT_TIME_MS=10
+export XSECURELOCK_IMAGE_DURATION_SECONDS=3600
+export XSECURELOCK_SAVER=saver_mpv
+export XSECURELOCK_LIST_VIDEOS_COMMAND="echo ${HOME}/pics/lock-screens/lock_\$(get-ksetting KS_ENV).jpg"

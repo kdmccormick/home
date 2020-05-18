@@ -3,11 +3,13 @@
 set -e
 set -o pipefail
 set -u
+set -x 
 
-ksetup_env=$(cd "$HOME"/ksetup && make settings.ENV --silent)
-list_image_cmd="echo /home/kyle/pics/lock-screens/lock_${ksetup_env}.jpg"
+ksetup_env=$(get-ksetting KS_ENV)
+list_image_cmd="echo ${HOME}/pics/lock-screens/lock_${ksetup_env}.jpg"
 
-XSECURELOCK_IMAGE_DURATION_SECONDS=3600 \
-XSECURELOCK_SAVER=saver_mpv \
-XSECURELOCK_LIST_VIDEOS_COMMAND="$list_image_cmd" \
-xsecurelock
+#XSECURELOCK_IMAGE_DURATION_SECONDS=3600 \
+#XSECURELOCK_SAVER=saver_mpv \
+#XSECURELOCK_LIST_VIDEOS_COMMAND="$list_image_cmd" \
+#XSECURELOCK_WAIT_TIME_MS=100 \
+xsecurelock "$@"
