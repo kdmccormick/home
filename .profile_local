@@ -9,15 +9,15 @@ export EDITOR="$VISUAL"
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 
-# Set prompt to 'user:~/current/dir$ '
+# Set prompt to 'user:~/current/dir 🍀'
 export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;35m\]\w\[\033[01;32m\] 🍀\[\033[00;00m\] '
 
-# Set next-line prompt to '> '
+# Set next-line prompt to '⚬ '
 export PS2='\[\033[01;32m\]⚬\[\033[00;00m\] '
 
 # Set xsecurelock parameters
 export XSECURELOCK_WAIT_TIME_MS=10
 export XSECURELOCK_IMAGE_DURATION_SECONDS=3600
 export XSECURELOCK_SAVER=saver_mpv
-export XSECURELOCK_LIST_VIDEOS_COMMAND="echo ${HOME}/pics/lock-screens/lock_\$(/home/kyle/scripts/get-ksetting KS_ENV).jpg"
+export XSECURELOCK_LIST_VIDEOS_COMMAND="echo ${HOME}/pics/lock-screens/lock_\$(get-ksetting KS_ENV).jpg"
 export XSECURELOCK_NO_COMPOSITE=1
