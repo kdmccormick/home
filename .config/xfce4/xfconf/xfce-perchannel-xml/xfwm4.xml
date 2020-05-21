@@ -5,7 +5,7 @@
     <property name="activate_action" type="empty"/>
     <property name="box_move" type="empty"/>
     <property name="box_resize" type="empty"/>
-    <property name="button_layout" type="empty"/>
+    <property name="button_layout" type="string" value="|"/>
     <property name="button_offset" type="empty"/>
     <property name="button_spacing" type="empty"/>
     <property name="click_to_focus" type="bool" value="false"/>
@@ -40,7 +40,7 @@
     <property name="snap_width" type="empty"/>
     <property name="theme" type="string" value="Default"/>
     <property name="title_alignment" type="empty"/>
-    <property name="title_font" type="empty"/>
+    <property name="title_font" type="string" value="Noto Sans Bold 9"/>
     <property name="title_horizontal_offset" type="empty"/>
     <property name="title_shadow_active" type="empty"/>
     <property name="title_shadow_inactive" type="empty"/>
