@@ -76,6 +76,7 @@
       <property name="square-icons" type="bool" value="true"/>
       <property name="symbolic-icons" type="bool" value="true"/>
       <property name="known-items" type="array">
+        <value type="string" value="software-update-available"/>
         <value type="string" value="redshift"/>
         <value type="string" value="zoom"/>
         <value type="string" value="blueman"/>
@@ -87,7 +88,7 @@
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
       <property name="enable-mpris" type="bool" value="true"/>
       <property name="mixer-command" type="string" value="pavucontrol"/>
-      <property name="mpris-players" type="string" value="parole;spotify"/>
+      <property name="mpris-players" type="string" value="chromium.instance463897;chromium.instance467419;parole;spotify"/>
       <property name="show-notifications" type="bool" value="true"/>
     </property>
     <property name="plugin-11" type="string" value="separator">

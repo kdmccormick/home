@@ -133,6 +133,7 @@ apt-packages.sources: warn-password apt-packages.sources.disable-dist-docker-rep
 	deb_line="deb https://download.sublimetext.com/ apt/stable/" deb_name="sublime-text" make apt-packages.sources.add
 	deb_line="deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" deb_name="docker" make apt-packages.sources.add
 	deb_line="deb http://repository.spotify.com stable non-free" deb_name="spotify" make apt-packages.sources.add
+	sudo add-apt-repository ppa:deadsnakes/ppa --yes
 
 apt-packages.sources.disable-dist-docker-repo:
 	sudo sed --in-place -E "s/(^deb.*docker.*)/\# \1/" /etc/apt/sources.list
