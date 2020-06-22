@@ -5,6 +5,7 @@ containerd.io
 docker-ce
 docker-ce-cli
 docker-compose
+eslint
 feh
 libghc-xmonad-contrib-dev
 npm
