@@ -114,6 +114,7 @@ apt-packages: \
 	apt-packages.update \
 	apt-packages.install.common \
 	apt-packages.install.$(KS_ENV) \
+	apt-packages.remove \
 	apt-packages.upgrade
 
 apt-packages.keys: warn-password
@@ -152,6 +153,9 @@ apt-packages.install.%: warn-password oneshell.strict
 	else
 		@echo "No such file $${apt_install_list}."
 	fi
+
+apt-packages.remove:
+	apt-get remove update-manager --yes
 
 apt-packages.upgrade: warn-password
 	sudo apt-get upgrade --autoremove --yes
