@@ -1,4 +1,5 @@
 acpi
+bison
 build-essential
 chromium-browser
 containerd.io
@@ -7,6 +8,7 @@ docker-ce-cli
 docker-compose
 eslint
 feh
+flex
 libghc-xmonad-contrib-dev
 npm
 openconnect
