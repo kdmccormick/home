@@ -1,6 +1,4 @@
 [Configuration]
-ColorForeground=#000000
-ColorBackground=#ffffff
 FontName=DejaVu Sans Mono 8
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
@@ -10,7 +8,7 @@ MiscCursorBlinks=FALSE
 MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
 MiscDefaultGeometry=80x24
 MiscInheritGeometry=FALSE
-MiscMenubarDefault=TRUE
+MiscMenubarDefault=FALSE
 MiscMouseAutohide=FALSE
 MiscMouseWheelZoom=TRUE
 MiscToolbarDefault=FALSE
@@ -33,4 +31,13 @@ ScrollingLines=5000
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
 BackgroundDarkness=0.900000
 FontUseSystem=TRUE
+ColorForeground=#b7b7b7
+ColorBackground=#131926
+ColorCursor=#0f4999
+ColorSelection=#163b59
+ColorSelectionUseDefault=FALSE
+ColorBold=#ffffff
+ColorBoldUseDefault=FALSE
+ColorPalette=#000000;#aa0000;#44aa44;#aa5500;#0039aa;#aa22aa;#1a92aa;#aaaaaa;#777777;#ff8787;#4ce64c;#ded82c;#295fcc;#cc58cc;#4ccce6;#ffffff
+TabActivityColor=#0f4999
 

@@ -4,7 +4,7 @@
   <property name="panels" type="array">
     <value type="int" value="0"/>
     <property name="panel-0" type="empty">
-      <property name="position" type="string" value="p=6;x=1920;y=14"/>
+      <property name="position" type="string" value="p=8;x=960;y=1065"/>
       <property name="length" type="uint" value="100"/>
       <property name="position-locked" type="bool" value="true"/>
       <property name="plugin-ids" type="array">
@@ -88,7 +88,7 @@
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
       <property name="enable-mpris" type="bool" value="true"/>
       <property name="mixer-command" type="string" value="pavucontrol"/>
-      <property name="mpris-players" type="string" value="chromium.instance31361;chromium.instance463897;chromium.instance467419;chromium.instance63180;chromium.instance9528;parole;spotify"/>
+      <property name="mpris-players" type="string" value="chromium.instance11864;chromium.instance31361;chromium.instance36261;chromium.instance463897;chromium.instance467419;chromium.instance63180;chromium.instance9528;parole;spotify"/>
       <property name="show-notifications" type="bool" value="true"/>
     </property>
     <property name="plugin-11" type="string" value="separator">
