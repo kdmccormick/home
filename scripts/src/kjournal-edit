@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [[ -z "$1" ]]; then
+	vi ~/kjournal/"$(date '+%Y-%m-%d')".md
+else
+	vi ~/kjournal/"$1".md
+fi
