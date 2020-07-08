@@ -81,8 +81,9 @@
       <property name="&lt;Shift&gt;&lt;Super&gt;KP_Page_Up" type="string" value="win-set-desktop 8"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;KP_Divide" type="string" value="win-set-desktop 9"/>
       <property name="&lt;Super&gt;w" type="string" value="firefox -p"/>
-      <property name="&lt;Super&gt;j" type="string" value="xfce4-terminal -e kjournal-edit"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;j" type="string" value="xfce4-terminal --working-directory /home/kyle/kjournal"/>
+      <property name="&lt;Super&gt;j" type="string" value="xfce4-terminal --working-directory /home/kyle/kjournal"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;j" type="string" value="xfce4-terminal -e kjournal-edit"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;u" type="string" value="systemctl suspend"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
