@@ -5,7 +5,7 @@ set -o pipefail
 set -u
 set -x
 
-# Move this to workspace 9.
+# Move this to desktop 9 (i.e. workspace 10)
 win-set-desktop 9
 
 # Enable natural scrolling.
