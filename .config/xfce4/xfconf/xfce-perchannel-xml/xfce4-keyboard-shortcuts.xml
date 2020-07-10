@@ -53,13 +53,8 @@
       <property name="override" type="bool" value="true"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;Return" type="string" value="exo-open --launch TerminalEmulator"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;m" type="string" value="/home/kyle/scripts/invertscroll"/>
-      <property name="&lt;Super&gt;Return" type="string" value="xfce4-popup-whiskermenu"/>
       <property name="&lt;Super&gt;e" type="string" value="exo-open --launch FileManager"/>
       <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
-      <property name="&lt;Super&gt;d" type="string" value="firefox -p kyle-edx-dev"/>
-      <property name="&lt;Super&gt;c" type="string" value="firefox -p kyle-edx-comms"/>
-      <property name="&lt;Super&gt;k" type="string" value="firefox -p kyle-self-default"/>
-      <property name="&lt;Super&gt;g" type="string" value="chromium"/>
       <property name="&lt;Super&gt;KP_1" type="string" value="xdotool set_desktop 0"/>
       <property name="&lt;Super&gt;KP_2" type="string" value="xdotool set_desktop 1"/>
       <property name="&lt;Super&gt;KP_6" type="string" value="xdotool set_desktop 5"/>
@@ -80,11 +75,14 @@
       <property name="&lt;Shift&gt;&lt;Super&gt;KP_Up" type="string" value="win-set-desktop 7"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;KP_Page_Up" type="string" value="win-set-desktop 8"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;KP_Divide" type="string" value="win-set-desktop 9"/>
-      <property name="&lt;Super&gt;w" type="string" value="firefox -p"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;u" type="string" value="systemctl suspend"/>
-      <property name="F11" type="string" value="xfce4-terminal --drop-down"/>
       <property name="&lt;Super&gt;j" type="string" value="xfce4-terminal -e kjournal-edit"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;j" type="string" value="xfce4-terminal -e &apos;bash -c &quot;kjournal-edit today&quot;&apos;"/>
+      <property name="&lt;Super&gt;space" type="string" value="xfce4-popup-whiskermenu"/>
+      <property name="&lt;Super&gt;Return" type="string" value="xfce4-terminal --drop-down"/>
+      <property name="&lt;Alt&gt;&lt;Super&gt;i" type="string" value="firefox -p kyle-self"/>
+      <property name="&lt;Super&gt;i" type="string" value="firefox -p kyle-edx"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;i" type="string" value="chromium"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
@@ -194,8 +192,6 @@
       <property name="&lt;Super&gt;Up" type="string" value="tile_up_key"/>
       <property name="&lt;Super&gt;Down" type="string" value="tile_down_key"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;Up" type="string" value="maximize_window_key"/>
-      <property name="&lt;Super&gt;space" type="string" value="cycle_windows_key"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;space" type="string" value="cycle_reverse_windows_key"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;Down" type="string" value="fullscreen_key"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;bar" type="string" value="popup_menu_key"/>
       <property name="&lt;Super&gt;backslash" type="string" value="raise_window_key"/>
@@ -205,6 +201,8 @@
       <property name="&lt;Super&gt;equal" type="string" value="next_workspace_key"/>
       <property name="&lt;Super&gt;Delete" type="string" value="close_window_key"/>
       <property name="&lt;Super&gt;1" type="string" value="workspace_1_key"/>
+      <property name="&lt;Super&gt;Tab" type="string" value="cycle_windows_key"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;ISO_Left_Tab" type="string" value="cycle_reverse_windows_key"/>
     </property>
   </property>
   <property name="providers" type="array">

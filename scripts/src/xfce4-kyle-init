@@ -14,6 +14,8 @@ invertscroll
 # Lock screen automatically after 300 seconds. Poll every 5 milliseconds (?).
 xset s 300 5
 
+# TODO: Start apps here. Need to figure out workspaces on monitor though.
+
 # Run screen lock handler (blocks indefinitely).
 xss-lock --notifier=/usr/local/libexec/xsecurelock/dimmer \
          --transfer-sleep-lock -- xsecurelock
