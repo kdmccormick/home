@@ -61,7 +61,6 @@
       <property name="&lt;Super&gt;KP_7" type="string" value="xdotool set_desktop 6"/>
       <property name="&lt;Super&gt;KP_8" type="string" value="xdotool set_desktop 7"/>
       <property name="&lt;Super&gt;KP_9" type="string" value="xdotool set_desktop 8"/>
-      <property name="&lt;Super&gt;KP_Divide" type="string" value="xdotool set_desktop 9"/>
       <property name="&lt;Super&gt;KP_5" type="string" value="xdotool set_desktop 4"/>
       <property name="&lt;Super&gt;KP_3" type="string" value="xdotool set_desktop 2"/>
       <property name="&lt;Super&gt;KP_4" type="string" value="xdotool set_desktop 3"/>
@@ -83,6 +82,7 @@
       <property name="&lt;Alt&gt;&lt;Super&gt;i" type="string" value="firefox -p kyle-self"/>
       <property name="&lt;Super&gt;i" type="string" value="firefox -p kyle-edx"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;i" type="string" value="chromium"/>
+      <property name="&lt;Super&gt;KP_0" type="string" value="xdotool set_desktop 9"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

@@ -77,6 +77,7 @@
       <property name="square-icons" type="bool" value="true"/>
       <property name="symbolic-icons" type="bool" value="true"/>
       <property name="known-items" type="array">
+        <value type="string" value="kazam"/>
         <value type="string" value="software-update-available"/>
         <value type="string" value="redshift"/>
         <value type="string" value="zoom"/>
@@ -89,7 +90,7 @@
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
       <property name="enable-mpris" type="bool" value="true"/>
       <property name="mixer-command" type="string" value="pavucontrol"/>
-      <property name="mpris-players" type="string" value="chromium.instance11864;chromium.instance138200;chromium.instance185291;chromium.instance31361;chromium.instance36261;chromium.instance463897;chromium.instance467419;chromium.instance63180;chromium.instance9528;parole;spotify"/>
+      <property name="mpris-players" type="string" value="chromium.instance11864;chromium.instance138200;chromium.instance185291;chromium.instance20170;chromium.instance2349;chromium.instance31361;chromium.instance36261;chromium.instance414024;chromium.instance452281;chromium.instance463897;chromium.instance467419;chromium.instance477967;chromium.instance572011;chromium.instance58393;chromium.instance63180;chromium.instance722639;chromium.instance901554;chromium.instance9528;parole;spotify"/>
       <property name="show-notifications" type="bool" value="true"/>
     </property>
     <property name="plugin-11" type="string" value="separator">
