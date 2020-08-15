@@ -1,7 +1,9 @@
 #!/bin/sh
 if xinput --set-prop 10 "Synaptics Scrolling Distance" -114, -114 || \
    xinput --set-prop 11 "Synaptics Scrolling Distance" -114, -114 || \
-   xinput --set-prop 12 "Synaptics Scrolling Distance" -114, -114; then
+   xinput --set-prop 12 "Synaptics Scrolling Distance" -114, -114 || \
+   xinput --set-prop 13 "Synaptics Scrolling Distance" -114, -114 || \
+false; then
 	echo "> invertscroll success"
 else
 	echo "> invertscroll failed"

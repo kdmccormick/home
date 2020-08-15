@@ -1,5 +1,5 @@
 #!/bin/sh
-git fetch
 git checkout master
+git fetch
 git reset --hard origin/master
 git-cleanbranches || echo "No branches to clean"
