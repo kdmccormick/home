@@ -248,7 +248,7 @@ special-install.crashplan.download: oneshell.strict
 	@echo "Please authenticate, save the file to ~/downloads/Code42CrashPlan_7.0.3_Linux-MIT.tgz, and then quit Firefox."
 	firefox --no-remote -p kyle-edx-dev "https://downloads.mit.edu/released/crashplan/Code42CrashPlan_7.0.3_Linux-MIT.tgz"
 
-ONESHELL:
+.ONESHELL:
 special-install.crashplan.install: oneshell.strict
 	cd ~/downloads
 	rm -rf ./crashplan-install
