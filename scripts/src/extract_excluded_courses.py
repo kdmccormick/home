@@ -7,9 +7,11 @@ import json
 import sys
 
 assert (
-    len(sys.argv) == 2
-), "expected exactly one command line argument: base experiment flag name"
+    2 <= len(sys.argv) <= 3
+), "usage: extract_excluded_courses.py BASE_FLAG_NAME [json|simple]"
 exp_flag_name = sys.argv[1]
+output_fmt = sys.argv[2] if len(sys.argv) >= 3 else "json"
+assert output_fmt in ["json", "simple"]
 zero_flag_name = exp_flag_name + ".0"
 
 all_flags = json.load(sys.stdin)["waffle_flags"]
@@ -35,4 +37,7 @@ mfe_disabled["via_zero_flag"] = sorted(
 mfe_disabled["via_either_flag"] = sorted(
     list(set(mfe_disabled["via_experiment_flag"] + mfe_disabled["via_zero_flag"]))
 )
-print(json.dumps({"flag_is_disabled": mfe_disabled}, indent=4))
+if output_fmt == "json":
+    print(json.dumps({"flag_is_disabled": mfe_disabled}, indent=4))
+elif output_fmt == "simple":
+    print("\n".join(mfe_disabled["via_either_flag"]))
