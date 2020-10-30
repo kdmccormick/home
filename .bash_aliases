@@ -14,7 +14,7 @@ alias dk="docker-compose"
 
 # Load up environ-specific aliases, if defined.
 ksetup_env=$(get-ksetting KS_ENV)
-. ."$ksetup_env".bash_aliases 2>/dev/null || true
+. ~/."$ksetup_env".bash_aliases 2>/dev/null || true
 
 # Load up private (non-version-controlled) aliases, if defined.
-. .private.bash_aliases 2>/dev/null || true
+. ~/.private.bash_aliases 2>/dev/null || true
