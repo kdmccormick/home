@@ -120,7 +120,7 @@ apt-packages: \
 apt-packages.keys: warn-password
 	key_url="https://download.sublimetext.com/sublimehq-pub.gpg" make apt-packages.keys.get-key
 	key_url="https://download.docker.com/linux/ubuntu/gpg" fingerprint="0EBFCD88" make apt-packages.keys.get-key
-	key_url="https://download.spotify.com/debian/pubkey.gpg" make apt-packages.keys.get-key
+	key_url="https://download.spotify.com/debian/pubkey_0D811D58.gpg" make apt-packages.keys.get-key
 
 .ONESHELL:
 apt-packages.keys.get-key: oneshell.strict
