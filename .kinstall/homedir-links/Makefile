@@ -154,8 +154,8 @@ apt-packages.install.%: warn-password oneshell.strict
 		@echo "No such file $${apt_install_list}."
 	fi
 
-apt-packages.remove:
-	apt-get remove update-manager --yes
+apt-packages.remove: warn-password
+	sudo apt-get remove update-manager --yes
 
 apt-packages.upgrade: warn-password
 	sudo apt-get upgrade --autoremove --yes
@@ -256,12 +256,16 @@ special-install.crashplan.install: oneshell.strict
 	cd ./crashplan-install
 	sudo ./mit-crashplan-install.sh
 
-misc-admin:
+misc-admin: misc-admin.fix-grub
 	ufw enable
 	usermod -aG docker
 	systemctl enable --now docker
 	@echo "WARNING: Docker installation may require reboot, in addition to other commands."
 	@echo "         To see if it is working, run 'docker run hello-world'."
+
+misc-admin.fix-grub: warn-password
+	@echo "Fixing EFI grub.cfg; see ~/.kinstall/notes/grub2.md for details."
+	sudo su -c "echo 'configfile (hd0,gpt2)/grub/grub.cfg' > /boot/efi/EFI/ubuntu/grub.cfg"
 
 warn-password:
 	@echo "Note: If it seems like the Make process has stalled, "
