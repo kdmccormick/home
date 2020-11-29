@@ -19,6 +19,7 @@ xset s 300 5
 
 # Run screen lock handler (blocks indefinitely).
 xss-lock --notifier=/usr/local/libexec/xsecurelock/dimmer \
-         --transfer-sleep-lock -- xsecurelock
+         --transfer-sleep-lock -- xsecurelock 2>&1 | \
+         tee ~/.kinstall/logs/xss-lock_"$(date --iso-8601)".log
 
 echo "$0: xss-lock process finished - either crashed or was interrupted."
