@@ -95,6 +95,7 @@ dirs:
 	rm -df ~/Music
 	mkdir -p ~/apps
 	mkdir -p ~/bin
+	mkdir -p ~/.kinstall/logs
 
 .ONESHELL:
 dirs.convert-to-link: oneshell.strict
