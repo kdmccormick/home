@@ -1,1 +1,0 @@
-.kinstall/homedir-links/.bash_aliases

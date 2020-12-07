@@ -1,1 +1,0 @@
-.kinstall/homedir-links/.kyle-edx-xubuntu20.bash_aliases
