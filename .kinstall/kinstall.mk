@@ -251,6 +251,7 @@ misc-admin: misc-admin.fix-grub
 	ufw enable
 	usermod -aG docker
 	systemctl enable --now docker
+	git config --global core.excludesfile ~\.global.gitignore
 	@echo "WARNING: Docker installation may require reboot, in addition to other commands."
 	@echo "         To see if it is working, run 'docker run hello-world'."
 
