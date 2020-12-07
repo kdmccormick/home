@@ -1,16 +1,14 @@
-.PHONY: apt-packages apt-packages.keys \
-        apt-packages.keys.get-key apt-packages.sources \
-        apt-packages.sources.add apt-packages.sources.disable-dist-docker-repo \
-        apt-packages.update apt-packages.upgrade bootstrap dirs \
-        dirs.convert-to-link install misc-admin oneshell.strict root-homedir \
-        selfcheck source-bashrc-local special-install \
-        special-install.crashplan special-install.crashplan.download \
-        special-install.crashplan.install special-install.postman \
-        special-install.sophos special-install.sophos.download \
-        special-install.sophos.install special-install.xsecurelock \
-        special-install.xsecurelock.configure special-install.xsecurelock.deps \
-        special-install.xsecurelock.install special-install.zoom ssh \
-        ssh.rm-key
+.PHONY: apt-packages apt-packages.keys apt-packages.keys.get-key \
+        apt-packages.remove apt-packages.sources apt-packages.sources.add \
+        apt-packages.sources.disable-dist-docker-repo apt-packages.update \
+        apt-packages.upgrade bootstrap dirs dirs.convert-to-link install \
+        misc-admin misc-admin.fix-grub oneshell.strict root-homedir selfcheck \
+        source-profile-local special-install special-install.crashplan \
+        special-install.crashplan.download special-install.crashplan.install \
+        special-install.crowdstrike special-install.postman \
+        special-install.xsecurelock special-install.xsecurelock.configure \
+        special-install.xsecurelock.deps special-install.xsecurelock.install \
+        special-install.zoom ssh ssh.rm-key warn-password
 
 SHELL=/bin/bash
 
@@ -165,7 +163,7 @@ special-install: \
 	special-install.xsecurelock \
 	special-install.postman \
 	special-install.zoom \
-	special-install.sophos
+	special-install.crowdstrike
 	sudo apt-get upgrade --autoremove --yes
 
 special-install.xsecurelock: \
@@ -219,24 +217,11 @@ special-install.zoom: oneshell.strict
 	wget https://zoom.us/client/latest/zoom_amd64.deb
 	sudo apt-get install --yes ./zoom_amd64.deb
 
-special-install.sophos: \
-	special-install.sophos.download \
-	special-install.sophos.install
-
-.ONESHELL:
-special-install.sophos.download: oneshell.strict
-	rm -f ~/downloads/mit-sophos-linux.tgz
-	@echo "Please authenticate, save the file to ~/downloads/mit-sophos-linux.tgz, and then quit Firefox."
-	firefox --no-remote -p kyle-edx-dev "https://downloads.mit.edu/released/sophos/mit-sophos-linux.tgz"
-
-ONESHELL:
-special-install.sophos.install: oneshell.strict
-	cd ~/downloads
-	rm -rf ./sophos-av
-	tar --extract -f ./mit-sophos-linux.tgz --gzip -v
-	cd ./sophos-av
-	cp -f ~/.kinstall/sophos-av_installOptions installOptions
-	sudo ./install.sh
+special-install.crowdstrike:
+	xdg-open "https://openedx.atlassian.net/wiki/spaces/IT/pages/2065138087/Crowdstrike+Installation+Linux+Endpoints"
+	@echo "Cannot install Crowdstrike antivirus automatically due to restricted download."
+	@echo "For manual instructions, see: "
+	@echo "https://openedx.atlassian.net/wiki/spaces/IT/pages/2065138087/Crowdstrike+Installation+Linux+Endpoints"
 
 special-install.crashplan: \
 	special-install.crashplan.download \
@@ -244,7 +229,6 @@ special-install.crashplan: \
 
 .ONESHELL:
 special-install.crashplan.download: oneshell.strict
-	rm -f ~/downloads/mit-sophos-linux.tgz
 	rm -f ~/downloads/Code42CrashPlan_7.0.3_Linux-MIT.tgz
 	@echo "Please authenticate, save the file to ~/downloads/Code42CrashPlan_7.0.3_Linux-MIT.tgz, and then quit Firefox."
 	firefox --no-remote -p kyle-edx-dev "https://downloads.mit.edu/released/crashplan/Code42CrashPlan_7.0.3_Linux-MIT.tgz"
