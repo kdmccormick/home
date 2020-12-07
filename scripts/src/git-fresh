@@ -4,7 +4,9 @@ flag="${1:-}"
 
 set -euo pipefail
 
+# Abort if uncommited changes
 if [[ "$flag" != -f ]]; then
+	git reset  # Unstage everything so that diff check will work.
 	git diff --exit-code
 fi
 
