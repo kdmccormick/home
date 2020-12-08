@@ -18,13 +18,13 @@ all_flags = json.load(sys.stdin)["waffle_flags"]
 try:
     exp_flag_overrides = next(
         flag for flag in all_flags if flag["name"] == exp_flag_name
-    )["course_overrides"]
+    ).get("course_overrides", [])
 except StopIteration:
     exp_flag_overrides = []
 try:
     zero_flag_overrides = next(
         flag for flag in all_flags if flag["name"] == zero_flag_name
-    )["course_overrides"]
+    ).get("course_overrides", [])
 except StopIteration:
     zero_flag_overrides = []
 mfe_disabled = {}
