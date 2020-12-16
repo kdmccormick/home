@@ -1,10 +1,9 @@
 .PHONY: apt-packages apt-packages.keys apt-packages.keys.get-key \
         apt-packages.remove apt-packages.sources apt-packages.sources.add \
         apt-packages.sources.disable-dist-docker-repo apt-packages.update \
-        apt-packages.upgrade bootstrap dirs dirs.convert-to-link install \
-        misc-admin misc-admin.fix-grub oneshell.strict root-homedir selfcheck \
+        apt-packages.upgrade bootstrap copy-dotfiles dirs dirs.convert-to-link \
+        install misc-admin.fix-grub oneshell.strict root-homedir selfcheck \
         source-profile-local special-install special-install.crashplan \
-        special-install.crashplan.download special-install.crashplan.install \
         special-install.crowdstrike special-install.postman \
         special-install.xsecurelock special-install.xsecurelock.configure \
         special-install.xsecurelock.deps special-install.xsecurelock.install \
@@ -168,9 +167,10 @@ apt-packages.upgrade: warn-password
 special-install: \
 	special-install.xsecurelock \
 	special-install.postman \
-	special-install.zoom \
-	special-install.crowdstrike
+	special-install.zoom
 	sudo apt-get upgrade --autoremove --yes
+	make special-install.crowdstrike
+	make special-install.crashplan
 
 special-install.xsecurelock: \
 	special-install.xsecurelock.deps \
@@ -229,31 +229,11 @@ special-install.crowdstrike:
 	@echo "For manual instructions, see: "
 	@echo "https://openedx.atlassian.net/wiki/spaces/IT/pages/2065138087/Crowdstrike+Installation+Linux+Endpoints"
 
-special-install.crashplan: \
-	special-install.crashplan.download \
-	special-install.crashplan.install
-
-.ONESHELL:
-special-install.crashplan.download: oneshell.strict
-	rm -f ~/downloads/Code42CrashPlan_7.0.3_Linux-MIT.tgz
-	@echo "Please authenticate, save the file to ~/downloads/Code42CrashPlan_7.0.3_Linux-MIT.tgz, and then quit Firefox."
-	firefox --no-remote -p kyle-edx-dev "https://downloads.mit.edu/released/crashplan/Code42CrashPlan_7.0.3_Linux-MIT.tgz"
-
-.ONESHELL:
-special-install.crashplan.install: oneshell.strict
-	cd ~/downloads
-	rm -rf ./crashplan-install
-	tar --extract -f ./Code42CrashPlan_7.0.3_Linux-MIT.tgz --gzip -v
-	cd ./crashplan-install
-	sudo ./mit-crashplan-install.sh
-
-misc-admin: misc-admin.fix-grub
-	ufw enable
-	usermod -aG docker
-	systemctl enable --now docker
-	git config --global core.excludesfile ~\.global.gitignore
-	@echo "WARNING: Docker installation may require reboot, in addition to other commands."
-	@echo "         To see if it is working, run 'docker run hello-world'."
+special-install.crashplan:
+	xdg-open https://openedx.atlassian.net/wiki/spaces/IT/pages/2125562100/Crashplan+Installation+Linux+Endpoints
+	@echo "Cannot install Crowdstrike antivirus automatically due to restricted download."
+	@echo "For manual instructions, see: "
+	@echo "https://openedx.atlassian.net/wiki/spaces/IT/pages/2125562100/Crashplan+Installation+Linux+Endpoints"
 
 misc-admin.fix-grub: warn-password
 	@echo "Fixing EFI grub.cfg; see ~/.kinstall/notes/grub2.md for details."
