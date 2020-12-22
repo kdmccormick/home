@@ -11,6 +11,7 @@ alias reown="sudo chown $(whoami) -R"
 alias kj="kjournal-edit"
 alias kt="kjournal-edit today"
 alias dk="docker-compose"
+alias activ="source .venv/bin/activate || source venv/bin/activate"
 
 # Load up environ-specific aliases, if defined.
 ksetup_env=$(get-ksetting KS_ENV)
