@@ -24,15 +24,35 @@ function findStructureIdsForDefinitionIds(definitionIds) {
 	);
 }
 
-function findCourseIdsForStructureIds(structureIds) {
-	return db.modulestore.active_versions.find(
+function courseObjectToCourseKey(activeVersion) {
+	return (
+		"course-v1:" + activeVersion["org"] + 
+		"+" + activeVersion["course"] + 
+		"+" + activeVersion["run"]
+	);
+}
+
+function findCourseIdsForStructureIds(structureIds, includeDrafts) {
+	var published = db.modulestore.active_versions.find(
 		{
 			"versions.published-branch": {$in: structureIds}
 		},
 		{"org": 1, "course": 1, "run": 1}
 	).map(
-		function(obj) {return obj}
+		function(obj) {return courseObjectToCourseKey(obj) }
 	);
+	var drafts = [];
+	if (includeDrafts) {
+		drafts = db.modulestore.active_versions.find(
+			{
+				"versions.draft-branch": {$in: structureIds}
+			},
+			{"org": 1, "course": 1, "run": 1}
+		).map(
+			function(obj) {return courseObjectToCourseKey(obj)}
+		);
+	}
+	return Array.concat(published, drafts)
 }
 
 function findCourseIdsForBlockQuery(blockQuery) {
@@ -44,3 +64,37 @@ function findCourseIdsForBlockQuery(blockQuery) {
 
 // alias to friendler name
 var findCoursesForBlock = findCourseIdsForBlockQuery;
+
+
+function findCourseBlocksByType(org, course, run, blockType) {
+	var structureId = db.modulestore.active_versions.findOne(
+		{org: org, course: course, run: run}
+	).versions["published-branch"];
+	var blocks = db.modulestore.structures.findOne(
+		{_id: structureId}
+	).blocks;
+	return blocks.filter(function(b) b.block_type == blockType);
+}
+
+
+function findCourseBlockById(org, course, run, blockId) {
+	var structureId = db.modulestore.active_versions.findOne(
+		{org: org, course: course, run: run}
+	).versions["published-branch"];
+	var blocks = db.modulestore.structures.findOne(
+		{_id: structureId}
+	).blocks;
+	return blocks.find(function(b) b.block_id == blockId);
+}
+
+function descendCourseBlockById(org, course, run, blockId, depth) {
+	var block = findCourseBlockById(org, course, run, blockId);
+	if (depth <= 0) {
+		return block;
+	}
+	return descendCourseBlockById(org, course, run, block.fields.children[0][1], depth - 1);
+}
+
+function getBlockDefinition(block) {
+	return db.modulestore.definitions.findOne({_id: block.definition});
+}
