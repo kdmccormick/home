@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+
+# Load online banking -> account details -> desired range.
+# In network debugger, filter for onlinebanking.tdbank.com/ngp_api and reload page.
+# Copy response payload contents, pipe to this script, copy output.
+# Repeat for all API calls as necessary.
+
 import sys
 import json
 
