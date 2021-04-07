@@ -23,8 +23,7 @@ selfcheck:
 
 install: \
 	bootstrap \
-	source-profile-local \
-	root-homedir \
+	source-local \
 	ssh \
 	dirs \
 	apt-packages \
@@ -33,51 +32,76 @@ install: \
 
 bootstrap: apt-packages.update apt-packages.install.bootstrap copy-dotfiles
 
-copy-dotfiles:
+copy-dotfiles: copy-dotfiles.user copy-dotfiles.root
+
+copy-dotfiles.user:
 	cd ~/.kinstall/dotfiles && ls -1A | \
 	while read file; \
 		do (cd ~ && ln -s --force ".kinstall/dotfiles/$${file}"); \
 	done
 
+copy-dotfiles.root:
+	sudo cp ~/.kinstall/root.bashrc_local /root/.bashrc_local
+
+source-local: source-local.user source-local.root
+
 .ONESHELL:
-source-profile-local: oneshell.strict
-	if cat ~/.profile | grep ".profile_local"; then
+source-local.user: oneshell.strict
+	@touch ~/.profile
+	@if cat ~/.profile | grep ".profile_local"; then
 		@echo "It looks like ~/.profile already sources ~/.profile_local"
-	else
-		echo >> ~/.profile
-		echo "# Local login shell init commands." >> ~/.profile
-		echo "# Added by ~/Makefile." >> ~/.profile
-		echo "if [ -f ~/.profile_local ]; then" >> ~/.profile
-		echo "    . ~/.profile_local" >> ~/.profile
-		echo "fi" >> ~/.profile
-	fi
-	if cat ~/.bashrc | grep ".profile_local"; then
-		@echo "It looks like ~/.bashrc already sources ~/.profile_local"
-	else
-		echo >> ~/.bashrc
-		echo "# Local bash init commands." >> ~/.bashrc
-		echo "# Added by ~/Makefile." >> ~/.bashrc
-		echo "if [ -f ~/.profile_local ]; then" >> ~/.bashrc
-		echo "    . ~/.profile_local" >> ~/.bashrc
-		echo "fi" >> ~/.bashrc
-	fi
+	@else
+		@echo "Sourcing ~/.profile_local in ~/.profile..."
+		@echo >> ~/.profile
+		@echo "# Local login shell init commands." >> ~/.profile
+		@echo "# Added by ~/Makefile." >> ~/.profile
+		@echo "if [ -f ~/.profile_local ]; then" >> ~/.profile
+		@echo "    . ~/.profile_local" >> ~/.profile
+		@echo "fi" >> ~/.profile
+		@echo "...done"
+	@fi
+	@touch ~/.bashrc
+	@if cat ~/.bashrc | grep ".bashrc_local"; then
+		@echo "It looks like ~/.bashrc already sources ~/.bashrc_local"
+	@else
+		@echo "Sourcing ~/.bashrc_local in ~/.bashrc..."
+		@echo >> ~/.bashrc
+		@echo "# Local bash init commands." >> ~/.bashrc
+		@echo "# Added by ~/Makefile." >> ~/.bashrc
+		@echo "if [ -f ~/.bashrc_local ]; then" >> ~/.bashrc
+		@echo "    . ~/.bashrc_local" >> ~/.bashrc
+		@echo "fi" >> ~/.bashrc
+		@echo "...done"
+	@fi
+
 .ONESHELL:
-root-homedir: oneshell.strict
-	cd ~/.kinstall/root-homedir
-	src_dir="$$(pwd)"
-	cd ~
-	# sudo mv "$$src_dir"/* /root/  # uncomment if/when there are any non-dotfiles.
-	sudo mv "$$src_dir"/.[!.]* /root/ -f
-	if sudo cat /root/.bashrc | grep ".bashrc_local"; then
+source-local.root: oneshell.strict
+	@sudo touch /root/.profile
+	@if sudo cat /root/.profile | grep ".profile_local"; then
+		@echo "It looks like /root/.profile already sources /root/.profile_local"
+	@else
+		@echo "Sourcing /root/.profile_local in /root/.profile..."
+		@sudo sh -c 'echo >> /root/.profile'
+		@sudo sh -c 'echo "# Local login shell init commands." >> /root/.profile'
+		@sudo sh -c 'echo "# Added by ~/Makefile." >> /root/.profile'
+		@sudo sh -c 'echo "if [ -f /root/.profile_local ]; then" >> /root/.profile'
+		@sudo sh -c 'echo "    . /root/.profile_local" >> /root/.profile'
+		@sudo sh -c 'echo "fi" >> /root/.profile'
+		@echo "...done"
+	@fi
+	@sudo touch /root/.bashrc
+	@if sudo cat /root/.bashrc | grep ".bashrc_local"; then
 		@echo "It looks like /root/.bashrc already sources /root/.bashrc_local"
-	else
-		echo                                   | sudo tee /root/.bashrc
-		echo "# Local bash init commands."     | sudo tee /root/.bashrc
-		echo "# Added by ~/Makefile."          | sudo tee /root/.bashrc
-		echo "if [ -f ~/.bashrc_local ]; then" | sudo tee /root/.bashrc
-		echo "    . ~/.bashrc_local"           | sudo tee /root/.bashrc
-		echo "fi"                              | sudo tee /root/.bashrc
-	fi
+	@else
+		@echo "Sourcing /root/.bashrc_local in /root/.bashrc..."
+		@sudo sh -c 'echo >> /root/.bashrc'
+		@sudo sh -c 'echo "# Local bash init commands." >> /root/.bashrc'
+		@sudo sh -c 'echo "# Added by ~/Makefile." >> /root/.bashrc'
+		@sudo sh -c 'echo "if [ -f /root/.bashrc_local ]; then" >> /root/.bashrc'
+		@sudo sh -c 'echo "    . /root/.bashrc_local" >> /root/.bashrc'
+		@sudo sh -c 'echo "fi" >> /root/.bashrc'
+		@echo "...done"
+	@fi
 
 ssh:
 	ensure-ssh-key
@@ -94,7 +118,7 @@ dirs:
 	LINK_NAME=Desktop LINK_TO=desktop make dirs.convert-to-link
 	LINK_NAME=Templates LINK_TO=templates make dirs.convert-to-link
 	# -d is like -r but only for EMPTY directories.
-	rm -df ~/Public 
+	rm -df ~/Public
 	rm -df ~/Music
 	mkdir -p ~/apps
 	mkdir -p ~/bin
@@ -219,7 +243,7 @@ special-install.postman: oneshell.strict
 .ONESHELL:
 special-install.zoom: oneshell.strict
 	cd ~/downloads
-	rm -f ./zoom_amd64.deb 
+	rm -f ./zoom_amd64.deb
 	wget https://zoom.us/client/latest/zoom_amd64.deb
 	sudo apt-get install --yes ./zoom_amd64.deb
 
