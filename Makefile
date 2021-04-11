@@ -18,6 +18,7 @@ complete: \
 	dirs \
 	git \
 	apt \
+	firefox \
 	special-install
 
 bootstrap: \
@@ -130,6 +131,9 @@ apt.remove: warn-password
 
 apt.upgrade: warn-password
 	sudo apt-get upgrade --autoremove --yes
+
+firefox:
+	firefox -CreateProfile ${KI_USER}-${KI_PROFILE}
 
 special-install: \
 	special-install.xsecurelock \
