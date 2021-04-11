@@ -21,7 +21,6 @@ install: \
 	ssh \
 	dirs \
 	apt-packages \
-	misc-admin \
 	special-install
 
 bootstrap: apt-packages.update apt-packages.install.bootstrap copy-dotfiles

@@ -10,8 +10,18 @@ USER kyle
 WORKDIR /home/kyle
 
 RUN sudo apt-get -y install git make
-RUN git clone https://github.com/kdmccormick/home
-RUN cp -r home/* .
-RUN cp -r home/.[!.]* .
-RUN rm -rf home
+RUN git init
+RUN git remote add origin https://github.com/kdmccormick/home
+RUN git fetch
+RUN git switch master
 RUN ln -s /home/kyle/.kinstall/kinstall.mk Makefile
+RUN make copy-dotfiles
+RUN make source-local
+CMD /usr/bin/env bash
+
+#RUN echo "To bust the cache just change this number: 1"
+#RUN make ssh
+#RUN git remote set-url origin git@github.com:kdmccormick/home.git
+#RUN make apt-packages
+#RUN make special-install
+
