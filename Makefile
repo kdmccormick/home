@@ -15,11 +15,16 @@ selfcheck:
 
 complete: \
 	boostrap \
+	ssh \
 	dirs \
 	apt \
 	special-install
 
-bootstrap: apt.update apt.install.bootstrap bootstrap.source-local bootstrap.copy-root-homedir
+bootstrap: apt.update apt.install.bootstrap  bootstrap.copy-root-homedir bootstrap.source-local
+	@echo "Now, run '. ~/.profile' to re-source profile. Or, log out and log back in."
+	@echo "Next, create a .profile_private file with overrides, including KI_SSH_PASSPHRASE."
+	@echo "Then, add the resulting SSH key to GitHub and switch home repo to SSH origin."
+	@echo "Finally, run 'make complete' to wrap up."
 
 bootstrap.copy-root-homedir:
 	sudo cp -r ~/kinstall/root-homedir/* /root
