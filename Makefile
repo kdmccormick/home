@@ -1,36 +1,31 @@
-.PHONY: apt-packages apt-packages.keys apt-packages.keys.get-key \
-        apt-packages.remove apt-packages.sources apt-packages.sources.add \
-        apt-packages.sources.disable-dist-docker-repo apt-packages.update \
-        apt-packages.upgrade bootstrap dirs dirs.convert-to-link \
-        install misc-admin.fix-grub oneshell.strict root-homedir selfcheck \
-        source-profile-local special-install special-install.crashplan \
-        special-install.crowdstrike special-install.postman \
-        special-install.xsecurelock special-install.xsecurelock.configure \
-        special-install.xsecurelock.deps special-install.xsecurelock.install \
-        special-install.zoom ssh ssh.rm-key warn-password
+.PHONY: apt apt.keys apt.keys.get-key apt.remove apt.sources apt.sources.add \
+        apt.sources.disable-dist-docker-repo apt.update apt.upgrade bootstrap \
+        complete copy-root-homedir dirs dirs.convert-to-link extra.fix-grub \
+        oneshell.strict selfcheck source-local special-install \
+        special-install.crashplan special-install.crowdstrike \
+        special-install.postman special-install.xsecurelock \
+        special-install.xsecurelock.configure special-install.xsecurelock.deps \
+        special-install.xsecurelock.install special-install.zoom ssh \
+        ssh.rm-key warn-password
 
 SHELL=/bin/bash
-
 
 selfcheck:
 	@echo "Makefile is well-formed."
 
-install: \
-	bootstrap \
-	source-local \
-	copy-root-homedir \
-	ssh \
+complete: \
+	boostrap \
 	dirs \
-	apt-packages \
+	apt \
 	special-install
 
-bootstrap: apt-packages.update apt-packages.install.bootstrap
+bootstrap: apt.update apt.install.bootstrap bootstrap.source-local bootstrap.copy-root-homedir
 
-copy-root-homedir:
+bootstrap.copy-root-homedir:
 	sudo cp -r ~/kinstall/root-homedir/* /root
 	sudo cp -r ~/kinstall/root-homedir/.[!.]* /root
 
-source-local:
+bootstrap.source-local:
 	touch ~/.profile && ((cat ~/.profile | grep '.profile_local') || echo '. ~/.profile_local' >> ~/.profile)
 	touch ~/.bashrc && ((cat ~/.bashrc | grep '.bashrc_local') || echo '. ~/.bashrc_local' >> ~/.bashrc)
 	sudo bash -c "touch /root/.profile && ((cat /root/.profile | grep '.profile_local') || echo '. ~/.profile_local' >> /root/.profile)"
@@ -69,45 +64,45 @@ dirs.convert-to-link: oneshell.strict
 	fi
 	@echo on
 
-apt-packages: \
-	apt-packages.keys \
-	apt-packages.sources \
-	apt-packages.update \
-	apt-packages.install.common \
-	apt-packages.install.$(KI_ENV) \
-	apt-packages.remove \
-	apt-packages.upgrade
+apt: \
+	apt.keys \
+	apt.sources \
+	apt.update \
+	apt.install.common \
+	apt.install.$(KI_ENV) \
+	apt.remove \
+	apt.upgrade
 
-apt-packages.keys: warn-password
-	key_url="https://download.sublimetext.com/sublimehq-pub.gpg" make apt-packages.keys.get-key
-	key_url="https://download.docker.com/linux/ubuntu/gpg" fingerprint="0EBFCD88" make apt-packages.keys.get-key
-	key_url="https://download.spotify.com/debian/pubkey_0D811D58.gpg" make apt-packages.keys.get-key
+apt.keys: warn-password
+	key_url="https://download.sublimetext.com/sublimehq-pub.gpg" make apt.keys.get-key
+	key_url="https://download.docker.com/linux/ubuntu/gpg" fingerprint="0EBFCD88" make apt.keys.get-key
+	key_url="https://download.spotify.com/debian/pubkey_0D811D58.gpg" make apt.keys.get-key
 
 .ONESHELL:
-apt-packages.keys.get-key: oneshell.strict
+apt.keys.get-key: oneshell.strict
 	wget -O - $(key_url) | sudo apt-key add -
 	if [[ -n "$(fingerprint)" && -z "$$(apt-key fingerprint '$(fingerprint)')" ]]; then
 		@echo "Fingerprint verification failed for key from $(key_url)"
 		exit 1
 	fi
 
-apt-packages.sources: warn-password apt-packages.sources.disable-dist-docker-repo
-	deb_line="deb https://download.sublimetext.com/ apt/stable/" deb_name="sublime-text" make apt-packages.sources.add
-	deb_line="deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" deb_name="docker" make apt-packages.sources.add
-	deb_line="deb http://repository.spotify.com stable non-free" deb_name="spotify" make apt-packages.sources.add
+apt.sources: warn-password apt.sources.disable-dist-docker-repo
+	deb_line="deb https://download.sublimetext.com/ apt/stable/" deb_name="sublime-text" make apt.sources.add
+	deb_line="deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" deb_name="docker" make apt.sources.add
+	deb_line="deb http://repository.spotify.com stable non-free" deb_name="spotify" make apt.sources.add
 	sudo add-apt-repository ppa:deadsnakes/ppa --yes
 
-apt-packages.sources.disable-dist-docker-repo:
+apt.sources.disable-dist-docker-repo:
 	sudo sed --in-place -E "s/(^deb.*docker.*)/\# \1/" /etc/apt/sources.list
 
-apt-packages.sources.add:
+apt.sources.add:
 	echo "$$deb_line" | sudo tee /etc/apt/sources.list.d/"$$deb_name".list
 
-apt-packages.update: warn-password
+apt.update: warn-password
 	sudo apt-get update
 
 .ONESHELL:
-apt-packages.install.%: warn-password oneshell.strict
+apt.install.%: warn-password oneshell.strict
 	apt_install_list=~/kinstall/$*.apt-install.list
 	if [[ -f "$$apt_install_list" ]]; then
 		cat "$$apt_install_list" | xargs sudo apt-get install --yes
@@ -115,10 +110,10 @@ apt-packages.install.%: warn-password oneshell.strict
 		@echo "No such file $${apt_install_list}."
 	fi
 
-apt-packages.remove: warn-password
+apt.remove: warn-password
 	sudo apt-get remove update-manager --yes
 
-apt-packages.upgrade: warn-password
+apt.upgrade: warn-password
 	sudo apt-get upgrade --autoremove --yes
 
 special-install: \
@@ -134,7 +129,7 @@ special-install.xsecurelock: \
 	special-install.xsecurelock.install \
 	special-install.xsecurelock.configure
 
-special-install.xsecurelock.deps: apt-packages.install.xsecurelock-deps
+special-install.xsecurelock.deps: apt.install.xsecurelock-deps
 
 .ONESHELL:
 special-install.xsecurelock.install: oneshell.strict
@@ -192,7 +187,7 @@ special-install.crashplan:
 	@echo "For manual instructions, see: "
 	@echo "https://openedx.atlassian.net/wiki/spaces/IT/pages/2125562100/Crashplan+Installation+Linux+Endpoints"
 
-misc-admin.fix-grub: warn-password
+extra.fix-grub: warn-password
 	@echo "Fixing EFI grub.cfg; see ~/kinstall/notes/grub2.md for details."
 	sudo su -c "echo 'configfile (hd0,gpt2)/grub/grub.cfg' > /boot/efi/EFI/ubuntu/grub.cfg"
 

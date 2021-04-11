@@ -1,7 +1,10 @@
 apt-transport-https
 ca-certificates
 curl
+git
 gnupg-agent
+make
 python-is-python3
 software-properties-common
+vim
 wget
