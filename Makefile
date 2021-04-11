@@ -27,8 +27,8 @@ install: \
 bootstrap: apt-packages.update apt-packages.install.bootstrap
 
 copy-root-homedir:
-	sudo cp -r ~/.kinstall/root-homedir/* /root
-	sudo cp -r ~/.kinstall/root-homedir/.[!.]* /root
+	sudo cp -r ~/kinstall/root-homedir/* /root
+	sudo cp -r ~/kinstall/root-homedir/.[!.]* /root
 
 source-local:
 	touch ~/.profile && ((cat ~/.profile | grep '.profile_local') || echo '. ~/.profile_local' >> ~/.profile)
@@ -55,7 +55,7 @@ dirs:
 	rm -df ~/Music
 	mkdir -p ~/apps
 	mkdir -p ~/bin
-	mkdir -p ~/.kinstall/logs
+	mkdir -p ~/kinstall/logs
 
 .ONESHELL:
 dirs.convert-to-link: oneshell.strict
@@ -108,7 +108,7 @@ apt-packages.update: warn-password
 
 .ONESHELL:
 apt-packages.install.%: warn-password oneshell.strict
-	apt_install_list=~/.kinstall/$*.apt-install.list
+	apt_install_list=~/kinstall/$*.apt-install.list
 	if [[ -f "$$apt_install_list" ]]; then
 		cat "$$apt_install_list" | xargs sudo apt-get install --yes
 	else
@@ -193,7 +193,7 @@ special-install.crashplan:
 	@echo "https://openedx.atlassian.net/wiki/spaces/IT/pages/2125562100/Crashplan+Installation+Linux+Endpoints"
 
 misc-admin.fix-grub: warn-password
-	@echo "Fixing EFI grub.cfg; see ~/.kinstall/notes/grub2.md for details."
+	@echo "Fixing EFI grub.cfg; see ~/kinstall/notes/grub2.md for details."
 	sudo su -c "echo 'configfile (hd0,gpt2)/grub/grub.cfg' > /boot/efi/EFI/ubuntu/grub.cfg"
 
 warn-password:
