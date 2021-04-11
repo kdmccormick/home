@@ -1,12 +1,12 @@
 .PHONY: apt apt.keys apt.keys.get-key apt.remove apt.sources apt.sources.add \
         apt.sources.disable-dist-docker-repo apt.update apt.upgrade bootstrap \
-        complete copy-root-homedir dirs dirs.convert-to-link extra.fix-grub \
-        oneshell.strict selfcheck source-local special-install \
-        special-install.crashplan special-install.crowdstrike \
-        special-install.postman special-install.xsecurelock \
-        special-install.xsecurelock.configure special-install.xsecurelock.deps \
-        special-install.xsecurelock.install special-install.zoom ssh \
-        ssh.rm-key warn-password
+        bootstrap.copy-root-homedir bootstrap.source-local complete dirs \
+        dirs.convert-to-link extras.fix-grub git git.rm-key oneshell.strict \
+        selfcheck special-install special-install.crashplan \
+        special-install.crowdstrike special-install.postman \
+        special-install.xsecurelock special-install.xsecurelock.configure \
+        special-install.xsecurelock.deps special-install.xsecurelock.install \
+        special-install.zoom warn-password
 
 SHELL=/bin/bash
 
@@ -16,15 +16,20 @@ selfcheck:
 complete: \
 	boostrap \
 	dirs \
-	ssh \
+	git \
 	apt \
 	special-install
 
-bootstrap: apt.update apt.install.bootstrap  bootstrap.copy-root-homedir bootstrap.source-local
+bootstrap: \
+	apt.update \
+	apt.install.bootstrap \
+	bootstrap.copy-root-homedir \
+	bootstrap.source-local
 	@echo "Now, run '. ~/.profile' to re-source profile. Or, log out and log back in."
 	@echo "Next, create a .profile_private file with overrides, including KI_SSH_PASSPHRASE."
 	@echo "Then, add the resulting SSH key to GitHub and switch home repo to SSH origin."
 	@echo "Finally, run 'make complete' to wrap up."
+
 
 bootstrap.copy-root-homedir:
 	sudo cp -r ~/kinstall/root-homedir/* /root
@@ -36,11 +41,13 @@ bootstrap.source-local:
 	sudo bash -c "touch /root/.profile && ((cat /root/.profile | grep '.profile_local') || echo '. ~/.profile_local' >> /root/.profile)"
 	sudo bash -c "touch /root/.bashrc && ((cat /root/.bashrc | grep '.bashrc_local') || echo '. ~/.bashrc_local' >> /root/.bashrc)"
 
-ssh:
+git:
 	ensure-ssh-key
 	cat ~/.ssh/id_rsa.pub
+	git config --global user.email "${KI_EMAIL}"
+	git config --global user.name "${KI_FULLNAME}"
 
-ssh.rm-key:
+git.rm-key:
 	rm -rf ~/.ssh/id_rsa.pub ~/.ssh/id_rsa
 
 dirs:

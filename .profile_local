@@ -14,6 +14,7 @@ export KI_USER=kyle
 export KI_DIST=xubuntu20
 export KI_PROFILE=self
 export KI_EMAIL=kdmc@pm.me
+export KI_FULLNAME="Kyle McCormick"
 
 # These vars must be set, but purposefully have no defaults.
 unset KI_SSH_PASSPHRASE

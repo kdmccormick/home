@@ -42,10 +42,10 @@ RUN make bootstrap
 ## Things below this serve moreso as tests, less so as docs.
 
 # (Pull in new changes if we've been hacking on the repo.)
-RUN echo "To bust the cache on the git pull, just change this number: 1"
+RUN echo "To bust the cache on the git pull, just change this number: 5"
 RUN git pull
 
 # (See if dirs and ssh work as we want them to.)
 RUN echo "export KI_SSH_PASSPHRASE=fake-ssh-password" >> ~/.profile_local
 RUN make dirs
-RUN . ~/.profile && make ssh
+RUN . ~/.profile && make git
