@@ -9,4 +9,9 @@ RUN chmod 0440 /etc/sudoers.d/kyle-nopasswd
 USER kyle
 WORKDIR /home/kyle
 
-RUN sudo apt-get -y install git
+RUN sudo apt-get -y install git make
+RUN git clone https://github.com/kdmccormick/home
+RUN cp -r home/* .
+RUN cp -r home/.[!.]* .
+RUN rm -rf home
+RUN ln -s /home/kyle/.kinstall/kinstall.mk Makefile

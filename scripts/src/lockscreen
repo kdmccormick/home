@@ -5,8 +5,7 @@ set -o pipefail
 set -u
 set -x 
 
-ksetup_env=$(get-ksetting KS_ENV)
-list_image_cmd="echo ${HOME}/pics/lock-screens/lock_${ksetup_env}.jpg"
+list_image_cmd="echo ${HOME}/pics/lock-screens/lock_${KI_ENV}.jpg"
 
 #XSECURELOCK_IMAGE_DURATION_SECONDS=3600 \
 #XSECURELOCK_SAVER=saver_mpv \

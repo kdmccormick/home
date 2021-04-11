@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-set -e
-set -o pipefail
-set -u
-
-. ~/.ksettings
-
-eval echo -n "\$$(echo -n "$1")"

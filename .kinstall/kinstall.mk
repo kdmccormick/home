@@ -11,12 +11,6 @@
 
 SHELL=/bin/bash
 
-KS_USER := $$(get-ksetting KS_USER)
-KS_DIST := $$(get-ksetting KS_DIST)
-KS_PROFILE := $$(get-ksetting KS_PROFILE)
-KS_EMAIL := $$(get-ksetting KS_EMAIL)
-KS_ENV := $$(get-ksetting KS_ENV)
-KS_ROOT_ENV := $$(get-ksetting KS_ROOT_ENV)
 
 selfcheck:
 	@echo "Makefile is well-formed."
@@ -141,7 +135,7 @@ apt-packages: \
 	apt-packages.sources \
 	apt-packages.update \
 	apt-packages.install.common \
-	apt-packages.install.$(KS_ENV) \
+	apt-packages.install.$(KI_ENV) \
 	apt-packages.remove \
 	apt-packages.upgrade
 
