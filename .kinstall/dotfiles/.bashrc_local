@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Set prompt to 'user:~/current/dir 🍀'
+export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;35m\]\w\[\033[01;32m\] 🍀\[\033[00;00m\] '
+
+# Set next-line prompt to '⚬ '
+export PS2='\[\033[01;32m\]⚬\[\033[00;00m\] '
+
+if [ -f ~/.bashrc_private ]; then
+	. ~/.bashrc_private
+fi
