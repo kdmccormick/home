@@ -14,8 +14,6 @@ RUN git init
 RUN git remote add origin https://github.com/kdmccormick/home
 RUN git fetch
 RUN git switch master
-RUN ln -s /home/kyle/.kinstall/kinstall.mk Makefile
-RUN make copy-dotfiles
 RUN make source-local
 CMD /usr/bin/env bash
 

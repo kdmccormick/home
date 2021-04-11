@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Set path.
+export PATH=$PATH:/sbin:/usr/sbin:/home/kyle/scripts
+
+# Set default terminal programs.
+export VISUAL=vim
+export EDITOR="$VISUAL"
+export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+export LESS=' -R '
+
+# Load up local env vars if we have them.
+if [ -f ~/.profile_private ]; then
+	. ~/.profile_private
+fi
+
+. ~/.bashrc_local
