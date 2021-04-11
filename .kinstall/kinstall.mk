@@ -1,7 +1,7 @@
 .PHONY: apt-packages apt-packages.keys apt-packages.keys.get-key \
         apt-packages.remove apt-packages.sources apt-packages.sources.add \
         apt-packages.sources.disable-dist-docker-repo apt-packages.update \
-        apt-packages.upgrade bootstrap copy-dotfiles dirs dirs.convert-to-link \
+        apt-packages.upgrade bootstrap dirs dirs.convert-to-link \
         install misc-admin.fix-grub oneshell.strict root-homedir selfcheck \
         source-profile-local special-install special-install.crashplan \
         special-install.crowdstrike special-install.postman \
@@ -18,75 +18,23 @@ selfcheck:
 install: \
 	bootstrap \
 	source-local \
+	copy-root-homedir \
 	ssh \
 	dirs \
 	apt-packages \
 	special-install
 
-bootstrap: apt-packages.update apt-packages.install.bootstrap copy-dotfiles.root
+bootstrap: apt-packages.update apt-packages.install.bootstrap
 
-copy-dotfiles.root:
-	sudo cp ~/.kinstall/root.bashrc_local /root/.bashrc_local
+copy-root-homedir:
+	sudo cp -r ~/.kinstall/root-homedir/* /root
+	sudo cp -r ~/.kinstall/root-homedir/.[!.]* /root
 
-source-local: source-local.user source-local.root
-
-.ONESHELL:
-source-local.user: oneshell.strict
-	@touch ~/.profile
-	@if cat ~/.profile | grep ".profile_local"; then
-		@echo "It looks like ~/.profile already sources ~/.profile_local"
-	@else
-		@echo "Sourcing ~/.profile_local in ~/.profile..."
-		@echo >> ~/.profile
-		@echo "# Local login shell init commands." >> ~/.profile
-		@echo "# Added by ~/Makefile." >> ~/.profile
-		@echo "if [ -f ~/.profile_local ]; then" >> ~/.profile
-		@echo "    . ~/.profile_local" >> ~/.profile
-		@echo "fi" >> ~/.profile
-		@echo "...done"
-	@fi
-	@touch ~/.bashrc
-	@if cat ~/.bashrc | grep ".bashrc_local"; then
-		@echo "It looks like ~/.bashrc already sources ~/.bashrc_local"
-	@else
-		@echo "Sourcing ~/.bashrc_local in ~/.bashrc..."
-		@echo >> ~/.bashrc
-		@echo "# Local bash init commands." >> ~/.bashrc
-		@echo "# Added by ~/Makefile." >> ~/.bashrc
-		@echo "if [ -f ~/.bashrc_local ]; then" >> ~/.bashrc
-		@echo "    . ~/.bashrc_local" >> ~/.bashrc
-		@echo "fi" >> ~/.bashrc
-		@echo "...done"
-	@fi
-
-.ONESHELL:
-source-local.root: oneshell.strict
-	@sudo touch /root/.profile
-	@if sudo cat /root/.profile | grep ".profile_local"; then
-		@echo "It looks like /root/.profile already sources /root/.profile_local"
-	@else
-		@echo "Sourcing /root/.profile_local in /root/.profile..."
-		@sudo sh -c 'echo >> /root/.profile'
-		@sudo sh -c 'echo "# Local login shell init commands." >> /root/.profile'
-		@sudo sh -c 'echo "# Added by ~/Makefile." >> /root/.profile'
-		@sudo sh -c 'echo "if [ -f /root/.profile_local ]; then" >> /root/.profile'
-		@sudo sh -c 'echo "    . /root/.profile_local" >> /root/.profile'
-		@sudo sh -c 'echo "fi" >> /root/.profile'
-		@echo "...done"
-	@fi
-	@sudo touch /root/.bashrc
-	@if sudo cat /root/.bashrc | grep ".bashrc_local"; then
-		@echo "It looks like /root/.bashrc already sources /root/.bashrc_local"
-	@else
-		@echo "Sourcing /root/.bashrc_local in /root/.bashrc..."
-		@sudo sh -c 'echo >> /root/.bashrc'
-		@sudo sh -c 'echo "# Local bash init commands." >> /root/.bashrc'
-		@sudo sh -c 'echo "# Added by ~/Makefile." >> /root/.bashrc'
-		@sudo sh -c 'echo "if [ -f /root/.bashrc_local ]; then" >> /root/.bashrc'
-		@sudo sh -c 'echo "    . /root/.bashrc_local" >> /root/.bashrc'
-		@sudo sh -c 'echo "fi" >> /root/.bashrc'
-		@echo "...done"
-	@fi
+source-local:
+	touch ~/.profile && ((cat ~/.profile | grep '.profile_local') || echo '. ~/.profile_local' >> ~/.profile)
+	touch ~/.bashrc && ((cat ~/.bashrc | grep '.bashrc_local') || echo '. ~/.bashrc_local' >> ~/.bashrc)
+	sudo bash -c "touch /root/.profile && ((cat /root/.profile | grep '.profile_local') || echo '. ~/.profile_local' >> /root/.profile)"
+	sudo bash -c "touch /root/.bashrc && ((cat /root/.bashrc | grep '.bashrc_local') || echo '. ~/.bashrc_local' >> /root/.bashrc)"
 
 ssh:
 	ensure-ssh-key

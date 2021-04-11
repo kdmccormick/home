@@ -5,7 +5,6 @@
 !/pics
 !/scripts
 !/*.bash_aliases
-/.private.bash_aliases
 !/.bashrc_local
 !/.config
 !/.gitignore
@@ -14,3 +13,5 @@
 !/.mozilla
 !/.profile_local
 !/.xmonad
+
+/.private.bash_aliases
