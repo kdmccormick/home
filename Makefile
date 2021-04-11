@@ -195,7 +195,7 @@ special-install.crashplan:
 	@echo "For manual instructions, see: "
 	@echo "https://openedx.atlassian.net/wiki/spaces/IT/pages/2125562100/Crashplan+Installation+Linux+Endpoints"
 
-extra.fix-grub: warn-password
+extras.fix-grub: warn-password
 	@echo "Fixing EFI grub.cfg; see ~/kinstall/notes/grub2.md for details."
 	sudo su -c "echo 'configfile (hd0,gpt2)/grub/grub.cfg' > /boot/efi/EFI/ubuntu/grub.cfg"
 
