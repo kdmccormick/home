@@ -23,15 +23,7 @@ install: \
 	apt-packages \
 	special-install
 
-bootstrap: apt-packages.update apt-packages.install.bootstrap copy-dotfiles
-
-copy-dotfiles: copy-dotfiles.user copy-dotfiles.root
-
-copy-dotfiles.user:
-	cd ~/.kinstall/dotfiles && ls -1A | \
-	while read file; \
-		do (cd ~ && ln -s --force ".kinstall/dotfiles/$${file}"); \
-	done
+bootstrap: apt-packages.update apt-packages.install.bootstrap copy-dotfiles.root
 
 copy-dotfiles.root:
 	sudo cp ~/.kinstall/root.bashrc_local /root/.bashrc_local

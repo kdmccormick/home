@@ -1,0 +1,1 @@
+.kinstall/dotfiles/.bash_aliases

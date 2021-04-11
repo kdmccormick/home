@@ -4,8 +4,13 @@
 
 !/pics
 !/scripts
-!/.kinstall
-!/.gitignore
-!/.xmonad
+!/*.bash_aliases
+/.private.bash_aliases
+!/.bashrc_local
 !/.config
+!/.gitignore
+!/.global.igitignore
+!/.kinstall
 !/.mozilla
+!/.profile_local
+!/.xmonad
