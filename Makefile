@@ -14,7 +14,7 @@ selfcheck:
 	@echo "Makefile is well-formed."
 
 complete: \
-	boostrap \
+	bootstrap \
 	dirs \
 	git \
 	apt \
