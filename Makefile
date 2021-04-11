@@ -15,8 +15,8 @@ selfcheck:
 
 complete: \
 	boostrap \
-	ssh \
 	dirs \
+	ssh \
 	apt \
 	special-install
 
@@ -63,8 +63,11 @@ dirs.convert-to-link: oneshell.strict
 	cd ~
 	if [[ -d "$$LINK_TO" ]] ; then
 		@echo "$$LINK_TO already in $$HOME"
-	else
+	elif [[ -d "$$LINK_NAME" ]] ; then
 		mv "$$LINK_NAME" "$$LINK_TO"
+		ln -s "$$HOME/$$LINK_TO" "$$LINK_NAME"
+	else
+		mkdir -p "$$LINK_TO"
 		ln -s "$$HOME/$$LINK_TO" "$$LINK_NAME"
 	fi
 	@echo on
