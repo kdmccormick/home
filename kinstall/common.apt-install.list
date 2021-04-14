@@ -8,6 +8,7 @@ docker-compose
 eslint
 feh
 libghc-xmonad-contrib-dev
+gparted
 npm
 openconnect
 pylint
