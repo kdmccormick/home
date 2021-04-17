@@ -1,0 +1,16 @@
+#/usr/bin/env bash
+
+# PRIVATE PROFILE OVERRIDES
+# Not version controlled.
+# This is sourced by every shell!
+
+# Optionally override these.
+#export KI_USER=
+#export KI_DIST=
+#export KI_PROFILE=
+#export KI_EMAIL=
+#export KI_FULLNAME=""
+
+# MUST override these
+export KI_SSH_PASSPHRASE="SET-ME!"
+

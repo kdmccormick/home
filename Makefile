@@ -1,12 +1,12 @@
 .PHONY: apt apt.keys apt.keys.get-key apt.remove apt.sources apt.sources.add \
         apt.sources.disable-dist-docker-repo apt.update apt.upgrade bootstrap \
         bootstrap.copy-root-homedir bootstrap.source-local complete dirs \
-        dirs.convert-to-link extras.fix-grub git git.rm-key oneshell.strict \
+        dirs.convert-to-link extras.fix-grub firefox oneshell.strict repos \
         selfcheck special-install special-install.crashplan \
         special-install.crowdstrike special-install.postman \
         special-install.xsecurelock special-install.xsecurelock.configure \
         special-install.xsecurelock.deps special-install.xsecurelock.install \
-        special-install.zoom warn-password
+        special-install.zoom ssh ssh.rm-key warn-password
 
 SHELL=/bin/bash
 
@@ -14,9 +14,8 @@ selfcheck:
 	@echo "Makefile is well-formed."
 
 complete: \
-	bootstrap \
+	repos \
 	dirs \
-	git \
 	apt \
 	firefox \
 	special-install
@@ -26,11 +25,12 @@ bootstrap: \
 	apt.install.bootstrap \
 	bootstrap.copy-root-homedir \
 	bootstrap.source-local
-	@echo "Now, run '. ~/.profile' to re-source profile. Or, log out and log back in."
-	@echo "Next, create a .profile_private file with overrides, including KI_SSH_PASSPHRASE."
-	@echo "Then, add the resulting SSH key to GitHub and switch home repo to SSH origin."
-	@echo "Finally, run 'make complete' to wrap up."
-
+	[ -f ~/.profile_private ] || cp ~/kinstall/profile_private_template ~/.profile_private
+	vi ~/.profile_private
+	@echo "Now, run '. ~/.profile' to re-source profile."
+	@echo "Next, run 'make ssh' to make and/or show your SSH key."
+	@echo "Then, add the resulting SSH key to GitHub."
+	@echo "Finally, run 'make complete' to perform the rest of setup."
 
 bootstrap.copy-root-homedir:
 	sudo cp -r ~/kinstall/root-homedir/* /root
@@ -42,14 +42,18 @@ bootstrap.source-local:
 	sudo bash -c "touch /root/.profile && ((cat /root/.profile | grep '.profile_local') || echo '. ~/.profile_local' >> /root/.profile)"
 	sudo bash -c "touch /root/.bashrc && ((cat /root/.bashrc | grep '.bashrc_local') || echo '. ~/.bashrc_local' >> /root/.bashrc)"
 
-git:
+ssh:
 	ensure-ssh-key
 	cat ~/.ssh/id_rsa.pub
+
+ssh.rm-key:
+	rm -rf ~/.ssh/id_rsa.pub ~/.ssh/id_rsa
+
+repos:
 	git config --global user.email "${KI_EMAIL}"
 	git config --global user.name "${KI_FULLNAME}"
-
-git.rm-key:
-	rm -rf ~/.ssh/id_rsa.pub ~/.ssh/id_rsa
+	cd ~ && git remote set-url origin git@github.com:kdmccormick/home.git
+	# Future: could clone repos here.
 
 dirs:
 	LINK_NAME=Documents LINK_TO=docs make dirs.convert-to-link

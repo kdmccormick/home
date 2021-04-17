@@ -35,9 +35,7 @@ RUN make bootstrap
 # Final setup steps. These don't play well with the test process,
 # but we leave them here as docs. 
 # RUN . ~/.profile
-# RUN vi .profile_local
 # RUN make complete
-# RUN git remote set-url origin git@github.com:kdmccormick/home.git
 
 ## Things below this serve moreso as tests, less so as docs.
 
