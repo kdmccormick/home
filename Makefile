@@ -137,7 +137,8 @@ apt.upgrade: warn-password
 	sudo apt-get upgrade --autoremove --yes
 
 firefox:
-	firefox -CreateProfile ${KI_USER}-${KI_PROFILE}
+	[[ -d ~/.mozilla/firefox/kyle-self ]] || firefox -CreateProfile "kyle-self $(HOME)/.mozilla/firefox/kyle-self"
+	[[ -d ~/.mozilla/firefox/kyle-edx ]] || firefox -CreateProfile "kyle-edx $(HOME)/.mozilla/firefox/kyle-edx"
 
 special-install: \
 	special-install.xsecurelock \

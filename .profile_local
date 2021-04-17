@@ -25,7 +25,8 @@ if [ -f ~/.profile_private ]; then
 fi
 
 # Environment = user x profile x distribution
-export KI_ENV="${KI_USER}-${KI_PROFILE}-${KI_DIST}"
+export KI_USER_PROFILE="${KI_USER}-${KI_PROFILE}"
+export KI_ENV="${KI_USER_PROFILE}-${KI_DIST}"
 export KI_ROOT_ENV="root-${KI_PROFILE}-${KI_DIST}"
 
 # Set xsecurelock parameters

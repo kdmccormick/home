@@ -12,6 +12,7 @@
 !/.gitignore
 !/.global.igitignore
 !/.profile_local
+!/.mozilla
 !/.xmonad
 
 /.private.bash_aliases
