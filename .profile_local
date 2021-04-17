@@ -33,7 +33,7 @@ export KI_ROOT_ENV="root-${KI_PROFILE}-${KI_DIST}"
 export XSECURELOCK_WAIT_TIME_MS=10
 export XSECURELOCK_IMAGE_DURATION_SECONDS=3600
 export XSECURELOCK_SAVER=saver_mpv
-export XSECURELOCK_LIST_VIDEOS_COMMAND="echo ${HOME}/pics/lock-screens/lock_${KI_ENV}.jpg"
+export XSECURELOCK_LIST_VIDEOS_COMMAND="echo ${HOME}/pics/lock-screens/lock.jpg"
 export XSECURELOCK_NO_COMPOSITE=1
 
 . ~/.bashrc_local

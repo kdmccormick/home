@@ -68,6 +68,7 @@ dirs:
 	mkdir -p ~/apps
 	mkdir -p ~/bin
 	mkdir -p ~/kinstall/logs
+	cd ~/pics/lock-screens && ([[ -f lock.jpg ]] || ln -s lock_"${KI_ENV}".jpg lock.jpg)
 
 .ONESHELL:
 dirs.convert-to-link: oneshell.strict
