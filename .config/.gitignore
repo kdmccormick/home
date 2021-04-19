@@ -1,0 +1,9 @@
+
+# No specific reason to ignore these other then the fact
+# that they seem to just be mostly noise and/or only useful
+# as machine-local state. Could un-ignore
+# if they turn out to be useful to version control.
+/dconf
+/pulse
+/gtk-3.0
+/xubuntu
