@@ -1,0 +1,9 @@
+// These settings override both User and Default settings for the Python syntax
+{
+	"rulers": [79, 88, 120],
+	"translate_tabs_to_spaces": true,
+	"tab_size": 4,
+	"folder_exclude_patterns": [".svn", ".git", ".hg", "CVS", "__pycache__", ".mypy_cache"],
+    "file_exclude_patterns": ["*.pyc", "*.pyo", "*.exe", "*.dll", "*.obj","*.o", "*.a", "*.lib", "*.so", "*.dylib", "*.ncb", "*.sdf", "*.suo", "*.pdb", "*.idb", ".DS_Store", "*.class", "*.psd", "*.db", "*.sublime-workspace"],
+   
+}

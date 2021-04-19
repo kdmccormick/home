@@ -1,0 +1,21 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Bison",
+		"Dockerfile Syntax Highlighting",
+		"Expand Selection to Whitespace",
+		"Generic Config",
+		"Gitignored File Excluder",
+		"HTML Underscore Syntax",
+		"JSX",
+		"MoveTab",
+		"Package Control",
+		"Rainglow",
+		"Terraform",
+		"TrailingSpaces"
+	]
+}
