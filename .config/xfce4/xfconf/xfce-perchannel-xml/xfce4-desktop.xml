@@ -91,7 +91,7 @@
         <property name="workspace0" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/ch-stars.jpg"/>
+          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/world-dots.jpg"/>
           <property name="backdrop-cycle-enable" type="bool" value="false"/>
           <property name="backdrop-cycle-random-order" type="bool" value="true"/>
         </property>
@@ -103,7 +103,7 @@
         <property name="workspace2" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/zimbabwe-forest.jpg"/>
+          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/swamp-forest.jpg"/>
         </property>
         <property name="workspace3" type="empty">
           <property name="color-style" type="int" value="0"/>
