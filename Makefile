@@ -13,23 +13,15 @@ SHELL=/bin/bash
 selfcheck:
 	@echo "Makefile is well-formed."
 
-complete: \
-	repos \
-	dirs \
-	apt \
-	firefox \
-	special-install
-
 bootstrap: \
 	apt.update \
 	apt.install.bootstrap \
 	bootstrap.copy-root-homedir \
 	bootstrap.source-local
 	[ -f ~/.profile_private ] || cp ~/kinstall/profile_private_template ~/.profile_private
-	vi ~/.profile_private
-	@echo "Now, run '. ~/.profile' to re-source profile."
-	@echo "Next, run 'make ssh' to make and/or show your SSH key."
-	@echo "Then, add the resulting SSH key to GitHub."
+	@echo "Now, edit ~/.profile_private, setting at least KI_SSH_PASSPHRASE."
+	@echo "Next, run '. ~/.profile' to re-source profile."
+	@echo "Then, run 'make ssh' to make and/or show an SSH key, and add it to GitHub."
 	@echo "Finally, run 'make complete' to perform the rest of setup."
 
 bootstrap.copy-root-homedir:
@@ -48,6 +40,13 @@ ssh:
 
 ssh.rm-key:
 	rm -rf ~/.ssh/id_rsa.pub ~/.ssh/id_rsa
+
+complete: \
+	dirs \
+	apt \
+	firefox \
+	special-install \
+	repos
 
 repos:
 	git config --global user.email "${KI_EMAIL}"

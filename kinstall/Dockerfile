@@ -29,21 +29,8 @@ RUN git remote add origin https://github.com/kdmccormick/home
 RUN git fetch
 RUN git switch master
 
-# Boostrap setup.
+# Run setup.
 RUN make bootstrap
-
-# Final setup steps. These don't play well with the test process,
-# but we leave them here as docs. 
-# RUN . ~/.profile
-# RUN make complete
-
-## Things below this serve moreso as tests, less so as docs.
-
-# (Pull in new changes if we've been hacking on the repo.)
-RUN echo "To bust the cache on the git pull, just change this number: 5"
-RUN git pull
-
-# (See if dirs and ssh work as we want them to.)
-RUN echo "export KI_SSH_PASSPHRASE=fake-ssh-password" >> ~/.profile_local
-RUN make dirs
-RUN . ~/.profile && make git
+RUN echo "export KI_SSH_PASSPHRASE=fake-ssh-password" >> ~/.profile_private
+RUN . ~/.profile && make ssh
+RUN . ~/.profile && make complete
