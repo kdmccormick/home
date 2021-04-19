@@ -98,12 +98,12 @@
         <property name="workspace1" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/leopard.jpg"/>
+          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/swamp-forest.jpg"/>
         </property>
         <property name="workspace2" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/swamp-forest.jpg"/>
+          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/vietnam.jpg"/>
         </property>
         <property name="workspace3" type="empty">
           <property name="color-style" type="int" value="0"/>
@@ -113,22 +113,22 @@
         <property name="workspace4" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/fields-under-mountains.jpg"/>
+          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/iceland-falls.jpg"/>
         </property>
         <property name="workspace5" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/iceland-falls.jpg"/>
+          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/leopard.jpg"/>
         </property>
         <property name="workspace6" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/nebula.jpg"/>
+          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/galaxy.jpg"/>
         </property>
         <property name="workspace7" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/moon-and-earth.jpg"/>
+          <property name="last-image" type="string" value="/home/kyle/pics/wallpapers/ald-ruhn.jpg"/>
         </property>
         <property name="workspace8" type="empty">
           <property name="color-style" type="int" value="0"/>
