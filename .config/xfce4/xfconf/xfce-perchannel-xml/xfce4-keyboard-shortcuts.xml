@@ -83,9 +83,9 @@
       <property name="&lt;Shift&gt;&lt;Super&gt;w" type="string" value="nmcli c u kyle-home-5"/>
       <property name="&lt;Super&gt;w" type="string" value="nmcli c u kyle-home"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;w" type="string" value="nmcli c u kyle-hotspot"/>
-      <property name="&lt;Alt&gt;&lt;Super&gt;i" type="string" value="chromium"/>
       <property name="&lt;Super&gt;i" type="string" value="passenv KI_USER_PROFILE firefox -p"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;i" type="string" value="firefox -P"/>
+      <property name="&lt;Alt&gt;&lt;Super&gt;i" type="string" value="chromium"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
