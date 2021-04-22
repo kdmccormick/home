@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+set -u
+
+echo "https://courses.edx.org/courses/$(xclip -selection clipboard -o)/jump_to_id/course" | xclip -selection c
+echo "URL copied to clipboard."
