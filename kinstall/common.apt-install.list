@@ -8,6 +8,7 @@ docker-compose
 eslint
 feh
 libghc-xmonad-contrib-dev
+libimage-exiftool-perl
 gparted
 npm
 openconnect
@@ -15,6 +16,7 @@ pylint
 python3-pip
 python3-venv
 redshift-gtk
+rename
 shellcheck
 spotify-client
 sublime-text
