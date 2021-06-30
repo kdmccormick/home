@@ -1,6 +1,6 @@
 // utility mongo queries for relating objects in modulestore.
 
-function findDefinitionsIdForBlockQuery(blockQuery) {
+function findDefinitionIdsForBlockQuery(blockQuery) {
 	return db.modulestore.definitions.find(
 		blockQuery,
 		{"_id": 1}
@@ -56,7 +56,7 @@ function findCourseIdsForStructureIds(structureIds, includeDrafts) {
 }
 
 function findCourseIdsForBlockQuery(blockQuery) {
-	var definitionIds = findDefinitionsIdsForBlockQuery(blockQuery);
+	var definitionIds = findDefinitionIdsForBlockQuery(blockQuery);
 	var structureIds = findStructureIdsForDefinitionIds(definitionIds);
 	var courseIds = findCourseIdsForStructureIds(structureIds)
 	return courseIds;
