@@ -51,8 +51,9 @@ complete: \
 repos:
 	git config --global user.email "${KI_EMAIL}"
 	git config --global user.name "${KI_FULLNAME}"
-	cd ~ && git remote set-url origin git@github.com:kdmccormick/home.git
-	# Future: could clone repos here.
+	git remote set-url origin git@github.com:kdmccormick/home.git
+	git clone git@github.com:kdmccormick/kpass && mv kpass .password-store
+	# Future: could clone more repos here.
 
 dirs:
 	LINK_NAME=Documents LINK_TO=docs make dirs.convert-to-link
