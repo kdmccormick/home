@@ -53,7 +53,9 @@ repos:
 	git config --global user.name "${KI_FULLNAME}"
 	git remote set-url origin git@github.com:kdmccormick/home.git
 	git clone git@github.com:kdmccormick/kpass && mv kpass .password-store
-	# Future: could clone more repos here.
+	gpg --import kinstall/kdmc.pub
+	@echo "Now, import the private GPG key in order to use the password store."
+	@# Future: could clone more repos here.
 
 dirs:
 	LINK_NAME=Documents LINK_TO=docs make dirs.convert-to-link
