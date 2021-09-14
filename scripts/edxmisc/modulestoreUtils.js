@@ -17,7 +17,7 @@ function findStructureIdsForDefinitionIds(definitionIds) {
 					definition: {$in: definitionIds},
 				}
 			}
-		},
+		},2
 		{"_id": 1}
 	).map(
 		function(obj) {return obj["_id"]}
@@ -73,7 +73,7 @@ function findCourseBlocksByType(org, course, run, blockType) {
 	var blocks = db.modulestore.structures.findOne(
 		{_id: structureId}
 	).blocks;
-	return blocks.filter(function(b) b.block_type == blockType);
+	return blocks.filter(function(b) { return b.block_type == blockType });
 }
 
 
@@ -87,6 +87,7 @@ function findCourseBlockById(org, course, run, blockId) {
 	return blocks.find(function(b) b.block_id == blockId);
 }
 
+
 function descendCourseBlockById(org, course, run, blockId, depth) {
 	var block = findCourseBlockById(org, course, run, blockId);
 	if (depth <= 0) {
@@ -97,4 +98,12 @@ function descendCourseBlockById(org, course, run, blockId, depth) {
 
 function getBlockDefinition(block) {
 	return db.modulestore.definitions.findOne({_id: block.definition});
+}
+
+
+function findRuns(org, course) {
+	return db.modulestore.active_versions.find(
+		{org: org, course: course},
+		{"run": 1}
+	);
 }
