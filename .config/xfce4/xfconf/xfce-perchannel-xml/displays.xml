@@ -4,10 +4,10 @@
   <property name="ActiveProfile" type="string" value="Default"/>
   <property name="Default" type="empty">
     <property name="eDP-1" type="string" value="Laptop">
-      <property name="Active" type="bool" value="true"/>
-      <property name="EDID" type="string" value="8a4307553e1aa7fb31cca1fb11fc6b27027b91a5"/>
+      <property name="Active" type="bool" value="false"/>
+      <property name="EDID" type="string" value="48c2c3b0e6bbb03c92779b5f36bf517eec02c7bc"/>
       <property name="Resolution" type="string" value="1920x1080"/>
-      <property name="RefreshRate" type="double" value="60.049471"/>
+      <property name="RefreshRate" type="double" value="60.001038"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
       <property name="Primary" type="bool" value="false"/>
@@ -18,12 +18,12 @@
     </property>
     <property name="DP-1" type="string" value="Dell 27&quot;">
       <property name="Active" type="bool" value="true"/>
-      <property name="EDID" type="string" value="b247acf717e224e16f0a361a3bed116b493df2a6"/>
+      <property name="EDID" type="string" value="a6e3ed5e43f418b398e03f0fcf2a3febb0df8a76"/>
       <property name="Resolution" type="string" value="3840x2160"/>
-      <property name="RefreshRate" type="double" value="29.562331"/>
+      <property name="RefreshRate" type="double" value="59.996625"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
-      <property name="Primary" type="bool" value="false"/>
+      <property name="Primary" type="bool" value="true"/>
       <property name="Position" type="empty">
         <property name="X" type="int" value="0"/>
         <property name="Y" type="int" value="0"/>
@@ -45,10 +45,10 @@
   </property>
   <property name="Fallback" type="empty">
     <property name="eDP-1" type="string" value="Laptop">
-      <property name="Active" type="bool" value="true"/>
-      <property name="EDID" type="string" value="8a4307553e1aa7fb31cca1fb11fc6b27027b91a5"/>
+      <property name="Active" type="bool" value="false"/>
+      <property name="EDID" type="string" value="48c2c3b0e6bbb03c92779b5f36bf517eec02c7bc"/>
       <property name="Resolution" type="string" value="1920x1080"/>
-      <property name="RefreshRate" type="double" value="60.049471"/>
+      <property name="RefreshRate" type="double" value="60.001038"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
       <property name="Primary" type="bool" value="false"/>
@@ -59,12 +59,12 @@
     </property>
     <property name="DP-1" type="string" value="Dell 27&quot;">
       <property name="Active" type="bool" value="true"/>
-      <property name="EDID" type="string" value="b247acf717e224e16f0a361a3bed116b493df2a6"/>
+      <property name="EDID" type="string" value="a6e3ed5e43f418b398e03f0fcf2a3febb0df8a76"/>
       <property name="Resolution" type="string" value="3840x2160"/>
-      <property name="RefreshRate" type="double" value="29.562331"/>
+      <property name="RefreshRate" type="double" value="59.996625"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
-      <property name="Primary" type="bool" value="false"/>
+      <property name="Primary" type="bool" value="true"/>
       <property name="Position" type="empty">
         <property name="X" type="int" value="0"/>
         <property name="Y" type="int" value="0"/>

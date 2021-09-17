@@ -91,7 +91,7 @@
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
       <property name="enable-mpris" type="bool" value="true"/>
       <property name="mixer-command" type="string" value="pavucontrol"/>
-      <property name="mpris-players" type="string" value="[&apos;chromium&apos;, &apos;firefox&apos;];firefox.instance15083;parole;spotify"/>
+      <property name="mpris-players" type="string" value="[&apos;chromium&apos;, &apos;firefox&apos;];firefox.instance15083;firefox.instance2154;firefox.instance3439;firefox.instance3845;parole;spotify"/>
       <property name="show-notifications" type="bool" value="true"/>
     </property>
     <property name="plugin-11" type="string" value="separator">
