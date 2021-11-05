@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-alias platform-dirs="echo -n '~/edx-platform/common,~/edx-platform/openedx/,~/edx-platform/lms/,~/edx-platform/cms,~/edx-platform/themes' | xcopy && echo 'Copied to clipboard.'"
+alias platform-dirs="echo -n '~/src/edx-platform/common,~/src/edx-platform/openedx/,~/src/edx-platform/lms/,~/src//edx-platform/cms,~/src//edx-platform/themes' | xcopy && echo 'Copied to clipboard.'"
 alias vertica-driver="echo -n '(cd /edx/app/hadoop/sqoop/lib && curl https://vertica.com/client_drivers/9.1.x/9.1.1-0/vertica-jdbc-9.1.1-0.jar -O)' | xcopy"
 alias rr="ssh kdmccormick@tools-edx-gp.edx.org"
 alias rr-tee="ssh kdmccormick@tools-edx-gp.edx.org | tee"
