@@ -51,6 +51,8 @@
       <property name="square-icons" type="bool" value="true"/>
       <property name="size-max" type="uint" value="22"/>
       <property name="names-ordered" type="array">
+        <value type="string" value="thunar"/>
+        <value type="string" value="pangpui"/>
         <value type="string" value="xfce terminal"/>
         <value type="string" value="task manager"/>
         <value type="string" value="network"/>
@@ -77,6 +79,7 @@
       <property name="square-icons" type="bool" value="true"/>
       <property name="symbolic-icons" type="bool" value="true"/>
       <property name="known-items" type="array">
+        <value type="string" value="PanGPUI"/>
         <value type="string" value="steam"/>
         <value type="string" value="kazam"/>
         <value type="string" value="software-update-available"/>

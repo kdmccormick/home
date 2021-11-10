@@ -86,6 +86,7 @@
       <property name="&lt;Super&gt;i" type="string" value="passenv KI_USER_PROFILE firefox -p"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;i" type="string" value="firefox -P"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;i" type="string" value="chromium"/>
+      <property name="&lt;Super&gt;v" type="string" value="globalprotect launch-ui"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
