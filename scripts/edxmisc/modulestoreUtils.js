@@ -1,6 +1,6 @@
 // utility mongo queries for relating objects in modulestore.
 
-function findDefinitionsIdForBlockQuery(blockQuery) {
+function findDefinitionIdsForBlockQuery(blockQuery) {
 	return db.modulestore.definitions.find(
 		blockQuery,
 		{"_id": 1}
@@ -17,7 +17,7 @@ function findStructureIdsForDefinitionIds(definitionIds) {
 					definition: {$in: definitionIds},
 				}
 			}
-		},
+		},2
 		{"_id": 1}
 	).map(
 		function(obj) {return obj["_id"]}
@@ -56,7 +56,7 @@ function findCourseIdsForStructureIds(structureIds, includeDrafts) {
 }
 
 function findCourseIdsForBlockQuery(blockQuery) {
-	var definitionIds = findDefinitionsIdsForBlockQuery(blockQuery);
+	var definitionIds = findDefinitionIdsForBlockQuery(blockQuery);
 	var structureIds = findStructureIdsForDefinitionIds(definitionIds);
 	var courseIds = findCourseIdsForStructureIds(structureIds)
 	return courseIds;
@@ -73,9 +73,14 @@ function findCourseBlocksByType(org, course, run, blockType) {
 	var blocks = db.modulestore.structures.findOne(
 		{_id: structureId}
 	).blocks;
-	return blocks.filter(function(b) b.block_type == blockType);
+	return blocks.filter(b => b.block_type == blockType);
 }
 
+function findBlockDefinitionsByType(org, course, run, blockType) {
+	var courseBlocks = findCourseBlocksByType(org, course, run, blockType);
+	var definitionIds = courseBlocks.map(cb => cb.definition);
+	return db.modulestore.definitions.find({_id: {$in: definitionIds}}).map(d=>d);
+}
 
 function findCourseBlockById(org, course, run, blockId) {
 	var structureId = db.modulestore.active_versions.findOne(
@@ -84,7 +89,13 @@ function findCourseBlockById(org, course, run, blockId) {
 	var blocks = db.modulestore.structures.findOne(
 		{_id: structureId}
 	).blocks;
-	return blocks.find(function(b) b.block_id == blockId);
+	return blocks.find(b => b.block_id == blockId);
+}
+
+function findBlockDefinitionByBlockId(org, course, run, blockId) {
+	var courseBlock = findCourseBlockById(org, course, run, blockId);
+	var definitionId = courseBlock.definition;
+	return db.modulestore.definitions.findOne({_id: definitionId});
 }
 
 function descendCourseBlockById(org, course, run, blockId, depth) {
@@ -97,4 +108,12 @@ function descendCourseBlockById(org, course, run, blockId, depth) {
 
 function getBlockDefinition(block) {
 	return db.modulestore.definitions.findOne({_id: block.definition});
+}
+
+
+function findRuns(org, course) {
+	return db.modulestore.active_versions.find(
+		{org: org, course: course},
+		{"run": 1}
+	);
 }

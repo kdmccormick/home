@@ -1,6 +1,3 @@
-var ORG = "...";
-var COURSE = "...";
-var RUN = "...";
 
 function getLatestCourseStructure(org, course, run) {
 	var courseIndex = db.modulestore.active_versions.findOne({
@@ -8,6 +5,15 @@ function getLatestCourseStructure(org, course, run) {
 	});
 	return db.modulestore.structures.findOne({
 		_id: courseIndex.versions["draft-branch"]
+	});
+}
+
+function getLatestLibraryStructure(org, lib) {
+	var courseIndex = db.modulestore.active_versions.findOne({
+		org: org, course: lib, run: "library"
+	});
+	return db.modulestore.structures.findOne({
+		_id: courseIndex.versions["library"]
 	});
 }
 
@@ -58,6 +64,17 @@ function examineAllAvailableVersions(structure) {
 	return output;
 }
 
-var latestCourseStructure = getLatestCourseStructure(ORG, COURSE, RUN);
-examineAllAvailableVersions(latestCourseStructure);
+function examineAllAvailableCourseVersions(org, course, run) {
+	return examineAllAvailableVersions(
+		getLatestCourseStructure(org, course, run)
+	);
+}
+
+
+function examineAllAvailableLibraryVersions(org, lib) {
+	return examineAllAvailableVersions(
+		getLatestLibraryStructure(org, lib)
+	);
+}
+
 

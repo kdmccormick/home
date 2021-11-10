@@ -4,9 +4,10 @@
         dirs.convert-to-link extras.fix-grub firefox oneshell.strict repos \
         selfcheck special-install special-install.crashplan \
         special-install.crowdstrike special-install.postman \
-        special-install.xsecurelock special-install.xsecurelock.configure \
-        special-install.xsecurelock.deps special-install.xsecurelock.install \
-        special-install.zoom ssh ssh.rm-key warn-password
+        special-install.prismavpn special-install.xsecurelock \
+        special-install.xsecurelock.configure special-install.xsecurelock.deps \
+        special-install.xsecurelock.install special-install.zoom ssh \
+        ssh.rm-key warn-password
 
 SHELL=/bin/bash
 
@@ -51,8 +52,11 @@ complete: \
 repos:
 	git config --global user.email "${KI_EMAIL}"
 	git config --global user.name "${KI_FULLNAME}"
-	cd ~ && git remote set-url origin git@github.com:kdmccormick/home.git
-	# Future: could clone repos here.
+	git remote set-url origin git@github.com:kdmccormick/home.git
+	[ -d .password-store ] || (git clone git@github.com:kdmccormick/kpass && mv kpass .password-store)
+	gpg --import kinstall/kdmc.pub
+	@echo "Now, import the private GPG key in order to use the password store."
+	@# Future: could clone more repos here.
 
 dirs:
 	LINK_NAME=Documents LINK_TO=docs make dirs.convert-to-link
@@ -147,6 +151,7 @@ special-install: \
 	sudo apt-get upgrade --autoremove --yes
 	make special-install.crowdstrike
 	make special-install.crashplan
+	make special-install.prismavpn
 
 special-install.xsecurelock: \
 	special-install.xsecurelock.deps \
@@ -210,6 +215,12 @@ special-install.crashplan:
 	@echo "Cannot install Crowdstrike antivirus automatically due to restricted download."
 	@echo "For manual instructions, see: "
 	@echo "https://openedx.atlassian.net/wiki/spaces/IT/pages/2125562100/Crashplan+Installation+Linux+Endpoints"
+
+special-install.prismavpn:
+	xdg-open https://ist.mit.edu/prisma/client
+	@echo "Cannot install Prisma VPN automatically due to restricted download."
+	@echo "For manual instructions, see: "
+	@echo "https://openedx.atlassian.net/wiki/spaces/IT/pages/2023686283/How+do+I+install+a+VPN+Client+to+connect+to+the+edX+or+MIT+VPN+Prisma+GlobalProtect+-+Edition"
 
 extras.fix-grub: warn-password
 	@echo "Fixing EFI grub.cfg; see ~/kinstall/notes/grub2.md for details."
