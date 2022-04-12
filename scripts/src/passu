@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+pass "$1" | grep username
+pass -c "$1"
+
