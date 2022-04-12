@@ -14,6 +14,8 @@ alias kt="kjournal-edit today"
 alias dk="docker-compose"
 alias svba="source .venv/bin/activate || source venv/bin/activate"
 
+alias ea="echo -n é | xcopy"
+
 # Load up environ-specific aliases, if defined.
 . ~/."$KI_ENV".bash_aliases 2>/dev/null || true
 
