@@ -101,6 +101,7 @@ apt.keys: warn-password
 	key_url="https://download.sublimetext.com/sublimehq-pub.gpg" make apt.keys.get-key
 	key_url="https://download.docker.com/linux/ubuntu/gpg" fingerprint="0EBFCD88" make apt.keys.get-key
 	key_url="https://download.spotify.com/debian/pubkey_0D811D58.gpg" make apt.keys.get-key
+	key_url="https://packages.cloud.google.com/apt/doc/apt-key.gpg" make apt.keys.get-key
 
 .ONESHELL:
 apt.keys.get-key: oneshell.strict
@@ -114,6 +115,7 @@ apt.sources: warn-password apt.sources.disable-dist-docker-repo
 	deb_line="deb https://download.sublimetext.com/ apt/stable/" deb_name="sublime-text" make apt.sources.add
 	deb_line="deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" deb_name="docker" make apt.sources.add
 	deb_line="deb http://repository.spotify.com stable non-free" deb_name="spotify" make apt.sources.add
+	deb_line="deb https://apt.kubernetes.io/ kubernetes-xenial main" deb_name="kubernetes" make apt.sources.add
 	sudo add-apt-repository ppa:deadsnakes/ppa --yes
 
 apt.sources.disable-dist-docker-repo:
@@ -143,6 +145,8 @@ apt.upgrade: warn-password
 firefox:
 	[[ -d ~/.mozilla/firefox/kyle-self ]] || firefox -CreateProfile "kyle-self $(HOME)/.mozilla/firefox/kyle-self"
 	[[ -d ~/.mozilla/firefox/kyle-edx ]] || firefox -CreateProfile "kyle-edx $(HOME)/.mozilla/firefox/kyle-edx"
+	[[ -d ~/.mozilla/firefox/kyle-tcril ]] || firefox -CreateProfile "kyle-tcril $(HOME)/.mozilla/firefox/kyle-tcril"
+	[[ -d ~/.mozilla/firefox/kyle-plus ]] || firefox -CreateProfile "kyle-plus $(HOME)/.mozilla/firefox/kyle-plus"
 
 special-install: \
 	special-install.xsecurelock \
@@ -221,6 +225,10 @@ special-install.prismavpn:
 	@echo "Cannot install Prisma VPN automatically due to restricted download."
 	@echo "For manual instructions, see: "
 	@echo "https://openedx.atlassian.net/wiki/spaces/IT/pages/2023686283/How+do+I+install+a+VPN+Client+to+connect+to+the+edX+or+MIT+VPN+Prisma+GlobalProtect+-+Edition"
+
+special-install.minikube:
+	curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+	sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
 extras.fix-grub: warn-password
 	@echo "Fixing EFI grub.cfg; see ~/kinstall/notes/grub2.md for details."
