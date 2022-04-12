@@ -11,11 +11,12 @@
 		"Generic Config",
 		"Gitignored File Excluder",
 		"HTML Underscore Syntax",
+		"Jinja2",
 		"JSX",
 		"MoveTab",
 		"Package Control",
 		"Rainglow",
 		"Terraform",
-		"TrailingSpaces"
+		"TrailingSpaces",
 	],
 }
