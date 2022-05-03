@@ -16,6 +16,9 @@ alias svba="source .venv/bin/activate || source venv/bin/activate"
 
 alias ea="echo -n é | xcopy"
 
+alias vi="nvim"
+alias vim="nvim"
+
 # Load up environ-specific aliases, if defined.
 . ~/."$KI_ENV".bash_aliases 2>/dev/null || true
 

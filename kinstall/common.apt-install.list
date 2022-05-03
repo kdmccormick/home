@@ -10,6 +10,7 @@ feh
 libghc-xmonad-contrib-dev
 libimage-exiftool-perl
 gparted
+neovim
 npm
 openconnect
 pass
@@ -25,7 +26,6 @@ spotify-client
 sublime-text
 tcptraceroute
 trash-cli
-vim
 xclip
 xdotool
 xmonad
