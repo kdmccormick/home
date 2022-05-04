@@ -9,3 +9,7 @@ export PS2='\[\033[01;32m\]⚬\[\033[00;00m\] '
 if [ -f ~/.bashrc_private ]; then
 	. ~/.bashrc_private
 fi
+
+# Use vi mode for line-editing
+set -o vi
+
