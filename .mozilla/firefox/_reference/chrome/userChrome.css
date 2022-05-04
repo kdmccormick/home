@@ -1,0 +1,46 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/*#nav-bar {
+  /* customize this value. *
+  --navbar-margin: -44px;
+  margin-top: var(--navbar-margin);
+  margin-bottom: 0;
+  z-index: -100;
+  transition: all 0.3s ease !important;
+  opacity: 0;
+  background-color: rgba(0,0,0,0.8) !important;
+}
+
+#navigator-toolbox:focus-within > #nav-bar,
+#navigator-toolbox:hover > #nav-bar {
+  margin-top: 0;
+  margin-bottom: var(--navbar-margin);
+  z-index: 100;
+  opacity: 1;
+}*/
+
+/*#main-window[chromehidden*="toolbar"] #nav-bar {
+  visibility: collapse;
+}*/
+
+:root:not([customizing]) #navigator-toolbox:not(:hover):not(:focus-within) #TabsToolbar {
+  visibility: collapse;
+}
+
+:root:not([customizing]) #navigator-toolbox:not(:hover):not(:focus-within) {
+  max-height: 1px;
+  min-height: calc(0px);
+  overflow: hidden;
+}
+
+:root:not([customizing]) #navigator-toolbox:not(:hover):not(:focus-within) #nav-bar {
+  max-height: 0;
+  min-height: 0!important;
+  --tridactyl-auto-show-zone: 10px;
+  margin-bottom: calc(-1 * var(--tridactyl-auto-show-zone));
+  opacity: 0;
+}
+
+#navigator-toolbox::after {
+  display: none !important;
+}
