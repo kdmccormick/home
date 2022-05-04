@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+alias x="xfce4-terminal -x"
+alias xx="xfce4-terminal -x bash"
+
 alias t="trash"
 alias ts="sudo trash"
 alias xcopy="xclip -selection c"
