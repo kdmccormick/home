@@ -23,6 +23,8 @@ user_pref("devtools.inspector.show_pseudo_elements", true);
 
 //user_pref("extensions.activeThemeID", "{074764e0-6dd5-4683-9947-06ee2e2df544}");
 
+user_pref("services.sync.declinedEngines", "tabs,addresses,creditcards,prefs,addons");
+
 user_pref("privacy.donottrackheader.enabled", true);
 
 user_pref("trailhead.firstrun.didSeeAboutWelcome", true);
