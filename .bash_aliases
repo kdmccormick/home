@@ -22,6 +22,9 @@ alias ea="echo -n é | xcopy"
 alias vi="nvim"
 alias vim="nvim"
 
+alias ff-addonsjson-decompile="(cd ~/.mozilla/firefox/_reference && ./addonsjson-decompile $KI_USER_PROFILE)"
+alias ff-addonsjson-compile="(cd ~/.mozilla/firefox/_reference && ./addonsjson-compile)"
+
 # Load up environ-specific aliases, if defined.
 . ~/."$KI_ENV".bash_aliases 2>/dev/null || true
 

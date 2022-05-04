@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -xeuo pipefail
+
+SRC_PROFILE="$1"
+cat "../$SRC_PROFILE/addons.json" | fjson > addons.fmt.json
+
+set +x
+echo "Loaded ../$SRC_PROFILE/addons.json. Formatted & dumped to addons.fmt.json"
+

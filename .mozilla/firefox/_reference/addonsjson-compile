@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -xeuo pipefail
+
+cat addons.fmt.json | sed 's/ //g' > ../kyle-self/addons.json
+cat addons.fmt.json | sed 's/ //g' > ../kyle-tcril/addons.json
+
+set +x
+echo "Loaded addons.fmt.json. Remove whitespace & dumped to addons.json of each profile."
+
