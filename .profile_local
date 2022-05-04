@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Turn CAPSLOCK into CTRL
+/usr/bin/setxkbmap -option "ctrl:nocaps"
+
 # Set path.
 export PATH=$PATH:/sbin:/usr/sbin:~/.local/bin:~/.cabal/bin:~/bin:~/scripts:/opt/vertica/bin
 
