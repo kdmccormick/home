@@ -144,9 +144,7 @@ apt.upgrade: warn-password
 
 firefox:
 	[[ -d ~/.mozilla/firefox/kyle-self ]] || firefox -CreateProfile "kyle-self $(HOME)/.mozilla/firefox/kyle-self"
-	[[ -d ~/.mozilla/firefox/kyle-edx ]] || firefox -CreateProfile "kyle-edx $(HOME)/.mozilla/firefox/kyle-edx"
 	[[ -d ~/.mozilla/firefox/kyle-tcril ]] || firefox -CreateProfile "kyle-tcril $(HOME)/.mozilla/firefox/kyle-tcril"
-	[[ -d ~/.mozilla/firefox/kyle-plus ]] || firefox -CreateProfile "kyle-plus $(HOME)/.mozilla/firefox/kyle-plus"
 
 special-install: \
 	special-install.xsecurelock \
