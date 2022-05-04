@@ -51,6 +51,7 @@
       <property name="square-icons" type="bool" value="true"/>
       <property name="size-max" type="uint" value="22"/>
       <property name="names-ordered" type="array">
+        <value type="string" value="drop-down terminal"/>
         <value type="string" value="networkmanager applet"/>
         <value type="string" value="thunar"/>
         <value type="string" value="pangpui"/>
@@ -95,7 +96,7 @@
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
       <property name="enable-mpris" type="bool" value="true"/>
       <property name="mixer-command" type="string" value="pavucontrol"/>
-      <property name="mpris-players" type="string" value="[&apos;chromium&apos;, &apos;firefox&apos;];chromium.instance13583;chromium.instance2698;firefox.instance11204;firefox.instance15083;firefox.instance164720;firefox.instance192923;firefox.instance1988;firefox.instance2025;firefox.instance2051;firefox.instance2096;firefox.instance2108;firefox.instance2154;firefox.instance332666;firefox.instance3439;firefox.instance3501;firefox.instance3652;firefox.instance368983;firefox.instance3845;firefox.instance4019;firefox.instance4684;firefox.instance48310;parole;spotify"/>
+      <property name="mpris-players" type="string" value="[&apos;chromium&apos;, &apos;firefox&apos;];chromium.instance13583;chromium.instance2698;firefox.instance11204;firefox.instance15083;firefox.instance164720;firefox.instance192923;firefox.instance1988;firefox.instance2025;firefox.instance2051;firefox.instance2096;firefox.instance2108;firefox.instance2154;firefox.instance2188;firefox.instance332666;firefox.instance3439;firefox.instance3501;firefox.instance3652;firefox.instance368983;firefox.instance3845;firefox.instance4019;firefox.instance4684;firefox.instance48310;parole;spotify"/>
       <property name="show-notifications" type="bool" value="true"/>
     </property>
     <property name="plugin-11" type="string" value="separator">
