@@ -1,1 +1,10 @@
-src/xfce4-kyle-init-apps
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+set -u
+set -x
+
+xdotool set_desktop 5
+xfce4-terminal --working-directory ~ --execute bash -c "xdotool key Shift+PageDown"
+xfce4-terminal --working-directory ~ --execute bash -c "xdotool key Shift+Right"

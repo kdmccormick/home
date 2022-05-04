@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-remote="${1:-origin}"
-echo "pruning remote branches for $remote..."
-git remote prune "$remote"
-echo "  done."
-echo "pruning local branches that are gone from $remote..."
-git branch -vv | grep "$remote/.*: gone]" | awk '{print $1}' | xargs git branch -D && echo "  done." || echo "  prune exited failure; perhaps no branches to prune?"

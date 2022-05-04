@@ -1,1 +1,8 @@
-src/win-maximize
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+set -u
+set -x
+
+xdotool windowsize $(xdotool getactivewindow) 100% 95%

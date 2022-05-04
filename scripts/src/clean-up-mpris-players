@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-set -xeuo pipefail
-
-PANEL_XML=~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
-cat "$PANEL_XML" | \
-	sed 's/property name="mpris-players".*/property name="mpris-players" type="string" value="\[\&apos\;chromium\&apos\;\, \&apos;firefox\&apos\;\]\;parole\;spotify"\/\>/g' > \
-	/tmp/xfce4-panel.xml
-mv /tmp/xfce4-panel.xml "$PANEL_XML"

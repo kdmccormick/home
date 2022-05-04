@@ -1,6 +1,0 @@
-#!/bin/bash
-
-apt update
-for arg in $@; do
-	apt install $arg -y && echo $arg >> $HOME/ksetup/packages.list
-done

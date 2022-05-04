@@ -1,3 +1,0 @@
-#!/bin/bash
-fixdrag ; sleep 5 ; invertscroll
-

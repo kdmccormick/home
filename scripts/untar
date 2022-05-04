@@ -1,1 +1,4 @@
-src/untar
+#!/bin/bash
+
+tar xzvf "$1" && trash "$1"
+

@@ -1,1 +1,4 @@
-src/dq
+#!/bin/bash
+
+dpkg-query -l *$1* | grep 'ii' | tr -s " " | cut -d" " -f2
+

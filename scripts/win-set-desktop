@@ -1,1 +1,10 @@
-src/win-set-desktop
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+set -u
+set -x
+
+desktop_number="$1"
+
+xdotool set_desktop_for_window "$(xdotool getactivewindow)" "$desktop_number"

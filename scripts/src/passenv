@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-env_value=$(printenv "$1")
-shift
-$* "$env_value"

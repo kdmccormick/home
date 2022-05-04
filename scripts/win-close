@@ -1,1 +1,8 @@
-src/win-close
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+set -u
+set -x
+
+xdotool windowkill "$(xdotool getactivewindow)"

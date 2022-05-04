@@ -1,1 +1,25 @@
-src/xfce4-kyle-init
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+set -u
+set -x
+
+# Move this to desktop 9 (i.e. workspace 10)
+win-set-desktop 9
+
+# Enable natural scrolling.
+invertscroll
+
+# Lock screen automatically after 300 seconds. Poll every 5 milliseconds (?).
+xset s 300 5
+
+# Run initial applications in their respective positions.
+# TODO xfce4-kyle-init-apps
+
+# Run screen lock handler (blocks indefinitely).
+xss-lock --notifier=/usr/local/libexec/xsecurelock/dimmer \
+         --transfer-sleep-lock -- xsecurelock 2>&1 | \
+         tee ~/kinstall/logs/xss-lock_"$(date --iso-8601)".log
+
+echo "$0: xss-lock process finished - either crashed or was interrupted."

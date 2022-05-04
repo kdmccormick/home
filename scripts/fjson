@@ -1,1 +1,9 @@
-src/fjson
+#!/usr/bin/env python
+
+import json
+import sys
+
+input_json = sys.stdin.read()
+input_dict = json.loads(input_json)
+output_json = json.dumps(input_dict, indent=4)
+print(output_json)

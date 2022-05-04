@@ -1,1 +1,3 @@
-src/remove-trailing
+#!/bin/bash
+
+find . -not \( -name .svn -prune -o -name .git -prune \) -type f -print0 | xargs -0 perl -pi -e 's/ +$//'

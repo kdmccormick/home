@@ -1,1 +1,17 @@
-src/vpn-connect
+#! /usr/bin/env bash
+
+case "$1" in
+  "user"|"")
+    endpoint="edx-vpn.mit.edu"
+    servercert="pin-sha256:SVg9PiR757AP3r3W5AxP6gTSspoENs+6+9qsoHu9GP4="
+    ;;
+  "admin")
+    endpoint="edx-admin-vpn.mit.edu"
+    # kdm 2020-02-16: this is probably out of date; will need to update if I ever need
+    # this VPN.
+    servercert="sha256:f0d27cd3d7b52658b573a9de98a016d7dc13aa084872c13a608db33e7135927a"
+    ;;
+esac
+
+(cat /home/kyle/.kprivate/mit.txt ; echo "push") | \
+sudo openconnect "$endpoint" --servercert "$servercert" --user=kdmccor --passwd-on-stdin

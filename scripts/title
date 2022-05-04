@@ -1,1 +1,11 @@
-src/title
+#!/usr/bin/env bash
+# Set the XFCE4 terminal title and execute command.
+# If no command, set to name of current dir
+
+if [[ -z "$1" ]]; then
+	curdir=$(pwd)
+	export PROMPT_COMMAND="echo -ne \"\\033]0;$curdir\\007\";"
+else
+	export PROMPT_COMMAND="echo -ne \"\\033]0;$*\\007\";"
+	$*
+fi
