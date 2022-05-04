@@ -2,9 +2,8 @@
         apt.sources.disable-dist-docker-repo apt.update apt.upgrade bootstrap \
         bootstrap.copy-root-homedir bootstrap.source-local complete dirs \
         dirs.convert-to-link extras.fix-grub firefox oneshell.strict repos \
-        selfcheck special-install special-install.crashplan \
-        special-install.crowdstrike special-install.postman \
-        special-install.prismavpn special-install.xsecurelock \
+        selfcheck special-install special-install.minikube \
+        special-install.postman special-install.xsecurelock \
         special-install.xsecurelock.configure special-install.xsecurelock.deps \
         special-install.xsecurelock.install special-install.zoom ssh \
         ssh.rm-key warn-password
@@ -145,15 +144,13 @@ apt.upgrade: warn-password
 firefox:
 	[[ -d ~/.mozilla/firefox/kyle-self ]] || firefox -CreateProfile "kyle-self $(HOME)/.mozilla/firefox/kyle-self"
 	[[ -d ~/.mozilla/firefox/kyle-tcril ]] || firefox -CreateProfile "kyle-tcril $(HOME)/.mozilla/firefox/kyle-tcril"
+	(cd ~/.mozilla/firefox/_reference && ./addonsjson-compile)
 
 special-install: \
 	special-install.xsecurelock \
 	special-install.postman \
-	special-install.zoom
-	sudo apt-get upgrade --autoremove --yes
-	make special-install.crowdstrike
-	make special-install.crashplan
-	make special-install.prismavpn
+	special-install.zoom \
+	special-install.minikube \
 
 special-install.xsecurelock: \
 	special-install.xsecurelock.deps \
@@ -205,24 +202,6 @@ special-install.zoom: oneshell.strict
 	rm -f ./zoom_amd64.deb
 	wget https://zoom.us/client/latest/zoom_amd64.deb
 	sudo apt-get install --yes ./zoom_amd64.deb
-
-special-install.crowdstrike:
-	xdg-open "https://openedx.atlassian.net/wiki/spaces/IT/pages/2065138087/Crowdstrike+Installation+Linux+Endpoints"
-	@echo "Cannot install Crowdstrike antivirus automatically due to restricted download."
-	@echo "For manual instructions, see: "
-	@echo "https://openedx.atlassian.net/wiki/spaces/IT/pages/2065138087/Crowdstrike+Installation+Linux+Endpoints"
-
-special-install.crashplan:
-	xdg-open https://openedx.atlassian.net/wiki/spaces/IT/pages/2125562100/Crashplan+Installation+Linux+Endpoints
-	@echo "Cannot install Crowdstrike antivirus automatically due to restricted download."
-	@echo "For manual instructions, see: "
-	@echo "https://openedx.atlassian.net/wiki/spaces/IT/pages/2125562100/Crashplan+Installation+Linux+Endpoints"
-
-special-install.prismavpn:
-	xdg-open https://ist.mit.edu/prisma/client
-	@echo "Cannot install Prisma VPN automatically due to restricted download."
-	@echo "For manual instructions, see: "
-	@echo "https://openedx.atlassian.net/wiki/spaces/IT/pages/2023686283/How+do+I+install+a+VPN+Client+to+connect+to+the+edX+or+MIT+VPN+Prisma+GlobalProtect+-+Edition"
 
 special-install.minikube:
 	curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
