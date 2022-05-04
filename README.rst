@@ -19,6 +19,12 @@ Misc. Notes
 
     * Needed to run `this command to fix find <https://github.com/tridactyl/tridactyl/issues/64#issuecomment-496913151>`_
 
+    * Swapped J and K with:
+    
+      * ``bind J tabnext``
+
+      * ``bind K tabprev``
+
     * Disabled menu bar by:
 
       * Enabling ``toolkit.legacyUserProfileCustomizations.stylesheets``
