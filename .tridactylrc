@@ -12,3 +12,9 @@ bind K tabprev
 
 # Restore bookmarks toolbar shortcut.
 unbind <C-b>
+
+# Shadow C-l and C-t to prevent accientally focusing
+# the hidden address bar. C-t shadowing doesn't seem to
+# work for some reason.
+bind <C-l> fillcmdline open
+bind <C-t> fillcmdline tabopen
