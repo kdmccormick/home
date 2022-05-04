@@ -1,0 +1,14 @@
+# Don't use firefox's quickfind dialog; use console instead.
+# Allows us to use vim-like n/N for findnext.
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+bind ,<Space> nohlsearch
+
+# Switch tabcycle order because right==down in my head.
+bind J tabnext
+bind K tabprev
+
+# Restore bookmarks toolbar shortcut.
+unbind <C-b>

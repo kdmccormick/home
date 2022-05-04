@@ -1,8 +1,14 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-/*#nav-bar {
-  /* customize this value. *
-  --navbar-margin: -44px;
+/* Hide status bar in bottom-left which gets in the way of console sometimes. */
+#statuspanel {
+  display: none !important;
+}
+
+/* Hide nav (address) bar. */
+#nav-bar {
+  /* customize this value. */
+  --navbar-margin: -45px;
   margin-top: var(--navbar-margin);
   margin-bottom: 0;
   z-index: -100;
@@ -11,7 +17,9 @@
   background-color: rgba(0,0,0,0.8) !important;
 }
 
-#navigator-toolbox:focus-within > #nav-bar,
+/* Uncomment this to un-hide nav bar when tabs are hovered.
+ * Good idea in theory but it obscures the bookmarks bar. */
+/*#navigator-toolbox:focus-within > #nav-bar,
 #navigator-toolbox:hover > #nav-bar {
   margin-top: 0;
   margin-bottom: var(--navbar-margin);
@@ -19,28 +27,12 @@
   opacity: 1;
 }*/
 
-/*#main-window[chromehidden*="toolbar"] #nav-bar {
-  visibility: collapse;
+/* Uncomment this to hide navbar when unfocused (where C-l focuses it).
+ * Good idea but I couldn't get it working. */
+/*
+#main-window:not([customizing]) #navigator-toolbox:not(:focus-within):not(:hover) {
+  margin-top: -45px;
+}
+#navigator-toolbox {
+  transition: 0.2s margin-top ease-out;
 }*/
-
-:root:not([customizing]) #navigator-toolbox:not(:hover):not(:focus-within) #TabsToolbar {
-  visibility: collapse;
-}
-
-:root:not([customizing]) #navigator-toolbox:not(:hover):not(:focus-within) {
-  max-height: 1px;
-  min-height: calc(0px);
-  overflow: hidden;
-}
-
-:root:not([customizing]) #navigator-toolbox:not(:hover):not(:focus-within) #nav-bar {
-  max-height: 0;
-  min-height: 0!important;
-  --tridactyl-auto-show-zone: 10px;
-  margin-bottom: calc(-1 * var(--tridactyl-auto-show-zone));
-  opacity: 0;
-}
-
-#navigator-toolbox::after {
-  display: none !important;
-}

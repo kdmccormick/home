@@ -14,6 +14,7 @@
 !/.global.igitignore
 !/.profile_local
 !/.mozilla
+!/.tridactylrc
 !/.xmonad
 
 /.private.bash_aliases
