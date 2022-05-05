@@ -10,11 +10,11 @@ import System.Process ( spawnCommand, waitForProcess, readProcessWithExitCode )
 import XMonad
   (
     xmonad, def,
-	keys, borderWidth, normalBorderColor, focusedBorderColor, terminal, modMask,
-	startupHook, manageHook, layoutHook, handleEventHook, logHook,
-	X, XConfig(XConfig), WorkspaceId,
-	spawn, windows, withFocused, sendMessage, kill, refresh,
-	mod1Mask, mod4Mask, noModMask, shiftMask,
+    keys, borderWidth, normalBorderColor, focusedBorderColor, terminal, modMask,
+    startupHook, manageHook, layoutHook, handleEventHook, logHook,
+    X, XConfig(XConfig), WorkspaceId,
+    spawn, windows, withFocused, sendMessage, kill, refresh,
+    mod1Mask, mod4Mask, noModMask, shiftMask,
     (|||), (.|.), (<+>)
   )
 import XMonad.Actions.SinkAll ( sinkAll )
@@ -24,7 +24,7 @@ import XMonad.Config.Xfce ( xfceConfig )
 import XMonad.Hooks.EwmhDesktops
   (
     ewmh,
-	ewmhDesktopsStartup, ewmhDesktopsEventHook, ewmhDesktopsLogHook,
+    ewmhDesktopsStartup, ewmhDesktopsEventHook, ewmhDesktopsLogHook,
   )
 import XMonad.Hooks.ManageDocks ( manageDocks, avoidStruts, docksEventHook )
 import XMonad.Layout ( Full(Full) )
@@ -41,13 +41,13 @@ main = do
           { keys = (\_ -> M.fromList $ map (\(m, k, c) -> ((m, k), c)) keybindings)
           , modMask = global
           , borderWidth = 3
-		  , focusedBorderColor = "#bb00ff"
-		  , normalBorderColor = "#220055"
+          , focusedBorderColor = "#bb00ff"
+          , normalBorderColor = "#220055"
           , terminal = cmdTerminal
-		  , startupHook = onStart
+          , startupHook = onStart
           , manageHook = manageHook def <+> manageDocks <+> manageSpawn
           , layoutHook = myLayout
-		  , handleEventHook = docksEventHook <+> ewmhDesktopsEventHook
+          , handleEventHook = docksEventHook <+> ewmhDesktopsEventHook
           , logHook    = ewmhDesktopsLogHook
           }
 
@@ -62,10 +62,10 @@ myLayout = avoidStruts $ tiled ||| goldenStack ||| Full
 onStart :: X ()
 onStart =
     ewmhDesktopsStartup >>                     -- Init EWMH stuff.
-	spawn "xfce4-panel --restart" >>           -- Restart panel show XMonad respects it.
-	spawn "invertscroll" >>                    -- Ensure natural scrolling direction.
-	spawn "xset s 300 5" >>                    -- Lock screen after 300s; poll every 5s.
-	spawn "xss-lock --notifier=/usr/local/libexec/xsecurelock/dimmer --transfer-sleep-lock -- xsecurelock"
+    spawn "xfce4-panel --restart" >>           -- Restart panel show XMonad respects it.
+    spawn "invertscroll" >>                    -- Ensure natural scrolling direction.
+    spawn "xset s 300 5" >>                    -- Lock screen after 300s; poll every 5s.
+    spawn "xss-lock --notifier=/usr/local/libexec/xsecurelock/dimmer --transfer-sleep-lock -- xsecurelock"
 
 spawnWks :: Int -> String -> X ()
 spawnWks wksId cmd = spawnOn (show wksId) cmd
@@ -106,7 +106,7 @@ keybindings =
 --    , (globalShift,   X11T.xK_e,         spawn cmdTextEditor)
     , (global,        X11T.xK_BackSpace, spawn cmdLock)
     , (globalShift,   X11T.xK_BackSpace, spawn cmdSuspend)
-	, (globalAlt,     X11T.xK_BackSpace, spawn cmdSessionDialog)
+    , (globalAlt,     X11T.xK_BackSpace, spawn cmdSessionDialog)
 --    , (globalShift,   X11T.xK_x,         spawnMulti [cmdWMQuit, cmdExit])
 --    , (globalShift,   X11T.xK_r,         spawn cmdReboot)
 --    , (globalShift,   X11T.xK_s,         spawnMulti [cmdWMQuit, cmdShutdown])
