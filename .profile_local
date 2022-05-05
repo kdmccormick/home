@@ -4,7 +4,8 @@
 /usr/bin/setxkbmap -option "ctrl:nocaps"
 
 # Set path.
-export PATH="/sbin:/usr/sbin:~/.local/bin:~/.cabal/bin:~/bin:~/scripts:$PATH"
+# Should already include $HOME/bin, via Ubuntu or whatever.
+export PATH="$HOME/scripts:$HOME/.cabal/bin:$PATH"
 
 # Set default terminal programs.
 export VISUAL=vim
