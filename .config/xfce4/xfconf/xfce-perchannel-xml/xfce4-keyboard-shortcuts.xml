@@ -54,37 +54,12 @@
       <property name="&lt;Shift&gt;&lt;Super&gt;Return" type="string" value="exo-open --launch TerminalEmulator"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;m" type="string" value="/home/kyle/scripts/invertscroll"/>
       <property name="&lt;Super&gt;e" type="string" value="exo-open --launch FileManager"/>
-      <property name="&lt;Super&gt;KP_1" type="string" value="xdotool set_desktop 0"/>
-      <property name="&lt;Super&gt;KP_2" type="string" value="xdotool set_desktop 1"/>
-      <property name="&lt;Super&gt;KP_6" type="string" value="xdotool set_desktop 5"/>
-      <property name="&lt;Super&gt;KP_7" type="string" value="xdotool set_desktop 6"/>
-      <property name="&lt;Super&gt;KP_8" type="string" value="xdotool set_desktop 7"/>
-      <property name="&lt;Super&gt;KP_9" type="string" value="xdotool set_desktop 8"/>
-      <property name="&lt;Super&gt;KP_5" type="string" value="xdotool set_desktop 4"/>
-      <property name="&lt;Super&gt;KP_3" type="string" value="xdotool set_desktop 2"/>
-      <property name="&lt;Super&gt;KP_4" type="string" value="xdotool set_desktop 3"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;KP_End" type="string" value="win-set-desktop 0"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;KP_Down" type="string" value="win-set-desktop 1"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;KP_Next" type="string" value="win-set-desktop 2"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;KP_Left" type="string" value="win-set-desktop 3"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;KP_Begin" type="string" value="win-set-desktop 4"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;KP_Right" type="string" value="win-set-desktop 5"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;KP_Home" type="string" value="win-set-desktop 6"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;KP_Up" type="string" value="win-set-desktop 7"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;KP_Page_Up" type="string" value="win-set-desktop 8"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;KP_Divide" type="string" value="win-set-desktop 9"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;u" type="string" value="systemctl suspend"/>
-      <property name="&lt;Super&gt;space" type="string" value="xfce4-popup-whiskermenu"/>
-      <property name="&lt;Super&gt;Return" type="string" value="xfce4-terminal --drop-down"/>
-      <property name="&lt;Super&gt;KP_0" type="string" value="xdotool set_desktop 9"/>
-      <property name="&lt;Super&gt;v" type="string" value="globalprotect launch-ui"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;b" type="string" value="chromium"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;b" type="string" value="firefox -P"/>
       <property name="&lt;Super&gt;b" type="string" value="passenv KI_USER_PROFILE firefox -p"/>
       <property name="&lt;Super&gt;w" type="string" value="nmcli c u kyle-home"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;w" type="string" value="nmcli c u kyle-home-5"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;w" type="string" value="nmcli c u kyle-hotspot"/>
-      <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
