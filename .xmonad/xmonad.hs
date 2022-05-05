@@ -1,27 +1,4 @@
 
-{- import XMonad
-import XMonad.Util.Run
-import XMonad.Util.EZConfig(additionalKeys)
-import XMonad.Config.Xfce
-import System.IO
-
-main = do
-     spawnPipe "sleep 2; xfce4-panel -r;"
-     spawnPipe "synclient MaxTapTime=0"
---   spawnPipe "killall xautolock; xautolock -time 5 -locker 'xdg-screensaver lock';"
-     spawnPipe "setxkbmap -option 'ctrl:nocaps'"
-     xmonad $ xfceConfig
-        { modMask = mod4Mask     -- Rebind Mod to the Windows key
-        } `additionalKeys`
-        [
-          ((mod4Mask .|. shiftMask, xK_Return),        spawn "xfce4-terminal")
-		, ((mod4Mask,               xK_Backspace),     spawn "xflock4")
-        , ((mod4Mask .|. shiftMask, xK_Backspace),     spawn "systemctl suspend")
---      , ((mod4Mask , xK_p), spawn "rofi -show run")
---      , ((mod4Mask .|. shiftMask, xK_l), spawn "xdg-screensaver lock")
---      , ((mod4Mask, xK_c), spawn "setxkbmap -option 'ctrl:nocaps'")
-        ] -}
-
 import Control.Concurrent ( threadDelay )
 import Data.List ( intercalate )
 import Numeric ( showHex )
@@ -47,7 +24,7 @@ import XMonad.Hooks.EwmhDesktops
     ewmh,
 	ewmhDesktopsStartup, ewmhDesktopsEventHook, ewmhDesktopsLogHook,
   )
-import XMonad.Hooks.ManageDocks ( manageDocks, avoidStruts )
+import XMonad.Hooks.ManageDocks ( manageDocks, avoidStruts, docksEventHook )
 import XMonad.Layout ( Full(Full) )
 import XMonad.Layout.ResizableTile
   ( MirrorResize(MirrorExpand, MirrorShrink), ResizableTall(ResizableTall) )
@@ -69,7 +46,7 @@ main = do
 		  , startupHook = onStart
           , manageHook = manageHook def <+> manageDocks <+> manageSpawn
           , layoutHook = myLayout
-		  , handleEventHook = ewmhDesktopsEventHook
+		  , handleEventHook = docksEventHook <+> ewmhDesktopsEventHook
           , logHook    = ewmhDesktopsLogHook
           }
     where
@@ -88,11 +65,11 @@ myLayout = avoidStruts $ tiled ||| goldenStack ||| Full
 
 onStart :: X ()
 onStart =
---    spawnWks 1 (cmdSublime False)
---    spawnWks 1 cmdTerminal
---    spawnWks 2 cmdTerminal
-    ewmhDesktopsStartup >>
-	spawn "sleep 1; xfce4-panel"
+    ewmhDesktopsStartup >>                     -- Init EWMH stuff.
+	spawn "sleep 2; xfce4-panel --restart" >>  -- Restart panel show XMonad respects it.
+	spawn "invertscroll" >>                    -- Ensure natural scrolling direction.
+	spawn "xset s 300 5" >>                    -- Lock screen after 300s; poll every 5s.
+	spawn "xss-lock --notifier=/usr/local/libexec/xsecurelock/dimmer --transfer-sleep-lock -- xsecurelock"
 
 spawnWks :: Int -> String -> X ()
 spawnWks wksId cmd = spawnOn (show wksId) cmd
@@ -158,7 +135,7 @@ cmdTextEditor             = "nvim" -- cmdSublime True
 cmdSublime new            = "subl -w" ++ if new then " -n" else ""
 cmdTerminal               = "xfce4-terminal"
 cmdTerminalDropDown       = "xfce4-terminal --drop-down"
-cmdMenu                   = "dmenu_run"
+cmdMenu                   = "xfce4-popup-whiskermenu"
 cmdChromium               = "chromium-browser --new-window"
 cmdFirefox                = "firefox"
 cmdLock                   = "xflock4" --"xset s activate"
