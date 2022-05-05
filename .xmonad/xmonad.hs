@@ -12,7 +12,7 @@ import XMonad
     xmonad, def,
     keys, borderWidth, normalBorderColor, focusedBorderColor, terminal, modMask,
     startupHook, manageHook, layoutHook, handleEventHook, logHook,
-    X, XConfig(XConfig), WorkspaceId,
+    X, XConfig(XConfig), WorkspaceId, ChangeLayout(NextLayout),
     spawn, windows, withFocused, sendMessage, kill, refresh,
     mod1Mask, mod4Mask, noModMask, shiftMask,
     (|||), (.|.), (<+>)
@@ -31,7 +31,8 @@ import XMonad.Layout ( Full(Full) )
 import XMonad.Layout.ResizableTile
   ( MirrorResize(MirrorExpand, MirrorShrink), ResizableTall(ResizableTall) )
 import XMonad.Layout.StackTile ( StackTile(StackTile) )
-import XMonad.StackSet ( focusDown, focusUp, swapDown, swapUp, shift, greedyView)
+import XMonad.ManageHook ( composeAll, (=?), (-->), resource, className, doIgnore, doFloat, title )
+import XMonad.StackSet ( focusDown, focusUp, focusMaster, swapDown, swapUp, swapMaster, shift, greedyView)
 import XMonad.Util.Run ( spawnPipe, runProcessWithInput )
 
 import qualified Graphics.X11.Types as X11T
@@ -45,11 +46,24 @@ main = do
           , normalBorderColor = "#220055"
           , terminal = cmdTerminal
           , startupHook = onStart
-          , manageHook = manageHook def <+> manageDocks <+> manageSpawn
+          , manageHook = myManageHook
           , layoutHook = myLayout
           , handleEventHook = docksEventHook <+> ewmhDesktopsEventHook
           , logHook    = ewmhDesktopsLogHook
           }
+
+myManageHook = composeAll
+    [ className =? "MPlayer"                    --> doFloat
+    , className =? "Gimp"                       --> doFloat
+    , className =? "Wpa_gui"                    --> doFloat
+    , title     =? "Whisker Menu"               --> doFloat
+    , title     =? "xfce4-terminal-drop-down"   --> doFloat
+    , title     =? "Zoom ?.*"                   --> doFloat
+--    , resource  =? "desktop_window" --> doIgnore
+    , manageDocks
+	, manageSpawn
+	, manageHook def
+    ]
 
 myLayout = avoidStruts $ tiled ||| goldenStack ||| Full
         where
@@ -88,19 +102,23 @@ workspaces = map show [1 .. 9 :: Int]
 keybindings =
     [ (global,        X11T.xK_j,         windows focusDown)
     , (global,        X11T.xK_k,         windows focusUp)
+    , (global,        X11T.xK_i,         windows focusMaster)
+--    , (global,        X11T.xK_a,         windows focusEnd)
     , (globalShift,   X11T.xK_j,         windows swapDown)
     , (globalShift,   X11T.xK_k,         windows swapUp)
---    , (global,        X11T.xK_h,         sendMessage Shrink)
---    , (global,        X11T.xK_l,         sendMessage Expand)
+    , (globalShift,   X11T.xK_i,         windows swapMaster)
+--    , (globalShift,   X11T.xK_a,         windows swapEnd)
     , (global,        X11T.xK_h,         sendMessage Shrink)
     , (global,        X11T.xK_l,         sendMessage Expand)
     , (globalShift,   X11T.xK_h,         sendMessage MirrorExpand)
     , (globalShift,   X11T.xK_l,         sendMessage MirrorShrink)
-    , (global,        X11T.xK_d,         kill)
+    , (global,        X11T.xK_x,         kill)
     , (global,        X11T.xK_space,     spawn cmdMenu)
---    , (global,        X11T.xK_Return,    spawn cmdTerminalDropDown)
-    , (global,        X11T.xK_i,         spawn cmdTerminal)
+    , (global,        X11T.xK_Return,    spawn cmdTerminalDropDown)
+    , (globalShift,   X11T.xK_Return,    spawn cmdTerminal)
+    , (global,        X11T.xK_a,         spawn cmdTerminal >> windows swapDown)
     , (global,        X11T.xK_Escape,    sinkAll >> refresh)
+	, (global,        X11T.xK_w,         sendMessage NextLayout)
 --    , (globalShift,   X11T.xK_f,         spawn cmdFirefox)
 --    , (globalShift,   X11T.xK_w,         spawn cmdChromium)
 --    , (globalShift,   X11T.xK_e,         spawn cmdTextEditor)
@@ -122,7 +140,7 @@ keybindings =
 cmdTextEditor             = "nvim" -- cmdSublime True
 cmdSublime new            = "subl -w" ++ if new then " -n" else ""
 cmdTerminal               = "xfce4-terminal"
-cmdTerminalDropDown       = "xfce4-terminal --drop-down"
+cmdTerminalDropDown       = "xfce4-terminal --drop-down --title='xfce4-terminal-drop-down'"
 cmdMenu                   = "xfce4-popup-whiskermenu"
 cmdChromium               = "chromium-browser --new-window"
 cmdFirefox                = "firefox -p $KI_USER_PROFILE"
