@@ -62,7 +62,7 @@ myLayout = avoidStruts $ tiled ||| goldenStack ||| Full
 onStart :: X ()
 onStart =
     ewmhDesktopsStartup >>                     -- Init EWMH stuff.
-	spawn "sleep 2; xfce4-panel --restart" >>  -- Restart panel show XMonad respects it.
+	spawn "xfce4-panel --restart" >>           -- Restart panel show XMonad respects it.
 	spawn "/home/kyle/invertscroll" >>         -- Ensure natural scrolling direction.
 	spawn "xset s 300 5" >>                    -- Lock screen after 300s; poll every 5s.
 	spawn "xss-lock --notifier=/usr/local/libexec/xsecurelock/dimmer --transfer-sleep-lock -- xsecurelock"
