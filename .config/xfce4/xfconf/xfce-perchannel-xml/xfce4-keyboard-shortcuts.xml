@@ -51,7 +51,6 @@
       <property name="&lt;Alt&gt;Print" type="string" value="xfce4-screenshooter -w"/>
       <property name="&lt;Shift&gt;Print" type="string" value="xfce4-screenshooter -r"/>
       <property name="override" type="bool" value="true"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;m" type="string" value="/home/kyle/scripts/invertscroll"/>
       <property name="&lt;Super&gt;e" type="string" value="exo-open --launch FileManager"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;b" type="string" value="chromium"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;b" type="string" value="firefox -P"/>
