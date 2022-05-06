@@ -10,14 +10,14 @@ import System.Process ( spawnCommand, waitForProcess, readProcessWithExitCode )
 import XMonad
   (
     xmonad, def,
-    keys, borderWidth, normalBorderColor, focusedBorderColor, terminal, modMask,
+    keys, borderWidth, normalBorderColor, focusedBorderColor, terminal,
     startupHook, manageHook, layoutHook, handleEventHook, logHook,
     X, XConfig(XConfig), WorkspaceId, ChangeLayout(NextLayout),
     spawn, windows, withFocused, sendMessage, kill, refresh,
-    mod1Mask, mod4Mask, noModMask, shiftMask,
+    modMask, mod1Mask, mod4Mask, controlMask, shiftMask, noModMask,
     (|||), (.|.), (<+>)
   )
-import XMonad.Actions.SinkAll ( sinkAll )
+import XMonad.Actions.WithAll ( sinkAll, killAll )
 import XMonad.Actions.SpawnOn ( spawnOn, manageSpawn )
 import XMonad.Config.Prime  ( Resize(Shrink, Expand) )
 import XMonad.Config.Xfce ( xfceConfig )
@@ -61,8 +61,8 @@ myManageHook = composeAll
     , title     =? "Zoom ?.*"                   --> doFloat
 --    , resource  =? "desktop_window" --> doIgnore
     , manageDocks
-	, manageSpawn
-	, manageHook def
+    , manageSpawn
+    , manageHook def
     ]
 
 myLayout = avoidStruts $ tiled ||| goldenStack ||| Full
@@ -100,65 +100,110 @@ workspaces = map show [1 .. 9 :: Int]
 
 -- Keybindings
 keybindings =
-    [ (global,        X11T.xK_j,         windows focusDown)
-    , (global,        X11T.xK_k,         windows focusUp)
+
+    -- Switch focusing up or down using k/j, like in vi.
+    -- Use i/e for "insert" (beginning) or "end".
+    -- TODO: haven't figured out a good command for "end" yet.
+    [ (global,        X11T.xK_k,         windows focusUp)
+    , (global,        X11T.xK_j,         windows focusDown)
     , (global,        X11T.xK_i,         windows focusMaster)
---    , (global,        X11T.xK_a,         windows focusEnd)
+    , (global,        X11T.xK_a,         return ()) -- windows focusEnd)
+
+    -- Shift plus a key from above causes the corresponding swap.
     , (globalShift,   X11T.xK_j,         windows swapDown)
     , (globalShift,   X11T.xK_k,         windows swapUp)
     , (globalShift,   X11T.xK_i,         windows swapMaster)
---    , (globalShift,   X11T.xK_a,         windows swapEnd)
+    , (globalShift,   X11T.xK_a,         return ()) -- windows swapEnd)
+
+    -- h/l to move the vertical bar left or right;
+    -- H/L to move the horizontal bar up or down.
     , (global,        X11T.xK_h,         sendMessage Shrink)
     , (global,        X11T.xK_l,         sendMessage Expand)
     , (globalShift,   X11T.xK_h,         sendMessage MirrorExpand)
     , (globalShift,   X11T.xK_l,         sendMessage MirrorShrink)
+
+    -- w/b (inspired by "word/back") to get us to cycle layouts
+    -- TODO: no good function for cycle backwards?
+    , (global,        X11T.xK_w,         sendMessage NextLayout)
+    , (global,        X11T.xK_b,         return ()) -- sendMessage Layout)
+
+    -- x to kill a "character" (a window); d to kill a "line" (workspace)
     , (global,        X11T.xK_x,         kill)
+    , (global,        X11T.xK_d,         killAll)
+
+    -- Whisker Menu on space
     , (global,        X11T.xK_space,     spawn cmdMenu)
+
+    -- enter for a dropdown terminal, ENTER for a windowed one, alt+enter for sudo one.
     , (global,        X11T.xK_Return,    spawn cmdTerminalDropDown)
     , (globalShift,   X11T.xK_Return,    spawn cmdTerminal)
-    , (global,        X11T.xK_a,         spawn cmdTerminal >> windows swapDown)
+    , (globalAlt,     X11T.xK_Return,    spawn cmdTerminalSudo)
+
+    -- ESC gets us back to a sane state
     , (global,        X11T.xK_Escape,    sinkAll >> refresh)
-	, (global,        X11T.xK_w,         sendMessage NextLayout)
---    , (globalShift,   X11T.xK_f,         spawn cmdFirefox)
---    , (globalShift,   X11T.xK_w,         spawn cmdChromium)
---    , (globalShift,   X11T.xK_e,         spawn cmdTextEditor)
-    , (global,        X11T.xK_BackSpace, spawn cmdLock)
-    , (globalShift,   X11T.xK_BackSpace, spawn cmdLogout)
-    , (globalAlt,     X11T.xK_BackSpace, spawn cmdXMonadRestart)
-    , (global,        X11T.xK_Delete,    spawn cmdSleep)
-    , (globalShift,   X11T.xK_Delete,    spawn cmdShutdown)
-    , (globalAlt,     X11T.xK_Delete,    spawn cmdRestart)
---    , (globalShift,   X11T.xK_x,         spawnMulti [cmdWMQuit, cmdExit])
---    , (globalShift,   X11T.xK_r,         spawn cmdReboot)
---    , (globalShift,   X11T.xK_s,         spawnMulti [cmdWMQuit, cmdShutdown])
---    , (global,        X11T.xK_0,         spawn cmdOneMonitor)
---    , (globalShift,   X11T.xK_0,         spawn cmdTwoMonitorsVertical)
+
+    -- Backslash key for Web browsers
+    , (global,        X11T.xK_backslash, spawn cmdFirefox)
+    , (globalShift,   X11T.xK_backslash, spawn cmdFirefoxProfiles)
+    , (globalAlt,     X11T.xK_backslash, spawn cmdChromium)
+
+    -- Insert key for file browsers. Unbind 'e' for that function.
+    , (global,        X11T.xK_Insert,    spawn cmdFolderHome)
+    , (globalShift,   X11T.xK_Insert,    spawn cmdFolderDownloads)
+    , (globalAlt,     X11T.xK_Insert,    spawn cmdFolderRoot)
+    , (global,        X11T.xK_e,         return ())
+
+    -- Session options using HOME.
+    , (global,        X11T.xK_Home,      spawn cmdLock)
+    , (globalShift,   X11T.xK_Home,      spawn cmdLogout)
+    , (globalAlt,     X11T.xK_Home,      spawn cmdXMonadRestart)
+
+    -- Power options using END.
+    , (global,        X11T.xK_End,       spawn cmdSleep)
+    , (globalShift,   X11T.xK_End,       spawn cmdShutdown)
+    , (globalAlt,     X11T.xK_End,       spawn cmdRestart)
+
+    -- Using "<C-t>" in firefox+tricatyl focuses the address bar and messes
+    -- up the workflow. We would keybind over it via tridactyl, but that doesn't
+    -- work for some reason. So, we shadow <C-t> here until I'm trained out of it.
+    -- We try to simulate a 't' keybpress but it's not working, but we'll leave that
+    -- here anyway.
+    -- Note that this could get annoying in other programs that use <C-t>.
+    , (controlMask,   X11T.xK_t,         spawn "xdotool key t")
+
     ] ++
+
     -- mod-[1..9] %! Switch to workspace N
     -- mod-shift-[1..9] %! Move client to workspace N
     [(global .|. m, k, windows $ f i)
         | (i, k) <- zip workspaces [X11T.xK_1 .. X11T.xK_9]
         , (f, m) <- [(greedyView, 0), (shift, shiftMask)]]
 
-cmdTextEditor             = "nvim" -- cmdSublime True
-cmdSublime new            = "subl -w" ++ if new then " -n" else ""
-cmdTerminal               = "xfce4-terminal"
 cmdTerminalDropDown       = "xfce4-terminal --drop-down --title='xfce4-terminal-drop-down'"
-cmdMenu                   = "xfce4-popup-whiskermenu"
+cmdTerminal               = "xfce4-terminal"
+cmdTerminalSudo           = "xfce4-terminal -x sudo su"
+
+cmdFirefox                = "firefox -P $KI_USER_PROFILE"
+cmdFirefoxProfiles        = "firefox -P"
 cmdChromium               = "chromium-browser --new-window"
-cmdFirefox                = "firefox -p $KI_USER_PROFILE"
-cmdFirefoxProfiles        = "firefox -p"
+
+cmdFolderHome             = "thunar"
+cmdFolderDownloads        = "thunar $HOME/downloads"
+cmdFolderRoot             = "thunar /"
+
+cmdMenu                   = "xfce4-popup-whiskermenu"
+
 cmdSessionDialog          = "xfce4-session-logout"
-cmdXMonadRestart          = "xmonad --recompile && xmonad --restart"
+
 cmdLock                   = "xflock4" --"xset s activate"
 cmdLogout                 = cmdSessionDialog ++ " --logout"
-cmdRestart                = cmdSessionDialog ++ " --reboot"
+cmdXMonadRestartInner     = "bash -c '(xmonad --recompile && xmonad --restart) || read -p \"\nPress ENTER to continue.\"'"
+cmdXMonadRestart          = "xfce4-terminal -x " ++ cmdXMonadRestartInner
+
 cmdSleep                  = cmdSessionDialog ++ " --suspend"
 cmdShutdown               = cmdSessionDialog ++ " --halt"
---cmdSuspend              = "systemctl suspend"
---cmdExit                   = "killall -SIGINT xmonad-x86_64-linux"
---cmdShutdown               = "shutdown -P now"
---cmdReboot                 = "shutdown -r now"
+cmdRestart                = cmdSessionDialog ++ " --reboot"
+
 --cmdOneMonitor             = "mon L"
 --cmdTwoMonitorsVertical    = "mon a"
 
