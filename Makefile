@@ -3,10 +3,10 @@
         bootstrap.copy-root-homedir bootstrap.source-local complete dirs \
         dirs.convert-to-link extras.fix-grub firefox oneshell.strict repos \
         selfcheck special-install special-install.minikube \
-        special-install.postman special-install.xsecurelock \
-        special-install.xsecurelock.configure special-install.xsecurelock.deps \
-        special-install.xsecurelock.install special-install.zoom ssh \
-        ssh.rm-key warn-password
+        special-install.postman special-install.tridactylnative \
+        special-install.xsecurelock special-install.xsecurelock.configure \
+        special-install.xsecurelock.deps special-install.xsecurelock.install \
+        special-install.zoom ssh ssh.rm-key warn-password
 
 SHELL=/bin/bash
 
@@ -147,10 +147,17 @@ firefox:
 	(cd ~/.mozilla/firefox/_reference && ./addonsjson-compile)
 
 special-install: \
+	special-install.tridactylnative \
 	special-install.xsecurelock \
 	special-install.postman \
 	special-install.zoom \
-	special-install.minikube \
+	special-install.minikube
+
+special-install.tridactylnative:
+	curl -fsSl \
+		https://raw.githubusercontent.com/tridactyl/native_messenger/master/installers/install.sh \
+		-o /tmp/trinativeinstall.sh && \
+		sh /tmp/trinativeinstall.sh
 
 special-install.xsecurelock: \
 	special-install.xsecurelock.deps \
