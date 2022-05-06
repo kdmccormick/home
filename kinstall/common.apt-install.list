@@ -21,6 +21,7 @@ python3-virtualenv
 python3.9
 redshift-gtk
 rename
+ripgrep
 shellcheck
 spotify-client
 sublime-text
