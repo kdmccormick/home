@@ -42,4 +42,5 @@ TabActivityColor=#0f4999
 DropdownKeepOpenDefault=TRUE
 FontUseSystem=TRUE
 ColorBackgroundVary=TRUE
+ScrollingUnlimited=TRUE
 
