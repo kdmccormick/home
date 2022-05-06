@@ -123,8 +123,11 @@ keybindings =
 --    , (globalShift,   X11T.xK_w,         spawn cmdChromium)
 --    , (globalShift,   X11T.xK_e,         spawn cmdTextEditor)
     , (global,        X11T.xK_BackSpace, spawn cmdLock)
-    , (globalShift,   X11T.xK_BackSpace, spawn cmdSuspend)
-    , (globalAlt,     X11T.xK_BackSpace, spawn cmdSessionDialog)
+    , (globalShift,   X11T.xK_BackSpace, spawn cmdLogout)
+    , (globalAlt,     X11T.xK_BackSpace, spawn cmdXMonadRestart)
+    , (global,        X11T.xK_Delete,    spawn cmdSleep)
+    , (globalShift,   X11T.xK_Delete,    spawn cmdShutdown)
+    , (globalAlt,     X11T.xK_Delete,    spawn cmdRestart)
 --    , (globalShift,   X11T.xK_x,         spawnMulti [cmdWMQuit, cmdExit])
 --    , (globalShift,   X11T.xK_r,         spawn cmdReboot)
 --    , (globalShift,   X11T.xK_s,         spawnMulti [cmdWMQuit, cmdShutdown])
@@ -145,10 +148,14 @@ cmdMenu                   = "xfce4-popup-whiskermenu"
 cmdChromium               = "chromium-browser --new-window"
 cmdFirefox                = "firefox -p $KI_USER_PROFILE"
 cmdFirefoxProfiles        = "firefox -p"
-cmdLock                   = "xflock4" --"xset s activate"
-cmdSuspend                = "systemctl suspend"
 cmdSessionDialog          = "xfce4-session-logout"
-cmdWMQuit                 = "wmquit"
+cmdXMonadRestart          = "xmonad --recompile && xmonad --restart"
+cmdLock                   = "xflock4" --"xset s activate"
+cmdLogout                 = cmdSessionDialog ++ " --logout"
+cmdRestart                = cmdSessionDialog ++ " --reboot"
+cmdSleep                  = cmdSessionDialog ++ " --suspend"
+cmdShutdown               = cmdSessionDialog ++ " --halt"
+--cmdSuspend              = "systemctl suspend"
 --cmdExit                   = "killall -SIGINT xmonad-x86_64-linux"
 --cmdShutdown               = "shutdown -P now"
 --cmdReboot                 = "shutdown -r now"
