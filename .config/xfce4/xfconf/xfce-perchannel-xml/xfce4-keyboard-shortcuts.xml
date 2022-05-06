@@ -44,17 +44,10 @@
       <property name="&lt;Alt&gt;F3" type="empty">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
-      <property name="Print" type="string" value="xfce4-screenshooter -f"/>
       <property name="&lt;Alt&gt;F2" type="empty">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
-      <property name="&lt;Alt&gt;Print" type="string" value="xfce4-screenshooter -w"/>
-      <property name="&lt;Shift&gt;Print" type="string" value="xfce4-screenshooter -r"/>
       <property name="override" type="bool" value="true"/>
-      <property name="&lt;Super&gt;e" type="string" value="exo-open --launch FileManager"/>
-      <property name="&lt;Alt&gt;&lt;Super&gt;b" type="string" value="chromium"/>
-      <property name="&lt;Shift&gt;&lt;Super&gt;b" type="string" value="firefox -P"/>
-      <property name="&lt;Super&gt;b" type="string" value="passenv KI_USER_PROFILE firefox -p"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

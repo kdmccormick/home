@@ -147,11 +147,16 @@ keybindings =
     , (globalShift,   X11T.xK_backslash, spawn cmdFirefoxProfiles)
     , (globalAlt,     X11T.xK_backslash, spawn cmdChromium)
 
-    -- Insert key for file browsers. Unbind 'e' for that function.
-    , (global,        X11T.xK_Insert,    spawn cmdFolderHome)
-    , (globalShift,   X11T.xK_Insert,    spawn cmdFolderDownloads)
-    , (globalAlt,     X11T.xK_Insert,    spawn cmdFolderRoot)
+    -- Backspace key for file browsers. Shadow built-in 'e' for that function.
+    , (global,        X11T.xK_BackSpace, spawn cmdFolderHome)
+    , (globalShift,   X11T.xK_BackSpace, spawn cmdFolderDownloads)
+    , (globalAlt,     X11T.xK_BackSpace, spawn cmdFolderRoot)
     , (global,        X11T.xK_e,         return ())
+
+    -- Session options using INSERT (note: NO global mod here)
+    , (noModMask,     X11T.xK_Print,     spawn cmdScreenshot)
+    , (shft,         X11T.xK_Print,     spawn cmdScreenshotSelect)
+    , (alt,           X11T.xK_Print,     spawn cmdScreenshotWindow)
 
     -- Session options using HOME.
     , (global,        X11T.xK_Home,      spawn cmdLock)
@@ -190,6 +195,14 @@ cmdChromium               = "chromium-browser --new-window"
 cmdFolderHome             = "thunar"
 cmdFolderDownloads        = "thunar $HOME/downloads"
 cmdFolderRoot             = "thunar /"
+
+cmdWifi                   = "nmcli c u $USER-home"
+cmdWifi5                  = "nmcli c u $USER-home-5"
+cmdWifiHotspot            = "nmcli c u $USER-hotspot"
+
+cmdScreenshot             = "xfce4-screenshooter --fullscreen"
+cmdScreenshotSelect       = "xfce4-screenshooter --region"
+cmdScreenshotWindow       = "xfce4-screenshooter --window"
 
 cmdMenu                   = "xfce4-popup-whiskermenu"
 
