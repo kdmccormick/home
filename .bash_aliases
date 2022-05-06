@@ -19,8 +19,12 @@ alias run-upgrade-yes="sudo apt update && sudo apt upgrade --yes && sudo apt aut
 
 # Misc. utilities
 alias reown="sudo chown $(whoami) -R"
-alias svba="source .venv/bin/activate || source venv/bin/activate"
 alias sizes="du -hs *"
+
+# Virtualenvs
+alias v="source .venv/bin/activate || source venv/bin/activate"
+alias d="deactivate"
+alias tv="source $HOME/openedx/tutor/venv/bin/activate"
 
 # Non-ascii character copying
 alias ea="echo -n é | xcopy"
