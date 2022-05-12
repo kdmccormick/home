@@ -23,8 +23,8 @@ alias sizes="du -hs *"
 
 # Virtualenvs
 alias v="source .venv/bin/activate || source venv/bin/activate"
-alias d="deactivate"
-alias tv="source $HOME/openedx/tutor/venv/bin/activate"
+alias v0="deactivate"
+alias vt="source $HOME/openedx/tutor/venv/bin/activate"
 
 # Non-ascii character copying
 alias ea="echo -n é | xcopy"
