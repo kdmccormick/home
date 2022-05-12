@@ -168,13 +168,14 @@ keybindings =
     , (globalShift,   X11T.xK_End,       spawn cmdShutdown)
     , (globalAlt,     X11T.xK_End,       spawn cmdRestart)
 
+	-- TODO: Disabling tridactyl for now. Let Firefox intercpt <C-t> again as normal.
     -- Using "<C-t>" in firefox+tricatyl focuses the address bar and messes
     -- up the workflow. We would keybind over it via tridactyl, but that doesn't
     -- work for some reason. So, we shadow <C-t> here until I'm trained out of it.
     -- We try to simulate a 't' keybpress but it's not working, but we'll leave that
     -- here anyway.
     -- Note that this could get annoying in other programs that use <C-t>.
-    , (controlMask,   X11T.xK_t,         spawn "xdotool key t")
+    --, (controlMask,   X11T.xK_t,         spawn "xdotool key t")
 
     ] ++
 
