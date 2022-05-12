@@ -15,7 +15,7 @@
             "supportURL": "https://old.reddit.com/r/uBlockOrigin/",
             "description": "Finally, an efficient wide-spectrum content blocker. Easy on CPU and memory.",
             "fullDescription": "uBlock Origin is not an \"ad blocker\", it's a wide-spectrum content blocker with CPU and memory efficiency as a primary feature.\n\n***\n\nOut of the box, uBO blocks ads, trackers, coin miners, popups, etc. through the following lists of filters, enabled by default:\n\n- EasyList (ads)\n- EasyPrivacy (tracking)\n- Peter Lowe\u2019s Ad server list (ads and tracking)\n- Online Malicious URL Blocklist\n- uBO's own lists\n\nMore lists are available for you to select if you wish:\n\n- EasyList Cookie\n- Fanboy Annoyances\n- AdGuard Annoyances\n- Dan Pollock\u2019s hosts file\n- And many others\n\nAdditionally, you can point-and-click to block JavaScript locally or globally, create your own global or local rules to override entries from filter lists, and many more advanced features.\n\n***\n\nFree.\nOpen source with public license (GPLv3)\nFor users by users.\n\nIf ever you really do want to contribute something, think about the people working hard to maintain the filter lists you are using, which were made available to use by all for free.\n\n***\n\n    Documentation\n    Release notes\n    Community support @ Reddit\n    Contributors @ GitHub\n    Contributors @ Crowdin",
-            "weeklyDownloads": 116030,
+            "weeklyDownloads": 118466,
             "type": "extension",
             "creator": {
                 "name": "Raymond Hill",
@@ -79,10 +79,10 @@
                 }
             ],
             "contributionURL": "",
-            "averageRating": 4.7722,
-            "reviewCount": 3604,
+            "averageRating": 4.7725,
+            "reviewCount": 3613,
             "reviewURL": "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/reviews/",
-            "updateDate": 1651158690000
+            "updateDate": 1652024499000
         },
         {
             "id": "newtaboverride@agenedia.com",
@@ -98,7 +98,7 @@
             "supportURL": "https://github.com/cadeyrn/newtaboverride/issues",
             "description": "New Tab Override allows you to set the page that shows whenever you open a new tab.",
             "fullDescription": "New Tab Override allows you to set the page that shows whenever you open a new tab.\n\nFeatures\n\n    Change your new tab page to whatever website you like\n    Use your current home page as new tab page\n    Customize the background color for your new tab page\n    Store a local HTML file in the extension and use it for new tab content\n    Get the latest news about Mozilla as new tab page (German language only)\n    You can set the focus to the address bar or the website\n    Customize where new tabs are opened\n    Automatically adds \u201chttp://\u201d if protocol is missing from a URL\n    Can be used in conjunction with Firefox\u2019s container tabs feature\n    Dark mode support for options interface\n\n\nShortcuts\n\nThe settings interface can be accessed via Shift + F12. It is also possible to open the settings interface by entering newtab settings in the address bar or from the menu entry in the tools menu.\n\nLanguages\n\nNew Tab Override is currently available in the following languages:\n\n    English\n    German\n    French (Thanks, SuperPat45 and Mozilla commmunity!)\n    Chinese, Simplified (Thanks, tiansh and Mozilla commmunity!)\n    Spanish (Thanks, MissingUser and Mozilla commmunity!)\n    Italian (Thanks, Mozilla commmunity!)\n    Russian (Thanks, vanja-san!)\n    Dutch (Thanks, Tonnes!)\n    Ukrainian (Thanks, Bergil32!)\n    Brazilian Portuguese (Thanks, Mozilla commmunity!)\n    Swedish (Thanks, Sopor-!)\n    Polish (Thanks, WaldiPL!)\n    Upper Sorbian (Thanks, milupo!)\n    Lower Sorbian (Thanks, milupo!)\n\n\nPermissions\n\nNew Tab Override needs several permissions to work properly. Some permissions are mandatory, some are optional. To offer full transparency, this overview also lists \"silent\" permissions.\n\nMandatory permissions. New Tab Override will not work without the following permissions:\n\n- access browser history\n\nThe permission to access the browser history is needed to prevent spammy \"moz-extension://\" entries in your browsing history every time you open a new tab. There is no way to prevent this without this permission.\n\n- access browser tabs\n\nThe permission to access the browser tabs is needed so that New Tab Override can jump to the settings page if it\u2019s already open in another tab when you click the button to open the extension\u2019s settings.\n\n- read and modify browser settings\n\nThe permission to read and modify browser settings is needed to change the position of new tabs and for the option to automatically use your home page as new tab page.\n\nOptional permissions. These permissions are not needed to install and use New Tab Override:\n\n- access data for www.soeren-hentzschel.at\n\nThe permission to access data for www.soeren-hentzschel.at is only needed if you enable the option to see the latest news about Mozilla as new tab page. If enabled, New Tab Override reads the feed of www.soeren-hentzschel.at to show you the latest news.\n\nSilent permissions. New Tab Override requires additional permissions, but Firefox does not prompt requests for the following:\n\n- menus\n\nThe menus permission is needed for providing an entry in the tools menu for accessing New Tab Override's settings.\n\n- storage\n\nThe storage permission is needed so that New Tab Override can store settings such as your new tab page.\n\nCompatibility\n\nThe extension requires at least Firefox 78. There is no support for older versions of Firefox.",
-            "weeklyDownloads": 2081,
+            "weeklyDownloads": 2329,
             "type": "extension",
             "creator": {
                 "name": "S\u00f6ren Hentzschel",
@@ -156,8 +156,8 @@
                 }
             ],
             "contributionURL": "https://paypal.me/agenedia/3?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
-            "averageRating": 4.3255,
-            "reviewCount": 363,
+            "averageRating": 4.3272,
+            "reviewCount": 365,
             "reviewURL": "https://addons.mozilla.org/en-US/firefox/addon/new-tab-override/reviews/",
             "updateDate": 1622041027000
         },
@@ -175,7 +175,7 @@
             "supportURL": "https://add0n.com/useragent-switcher.html",
             "description": "Spoof websites trying to gather information about your web navigation\u2014like your browser type and operating system\u2014to deliver distinct content you may not want.",
             "fullDescription": "Usage example: You can alter your user-agent string to indicate you\u2019re on a mobile device if you prefer seeing mobile versions of sites so they load quicker.\n\n--\n\nThis extension allows you to spoof your browser \"user-agent\" string to a custom designation, making it impossible for websites to know specific details about your browsing arrangement.\n\nOverviews:\nhttps://www.youtube.com/watch?v=-aVFxvF3N_E\nhttps://www.youtube.com/watch?v=4M6_Zc4o1MQ\n\nNotes:\n1. You can easily set custom \"user-agent\" strings from the toolbar popup\n2. The extension uses a two-factor technique to mimic your default \"user-agent\" string, which is the most reliable method\n3. The extension does not use any resources when it is not spoofing the user-agent\n4. The extension enables user-agent spoofing on specific domains only; it is conversely possible to exclude certain domains from spoofing. Check the Options page for more info.\n5. You can set per-site user-agent strings\n6. There is an option to randomize user-agent strings.\n7. It is possible to set user-agent string for a single window; you can have a separate user-agent string for each browser window\n\nSupported operating systems:\nWindows, Mac OS, Linux, Chromium OS, Ubuntu, Debian, Android, iOS, AmigaOS, OpenBSD, BeOS, Haiku, Solaris, NetBSD, FreeBSD, Slackware, SUSE, gentoo, Fedora, Gentoo, Mageia, CentOS, Mint, DragonFly, Kubuntu, Mandriva, Zenwalk, Unix, GNU, OS/2, AIX, QNX, BEOS, RISC OS, Symbian, Nintendo, OpenSolaris, Kubuntu\n\nSupported browsers:\nInternet Explorer, Safari, Chrome, Firefox, Opera, Edge, WebKit, Avant, Maxthon, Arora, Mozilla, Epiphany, Camino, Chimera, Chromium, Dragon, conkeror, Conkeror, Dillo, Links, Firebird, Swiftfox, Netscape, Flock, iCab, Iceape, icecat, IceCat, IceWeasel, Iron, Meleon, Konqueror, Lunascape, Lynx, MAXTHON, midori, Midori, KHTML, Mosaic, NetSurf, OmniWeb, Tablet, Mini, Phoenix, RockMelt, Safari, Browser, SeaMonkey, Slim, Webkit, w3m\n\nFor more info and general bug reports please use:\nhttps://add0n.com/useragent-switcher.html\n\nFor technical bug reports please use:\nhttps://github.com/ray-lothian/UserAgent-Switcher/",
-            "weeklyDownloads": 6862,
+            "weeklyDownloads": 8071,
             "type": "extension",
             "creator": {
                 "name": "Ray",
@@ -201,8 +201,8 @@
                 }
             ],
             "contributionURL": "https://paypal.me/addondonation/10usd?utm_content=product-page-contribute&utm_medium=referral&utm_source=addons.mozilla.org",
-            "averageRating": 4.3226,
-            "reviewCount": 159,
+            "averageRating": 4.3227,
+            "reviewCount": 160,
             "reviewURL": "https://addons.mozilla.org/en-US/firefox/addon/user-agent-string-switcher/reviews/",
             "updateDate": 1620231736000
         },
@@ -220,7 +220,7 @@
             "supportURL": null,
             "description": "A simple theme featuring a picture of a foggy forest.",
             "fullDescription": null,
-            "weeklyDownloads": 24799,
+            "weeklyDownloads": 28993,
             "type": "theme",
             "creator": {
                 "name": "Graph",
@@ -246,8 +246,8 @@
                 }
             ],
             "contributionURL": "",
-            "averageRating": 4.9167,
-            "reviewCount": 1,
+            "averageRating": 4.8095,
+            "reviewCount": 3,
             "reviewURL": "https://addons.mozilla.org/en-US/firefox/addon/somber-forest/reviews/",
             "updateDate": 1647245620000
         },
@@ -259,13 +259,13 @@
                 "128": "https://addons.mozilla.org/static-server/img/addon-icons/default-128.452018499894.png"
             },
             "name": "English (GB) Language Pack",
-            "version": "101.0buildid20220503.185929",
-            "sourceURI": "https://addons.mozilla.org/firefox/downloads/file/3944307/english_gb_language_pack-101.0buildid20220503.185929-fx.xpi",
+            "version": "101.0buildid20220510.144626",
+            "sourceURI": "https://addons.mozilla.org/firefox/downloads/file/3947138/english_gb_language_pack-101.0buildid20220510.144626-fx.xpi",
             "homepageURL": null,
             "supportURL": null,
             "description": "English (GB) Language Pack",
             "fullDescription": null,
-            "weeklyDownloads": 1508,
+            "weeklyDownloads": 1672,
             "type": "locale",
             "creator": {
                 "name": "Mozilla Firefox",
@@ -274,10 +274,10 @@
             "developers": [],
             "screenshots": [],
             "contributionURL": "",
-            "averageRating": 3.6855,
-            "reviewCount": 244,
+            "averageRating": 3.6838,
+            "reviewCount": 245,
             "reviewURL": "https://addons.mozilla.org/en-US/firefox/addon/english-gb-language-pack/reviews/",
-            "updateDate": 1651613286000
+            "updateDate": 1652217592000
         },
         {
             "id": "langpack-en-CA@firefox.mozilla.org",
@@ -287,13 +287,13 @@
                 "128": "https://addons.mozilla.org/static-server/img/addon-icons/default-128.452018499894.png"
             },
             "name": "English (CA) Language Pack",
-            "version": "101.0buildid20220503.185929",
-            "sourceURI": "https://addons.mozilla.org/firefox/downloads/file/3944306/english_ca_language_pack-101.0buildid20220503.185929-fx.xpi",
+            "version": "101.0buildid20220510.144626",
+            "sourceURI": "https://addons.mozilla.org/firefox/downloads/file/3947135/english_ca_language_pack-101.0buildid20220510.144626-fx.xpi",
             "homepageURL": null,
             "supportURL": null,
             "description": "Language pack for Firefox for en-CA",
             "fullDescription": null,
-            "weeklyDownloads": 107,
+            "weeklyDownloads": 100,
             "type": "locale",
             "creator": {
                 "name": "Mozilla Firefox",
@@ -305,7 +305,7 @@
             "averageRating": 4.0408,
             "reviewCount": 6,
             "reviewURL": "https://addons.mozilla.org/en-US/firefox/addon/english-ca-language-pack/reviews/",
-            "updateDate": 1651613276000
+            "updateDate": 1652217581000
         },
         {
             "id": "DontFuckWithPaste@raim.ist",
@@ -321,7 +321,7 @@
             "supportURL": "https://github.com/aaronraimist/DontFuckWithPaste",
             "description": "This add-on stops websites from blocking copy and paste for password fields and other input fields.",
             "fullDescription": "This add-on stops websites from blocking copy and paste actions for password fields and other input fields.\n\nTest page available here, try before downloading the add-on then installing the add-on, activate it, and try again: https://jsfiddle.net/aaronraimist/6qrnwcjp/28/show\n\nSource code available here: https://github.com/aaronraimist/DontFuckWithPaste\n\nThis add-on was originally created by Jacob Swanner for Chrome is now available in Firefox. Please don't ask Jacob for support with the Firefox version of the add-on.",
-            "weeklyDownloads": 142,
+            "weeklyDownloads": 200,
             "type": "extension",
             "creator": {
                 "name": "Aaron R",
@@ -339,7 +339,7 @@
                 }
             ],
             "contributionURL": "",
-            "averageRating": 4.495,
+            "averageRating": 4.5,
             "reviewCount": 56,
             "reviewURL": "https://addons.mozilla.org/en-US/firefox/addon/don-t-fuck-with-paste/reviews/",
             "updateDate": 1598138411000
@@ -358,7 +358,7 @@
             "supportURL": null,
             "description": "\ud83e\udd8aDesigned by MaD\u2665nna\ud83e\udd8a",
             "fullDescription": null,
-            "weeklyDownloads": 927,
+            "weeklyDownloads": 1068,
             "type": "theme",
             "creator": {
                 "name": "MaDonna",
@@ -384,7 +384,7 @@
                 }
             ],
             "contributionURL": "",
-            "averageRating": 4.8225,
+            "averageRating": 4.8235,
             "reviewCount": 34,
             "reviewURL": "https://addons.mozilla.org/en-US/firefox/addon/sunset-foggy-sea-by-madonna/reviews/",
             "updateDate": 1622670838000
@@ -403,7 +403,7 @@
             "supportURL": "https://github.com/cmcaine/tridactyl/issues",
             "description": "Vim, but in your browser. Replace Firefox's control mechanism with one modelled on Vim.\n\nThis addon is very usable, but is in an early stage of development. We intend to implement the majority of Vimperator's features.",
             "fullDescription": "Control your browser with your keyboard only.\nReplace Firefox\u2019s control mechanism with one modelled on VIM. This is a \u201cFirefox Quantum\u201d replacement for VimFX, Vimperator and Pentadactyl. Most common tasks you want your browser to perform are bound to a single key press:\n\n    You want to open a new tab? Hit t.\n    You want to follow that link? Hit f and type the displayed label. (Note: hint characters should be typed in lowercase.)\n    You want to go to the bottom of the page? Hit G. Or the top? gg.\n    You want to focus the text field on Wikipedia to search for another term? gi.\n    Switch to the next tab? gt.\n    Go back in time? H.\n    Notice that this tab is rubbish and you want to close it? d.\n    Regret that decision? u restores it.\n    Want to write something in Vim? Ctrl-i in a text box opens it in Vim, if you have :native working.\n    Temporarily disable all that magic because you can\u2019t stand it? Shift-Insert or Ctrl-Alt-Escape.\n    But how do you use your browser now? Shift-Insert or Ctrl-Alt-Escape again and we\u2019re back on.\n\nThe list could go on a bit here, but I guess you\u2019ll get the point. If you feel lost sometimes :help might help you a lot, and there\u2019s always :tutor.\nHighlighted features:\n\n    Follow any link on the site with just 2-3 key presses.\n    Switch to any open tab by searching for its URL or title or entering its ID.\n    Easy customizable search settings.\n    Bind any supported command or commands to the key (sequence) of your liking.\n    Great default bindings (if you\u2019re used to Pentadactyl or Vimperator).\n\nThis add-on is very usable, but is in an early stage of development. We intend to implement the majority of Vimperator\u2019s features.\nYou can get beta builds from our website.\nPermissions:\nSince Tridactyl aims to provide all the features Vimperator and Pentadactyl had, it requires quite a few permissions. Here we describe the specific permissions and why we need them.\n\n    Access your data for all websites:\n        This is Mozilla\u2019s way of saying that Tridactyl can read the content of web pages. This is necessary in order to e.g. find the links you can follow with the :hint command (bound to f by default).\n    Exchange messages with programs other than Firefox:\n        This permission is required for Tridactyl to interact with your operating system (opening your editor to edit text areas, sending links to your video player, reading a configuration file from your disk\u2026). This is possible thanks to an external executable we provide. If you feel this gives Tridactyl too much power you can chose not to install the external executable: Tridactyl will still work but won\u2019t be able to start external programs.\n    Read and modify bookmarks:\n        Tridactyl\u2019s command line has a powerful autocompletion mechanism. In order to be able to autocomplete your bookmarks, Tridactyl needs to read them.\n    Clear recent browsing history, cookies, and related data:\n        Tridactyl implements the :sanitise command Vimperator and Pentadactyl had. It works a bit like the \u201cClear All History\u201d dialog you can access by pressing Ctrl+Shift+Del on default Firefox.\n    Get data from the clipboard:\n        If your clipboard contains a URL, pressing p will make Tridactyl follow this URL in the current tab.\n    Input data to the clipboard:\n        Tridactyl lets you copy various elements to the clipboard such as a page\u2019s URL with yy, a link\u2019s URL with ;y or the content of an HTML element with ;p.\n    Download files and read and modify the browser\u2019s download history:\n        By pressing ;s, ;S, ;a and ;A you can save documents and pictures from a page to your download folder.\n    Access browsing history:\n        The URLs of websites you\u2019ve visited previously can be suggested as arguments for :tabopen and similar commands.\n    Access recently closed tabs:\n        If you\u2019ve accidentally closed a tab or window, Tridactyl will let you open it again with the :undo command which is bound to u by default.\n    Access browser tabs:\n        Tridactyl provides a quick tab-switching menu/command with the :buffer command (bound to b). This permission is also required to close, move, and pin tabs, amongst other things.\n    Access browser activity during navigation:\n        This is needed for Tridactyl to be able to go back to normal mode every time you open a new page. In the future we may use it for autocommands.\n    Read the text of all open tabs:\n        This allows us to use Firefox\u2019s built-in find-in-page API, for, for example, allowing you to bind find-next and find-previous to n and N.\n    Monitor extension usage and manage themes:\n        Tridactyl needs this to integrate with and avoid conflicts with other extensions. For example, Tridactyl\u2019s contextual identity features use this to cooperate with the Multi-Account Containers extension.",
-            "weeklyDownloads": 183,
+            "weeklyDownloads": 170,
             "type": "extension",
             "creator": {
                 "name": "Colin Caine",
@@ -477,7 +477,7 @@
             "supportURL": null,
             "description": null,
             "fullDescription": null,
-            "weeklyDownloads": 2,
+            "weeklyDownloads": 5,
             "type": "theme",
             "creator": {
                 "name": "ajcsessz",
@@ -567,7 +567,7 @@
             "supportURL": null,
             "description": "A violet theme",
             "fullDescription": null,
-            "weeklyDownloads": 2,
+            "weeklyDownloads": 3,
             "type": "theme",
             "creator": {
                 "name": "Amarilis",
