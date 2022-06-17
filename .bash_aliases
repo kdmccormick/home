@@ -47,3 +47,8 @@ alias wh="nmcli c u kyle-hotspot"
 
 # Load up private (non-version-controlled) aliases, if defined.
 . ~/.private.bash_aliases 2>/dev/null || true
+
+# Python calculator
+function py {
+    python -c "from math import *; print($*)"
+}
