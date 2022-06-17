@@ -153,9 +153,14 @@ keybindings =
     , (globalAlt,     X11T.xK_BackSpace, spawn cmdFolderRoot)
     , (global,        X11T.xK_e,         return ())
 
-    -- Session options using INSERT (note: NO global mod here)
+    -- Common WiFi networks using INSERT.
+	, (global,        X11T.xK_Insert,    spawn cmdWifi)
+	, (globalShift,   X11T.xK_Insert,    spawn cmdWifi5)
+	, (globalAlt,     X11T.xK_Insert,    spawn cmdWifiHotspot)
+	
+	-- Screenshots using PRINT (note: NO global mod here)
     , (noModMask,     X11T.xK_Print,     spawn cmdScreenshot)
-    , (shft,         X11T.xK_Print,     spawn cmdScreenshotSelect)
+    , (shft,          X11T.xK_Print,     spawn cmdScreenshotSelect)
     , (alt,           X11T.xK_Print,     spawn cmdScreenshotWindow)
 
     -- Session options using HOME.
