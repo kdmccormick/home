@@ -7,9 +7,10 @@ docker-ce-cli
 docker-compose
 eslint
 feh
+gh
+gparted
 libghc-xmonad-contrib-dev
 libimage-exiftool-perl
-gparted
 neovim
 npm
 openconnect

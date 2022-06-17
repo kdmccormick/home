@@ -101,6 +101,7 @@ apt.keys: warn-password
 	key_url="https://download.docker.com/linux/ubuntu/gpg" fingerprint="0EBFCD88" make apt.keys.get-key
 	key_url="https://download.spotify.com/debian/pubkey_0D811D58.gpg" make apt.keys.get-key
 	key_url="https://packages.cloud.google.com/apt/doc/apt-key.gpg" make apt.keys.get-key
+	key_url="https://cli.github.com/packages/githubcli-archive-keyring.gpg" make apt.keys.get-key
 
 .ONESHELL:
 apt.keys.get-key: oneshell.strict
@@ -112,9 +113,10 @@ apt.keys.get-key: oneshell.strict
 
 apt.sources: warn-password apt.sources.disable-dist-docker-repo
 	deb_line="deb https://download.sublimetext.com/ apt/stable/" deb_name="sublime-text" make apt.sources.add
-	deb_line="deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" deb_name="docker" make apt.sources.add
+	deb_line="deb [arch=$$(dpkg --print-architecture)] https://download.docker.com/linux/ubuntu bionic stable" deb_name="docker" make apt.sources.add
 	deb_line="deb http://repository.spotify.com stable non-free" deb_name="spotify" make apt.sources.add
 	deb_line="deb https://apt.kubernetes.io/ kubernetes-xenial main" deb_name="kubernetes" make apt.sources.add
+	echo "deb [arch=$$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 	sudo add-apt-repository ppa:deadsnakes/ppa --yes
 
 apt.sources.disable-dist-docker-repo:
