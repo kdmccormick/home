@@ -50,5 +50,7 @@ call plug#end()
 " End plugin block
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nmap <C-n> :NERDTreeFind<CR>
-
+nmap <leader>n :NERDTreeFocus<CR>
+nmap <C-n> :NERDTree<CR>
+nmap <C-t> :NERDTreeToggle<CR>
+nmap <C-f> :NERDTreeFind<CR>
