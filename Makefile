@@ -149,15 +149,17 @@ firefox:
 	(cd ~/.mozilla/firefox/_reference && ./addonsjson-compile)
 
 special-install: \
-	special-install.nvim-plugins \
+	special-install.nvim-setup \
 	special-install.tridactylnative \
 	special-install.xsecurelock \
 	special-install.postman \
 	special-install.zoom \
 	special-install.minikube
 
-special-install.nvim-plugins:
+special-install.nvim-setup:
+	# virtualenv ~/.config/nvim/venv --python=python3.8
 	nvim -c ':PlugInstall' -c ':q' -c ':q'
+
 
 special-install.tridactylnative:
 	curl -fsSl \

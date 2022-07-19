@@ -31,20 +31,25 @@ filetype plugin on          " run autocommands based on filetype
 inoremap jk <ESC>
 inoremap kj <ESC>
 
+" Point to neovim virtualenv.
+" let g:python3_host_prog = '~/.config/nvim/venv/bin/python'
+" let g:vim_isort_python_version = 'python3'
+" let g:black_virtualenv = '~/.config/nvim/venv'
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Begin plugin block
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'editorconfig/editorconfig-vim'
-Plug 'elmcast/elm-vim'
-Plug 'rust-lang/rust.vim'
+" Plug 'elmcast/elm-vim'
+" Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
-Plug 'psf/black'
-Plug 'fisadev/vim-isort'
+" Plug 'psf/black'
+" Plug 'fisadev/vim-isort'
 " Plug 'ycm-core/YouCompleteMe'
 Plug 'hashivim/vim-terraform'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeFind' }
-Plug 'junegunn/fzf'
+" Plug 'junegunn/fzf'
 
 call plug#end()
 " End plugin block
