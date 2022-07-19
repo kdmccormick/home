@@ -12,7 +12,6 @@ set shiftwidth=4            " width for autoindents
 set autoindent              " indent a new line the same amount as the line just typed
 set number                  " add line numbers
 set wildmode=longest,list   " get bash-like tab completions
-"set cc=88                   " set an 88 column border for good coding style
 set mouse=a                 " enable mouse click
 set clipboard=unnamedplus   " using system clipboard
 set cursorline              " highlight current cursorline
@@ -23,6 +22,7 @@ set noswapfile              " disable creating swap file
 "set expandtab               " converts tabs to white space
 "set spell                   " enable spell check
 "set backupdir=~/.cache/vim  " Directory to store backup files.
+"set cc=88                   " set an 88 column border for good coding style
 
 filetype plugin indent on   " allow auto-indenting depending on file type
 filetype plugin on          " run autocommands based on filetype
@@ -30,3 +30,25 @@ filetype plugin on          " run autocommands based on filetype
 " Consider jk or kj (when entered in succession) to be ESC
 inoremap jk <ESC>
 inoremap kj <ESC>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Begin plugin block
+call plug#begin('~/.config/nvim/plugged')
+
+Plug 'editorconfig/editorconfig-vim'
+Plug 'elmcast/elm-vim'
+Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
+Plug 'psf/black'
+Plug 'fisadev/vim-isort'
+" Plug 'ycm-core/YouCompleteMe'
+Plug 'hashivim/vim-terraform'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeFind' }
+Plug 'junegunn/fzf'
+
+call plug#end()
+" End plugin block
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nmap <C-n> :NERDTreeFind<CR>
+
