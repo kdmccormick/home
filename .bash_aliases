@@ -4,6 +4,10 @@
 alias x="xfce4-terminal -x"
 alias xx="xfce4-terminal -x bash"
 
+# File picker
+alias n="VISUAL='xfce4-terminal -x vi' nnn"
+alias ne="VISUAL='xfce4-terminal -x vi' nnn -e"
+
 # Trashing
 alias t="trash"
 alias ts="sudo trash"
