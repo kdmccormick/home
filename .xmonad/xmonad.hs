@@ -102,14 +102,15 @@ workspaces = map show [1 .. 9 :: Int]
 keybindings =
 
     -- Switch focusing up or down using k/j, like in vi.
-    -- Use i/e for "insert" (beginning) or "end".
-    -- TODO: haven't figured out a good command for "end" yet.
+    -- Use i/a for "insert" (beginning) or "append" (end).
+    -- TODO: haven't figured out a good command for "append" yet.
     [ (global,        X11T.xK_k,         windows focusUp)
     , (global,        X11T.xK_j,         windows focusDown)
     , (global,        X11T.xK_i,         windows focusMaster)
     , (global,        X11T.xK_a,         return ()) -- windows focusEnd)
 
     -- Shift plus a key from above causes the corresponding swap.
+    -- TODO: haven't figured out a good command for "append" yet.
     , (globalShift,   X11T.xK_j,         windows swapDown)
     , (globalShift,   X11T.xK_k,         windows swapUp)
     , (globalShift,   X11T.xK_i,         windows swapMaster)
