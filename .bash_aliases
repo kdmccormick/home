@@ -5,8 +5,8 @@ alias x="xfce4-terminal -x"
 alias xx="xfce4-terminal -x bash"
 
 # File picker
-alias n="VISUAL='xfce4-terminal -x vi' nnn"
-alias ne="VISUAL='xfce4-terminal -x vi' nnn -e"
+alias n="VISUAL='xfce4-terminal -x nvim' nnn"
+alias ne="VISUAL='xfce4-terminal -x nvim' nnn -e"
 
 # Trashing
 alias t="trash"
@@ -24,6 +24,7 @@ alias run-upgrade-yes="sudo apt update && sudo apt upgrade --yes && sudo apt aut
 # Misc. utilities
 alias reown="sudo chown $(whoami) -R"
 alias sizes="du -hs *"
+alias ddx="dd bs=64k status=progress"
 
 # Virtualenvs
 alias v="source .venv/bin/activate || source venv/bin/activate"
