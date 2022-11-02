@@ -19,6 +19,7 @@ bootstrap: \
 	bootstrap.copy-root-homedir \
 	bootstrap.source-local
 	[ -f ~/.profile_private ] || cp ~/kinstall/profile_private_template ~/.profile_private
+	[ -f ~/.bashrc_private ] || cp ~/kinstall/bashrc_private_template ~/.bashrc_private
 	@echo "Now, edit ~/.profile_private, setting at least KI_SSH_PASSPHRASE."
 	@echo "Next, run '. ~/.profile' to re-source profile."
 	@echo "Then, run 'make ssh' to make and/or show an SSH key, and add it to GitHub."

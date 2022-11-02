@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# PRIVATE BASH STARTUP COMMANDS
+# Not version controlled.
+# This is sourced by every non-login shell!
+# It is indirectly sourced by login shells as well.
+

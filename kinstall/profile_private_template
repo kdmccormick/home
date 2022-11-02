@@ -2,7 +2,8 @@
 
 # PRIVATE PROFILE OVERRIDES
 # Not version controlled.
-# This is sourced by every shell!
+# This is sourced by every login shell!
+# It is not sourced by non-login bash shells.
 
 # Optionally override these.
 #export KI_USER=
