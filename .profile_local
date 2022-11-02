@@ -40,4 +40,8 @@ export XSECURELOCK_SAVER=saver_mpv
 export XSECURELOCK_LIST_VIDEOS_COMMAND="echo ${HOME}/pics/lock-screens/lock.jpg"
 export XSECURELOCK_NO_COMPOSITE=1
 
+# Tutor (Open edX)
+export TUTOR_ROOT="${HOME}/openedx/tutor-root"
+export TUTOR_PLUGINS_ROOT="${HOME}/openedx/tutor-plugins"
+
 . ~/.bashrc_local
