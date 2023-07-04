@@ -195,6 +195,7 @@ cmdTerminal               = "xfce4-terminal"
 cmdTerminalSudo           = "xfce4-terminal -x sudo su"
 
 cmdFirefox                = "firefox"
+cmdChromium               = "chromium-browser --new-window"
 
 cmdFolderHome             = "thunar"
 cmdFolderDownloads        = "thunar $HOME/downloads"
