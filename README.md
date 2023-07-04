@@ -4,11 +4,20 @@ I version control my home diretory to make it easier to set up & reproduce my pr
 
 For the parts of my environment that can't simply be checked into this repo, the `kinstall/` dir has some scripts and files. Specialized versions of the environment can be made by creating parallel directories under `kinstall.$(hostname)`.
 
+Last tested with Xubuntu 22.04 running on a ThinkPad (amd64).
+
 ## Setup
 
-* Install Xubuntu 22.04, minimal, with full-disk encryption.
+* [Download Xubuntu](https://xubuntu.org/download/), plug in a flash drive, and run:
 
-* Open a terminal, and run:
+   ```bash
+   umount /dev/<FLASH_DRIVE_DEVICE_ID>
+   dd status=progress bs=1m if=xubuntu2204.iso of=/dev/<FLASH_DRIVE_DEVICE_ID>
+   ```
+
+* Eject it, reboot to flash drive. Choose minimal installation with full-disk encryption (under "Advanced").
+
+* Boot into Xubuntu. Open a terminal, and run:
 
   ```bash
   cd ~
