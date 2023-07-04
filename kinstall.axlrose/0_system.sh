@@ -10,10 +10,12 @@ set -xeuo pipefail
 
 cd /root/downloads
 
+# Zoom
 rm -f ./zoom_amd64.deb
 wget https://zoom.us/client/latest/zoom_amd64.deb
 apt-get install --yes ./zoom_amd64.deb
 
+# MiniKube
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
+apt-get install minikube-linux-amd64 /usr/local/bin/minikube
 
