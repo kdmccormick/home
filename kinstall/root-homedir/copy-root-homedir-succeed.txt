@@ -1,3 +1,0 @@
-This file exists solely so that `make copy-root-homedir`
-succeeds. It can be deleted if we ever add non-dotfiles
-to the root homedir in git.

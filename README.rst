@@ -1,17 +1,20 @@
 Kyle's ~
 --------
 
-WIP
-===
+Setup
+=====
 
-Content incoming
-
-Misc. Notes
-===========
-
-* 2022-05
-
-  * Installed Tridactyl firefox plugin into both profiles
-
-    * Needed to run `this command to fix find <https://github.com/tridactyl/tridactyl/issues/64#issuecomment-496913151>`_
-
+::
+    git init
+    git remote add origin https://github.com/kdmccormick/home
+    git fetch
+    git switch master
+    sudo kinstall/0_system.sh
+    vi ~/.profile_private  # fill in env vars and save.
+    kinstall/1_ssh.sh
+    open "https://github.com/settings/ssh/new"  # log in and add key.
+    kinstall/2_user.sh
+    open "...." # get the passkey
+    gpg --import kdmc.key
+    echo -e “trust\n5\ny\n” | gpg –command-fd 0 –edit-key kdmc@pm.me
+    reboot

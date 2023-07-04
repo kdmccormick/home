@@ -1,0 +1,12 @@
+#/usr/bin/env bash
+
+# PRIVATE PROFILE OVERRIDES
+# Not version controlled.
+# This is sourced by every login shell!
+# It is not sourced by non-login bash shells.
+
+# Uncomment & set these or setup scripts will fail:
+#export KI_FULLNAME="Kyle D. McCormick"
+#export KI_SSH_PASSPHRASE="yada-yada"
+#export KI_EMAIL="kyle@kylemccormick.me"
+
