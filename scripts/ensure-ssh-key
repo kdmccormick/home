@@ -8,7 +8,7 @@ set -euo pipefail
 
 # Env validation.
 if [[ -z "$KI_SSH_PASSPHRASE" ]] || [[ -z "$KI_EMAIL" ]] ; then
-	echo "error: passphrase and/or email hasn't been set in .profile_private"
+	echo "error: passphrase and/or email hasn't been set in .profile_private" >&2
 	exit 
 fi
 
@@ -20,8 +20,8 @@ if [[ -f ~/.ssh/id_rsa.pub ]] ; then
 	echo "  rm ~/.ssh/id_rsa.pub ~/.ssh/id_rsa" >&2
 else
 	echo "~/.ssh/id_rsa.pub not present. Creating now." >&2
-	echo ssh-keygen -t rsa -b 4096 -C "$KI_EMAIL" -f "$HOME/.ssh/id_rsa" -N "<PASSPHRASE>"
-	ssh-keygen -t rsa -b 4096 -C "$KI_EMAIL" -f "$HOME/.ssh/id_rsa" -N "$KI_SSH_PASSPHRASE"
+	echo ssh-keygen -t rsa -b 4096 -C "$KI_EMAIL" -f "$HOME/.ssh/id_rsa" -N "<PASSPHRASE>" >&2
+	ssh-keygen -t rsa -b 4096 -C "$KI_EMAIL" -f "$HOME/.ssh/id_rsa" -N "$KI_SSH_PASSPHRASE" >&2
 fi
 
 # Print public key to STDOUT for easy copying.
