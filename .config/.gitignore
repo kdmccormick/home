@@ -4,7 +4,6 @@
 !/.gitignore
 !/autostart
 !/mimeapps.list
-!/sublime-text-3
 !/user-dirs.*
 !/xfce4
 !/nvim
