@@ -2,7 +2,7 @@
 
 /*
 
-!README.rst
+!/README.rst
 !/kinstall
 !/pics
 !/scripts
@@ -11,9 +11,10 @@
 !/.bashrc_local
 !/.config
 !/.gitignore
-!/.global.igitignore
-!/.profile_local
+!/.global.gitignore
+!/.local
 !/.mozilla
+!/.profile_local
 !/.tridactylrc
 !/.xmonad
 

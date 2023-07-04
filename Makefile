@@ -1,12 +1,14 @@
-.PHONY: apt apt.keys apt.keys.get-key apt.remove apt.sources apt.sources.add \
+.PHONY: apt apt.install apt.keys apt.keys.get-key apt.remove apt.sources \
         apt.sources.disable-dist-docker-repo apt.update apt.upgrade bootstrap \
         bootstrap.copy-root-homedir bootstrap.source-local complete dirs \
         dirs.convert-to-link extras.fix-grub firefox oneshell.strict repos \
-        selfcheck special-install special-install.minikube \
-        special-install.postman special-install.tridactylnative \
-        special-install.xsecurelock special-install.xsecurelock.configure \
-        special-install.xsecurelock.deps special-install.xsecurelock.install \
-        special-install.zoom ssh ssh.rm-key warn-password
+        selfcheck snaps special-install special-install.include-extras \
+        special-install.minikube special-install.nvim-setup \
+        special-install.postman special-install.runelite \
+        special-install.tridactylnative special-install.xsecurelock \
+        special-install.xsecurelock special-install.zoom ssh ssh.rm-key \
+        warn-password
+
 
 SHELL=/bin/bash
 
@@ -45,6 +47,7 @@ ssh.rm-key:
 complete: \
 	dirs \
 	apt \
+	snaps \
 	firefox \
 	special-install \
 	repos
@@ -68,9 +71,6 @@ dirs:
 	# -d is like -r but only for EMPTY directories.
 	rm -df ~/Public
 	rm -df ~/Music
-	mkdir -p ~/apps
-	mkdir -p ~/bin
-	mkdir -p ~/kinstall/logs
 	cd ~/pics/lock-screens && ([[ -f lock.jpg ]] || ln -s ch-stars.jpg lock.jpg)
 
 .ONESHELL:
@@ -92,17 +92,18 @@ apt: \
 	apt.keys \
 	apt.sources \
 	apt.update \
-	apt.install.common \
-	apt.install.$(KI_ENV) \
+	apt.install \
 	apt.remove \
 	apt.upgrade
 
 apt.keys: warn-password
-	key_url="https://download.sublimetext.com/sublimehq-pub.gpg" make apt.keys.get-key
 	key_url="https://download.docker.com/linux/ubuntu/gpg" fingerprint="0EBFCD88" make apt.keys.get-key
 	key_url="https://download.spotify.com/debian/pubkey_0D811D58.gpg" make apt.keys.get-key
 	key_url="https://packages.cloud.google.com/apt/doc/apt-key.gpg" make apt.keys.get-key
-	key_url="https://cli.github.com/packages/githubcli-archive-keyring.gpg" make apt.keys.get-key
+	#key_url="https://cli.github.com/packages/githubcli-archive-keyring.gpg" make apt.keys.get-key
+	#sudo chmod go+r /usr/share/keyrings/githubcl/i-archive-keyring.gpg
+	#curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/repository-spotify-com-keyring.gpg
+	#key_url="https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg"
 
 .ONESHELL:
 apt.keys.get-key: oneshell.strict
@@ -113,29 +114,30 @@ apt.keys.get-key: oneshell.strict
 	fi
 
 apt.sources: warn-password apt.sources.disable-dist-docker-repo
-	deb_line="deb https://download.sublimetext.com/ apt/stable/" deb_name="sublime-text" make apt.sources.add
-	deb_line="deb [arch=$$(dpkg --print-architecture)] https://download.docker.com/linux/ubuntu bionic stable" deb_name="docker" make apt.sources.add
-	deb_line="deb http://repository.spotify.com stable non-free" deb_name="spotify" make apt.sources.add
-	deb_line="deb https://apt.kubernetes.io/ kubernetes-xenial main" deb_name="kubernetes" make apt.sources.add
-	echo "deb [arch=$$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-	sudo add-apt-repository ppa:deadsnakes/ppa --yes
+	sudo mv /etc/apt/sources.list.d "/root/etc_apt_sources.list.d.$$(date --iso=seconds).bak"
+	sudo mkdir /etc/apt/sources.list.d
+	echo "deb [arch=$$(dpkg --print-architecture)] https://download.docker.com/linux/ubuntu bionic stable" | \
+		sudo tee /etc/apt/sources.list.d/docker.list
+	echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | \
+		sudo tee /etc/apt/sources.list.d/kubernetes.list
+	echo "deb [arch=$$(dpkg --print-architecture)] https://cli.github.com/packages stable main" | \
+		sudo tee /etc/apt/sources.list.d/github-cli.list
+	echo "deb https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu/ jammy main" | \
+		sudo tee /etc/apt/sources.list.d/deadsnakes.list
 
 apt.sources.disable-dist-docker-repo:
 	sudo sed --in-place -E "s/(^deb.*docker.*)/\# \1/" /etc/apt/sources.list
-
-apt.sources.add:
-	echo "$$deb_line" | sudo tee /etc/apt/sources.list.d/"$$deb_name".list
 
 apt.update: warn-password
 	sudo apt-get update
 
 .ONESHELL:
-apt.install.%: warn-password oneshell.strict
-	apt_install_list=~/kinstall/$*.apt-install.list
-	if [[ -f "$$apt_install_list" ]]; then
-		cat "$$apt_install_list" | xargs sudo apt-get install --yes
+apt.install: warn-password oneshell.strict
+	cat ~/kinstall/common.apt-install.list | xargs sudo apt-get install --yes
+	if [[ ! -f "~/kinstall/$${KI_ENV}.apt-install.list" ]]; then
+		@echo "Note: no special apt package list for env $${KI_ENV}"
 	else
-		@echo "No such file $${apt_install_list}."
+		cat "~/kinstall/$${KI_ENV}.apt-install.list" | xargs sudo apt-get install --yes
 	fi
 
 apt.remove: warn-password
@@ -144,6 +146,10 @@ apt.remove: warn-password
 apt.upgrade: warn-password
 	sudo apt-get upgrade --autoremove --yes
 
+snaps:
+	snap install \
+		spotify
+
 firefox:
 	[[ -d ~/.mozilla/firefox/kyle-self ]] || firefox -CreateProfile "kyle-self $(HOME)/.mozilla/firefox/kyle-self"
 	[[ -d ~/.mozilla/firefox/kyle-tcril ]] || firefox -CreateProfile "kyle-tcril $(HOME)/.mozilla/firefox/kyle-tcril"
@@ -151,11 +157,14 @@ firefox:
 
 special-install: \
 	special-install.nvim-setup \
+	special-install.xsecurelock
+
+special-install.include-extras: \
 	special-install.tridactylnative \
-	special-install.xsecurelock \
 	special-install.postman \
 	special-install.zoom \
-	special-install.minikube
+	special-install.minikube \
+	special-install.runelite
 
 special-install.nvim-setup:
 	# virtualenv ~/.config/nvim/venv --python=python3.8
@@ -173,10 +182,28 @@ special-install.xsecurelock: \
 	special-install.xsecurelock.install \
 	special-install.xsecurelock.configure
 
-special-install.xsecurelock.deps: apt.install.xsecurelock-deps
-
 .ONESHELL:
-special-install.xsecurelock.install: oneshell.strict
+special-install.xsecurelock: warn-password oneshell.strict
+	sudo apt-get install \
+		autoconf \
+		autotools-dev \
+		binutils \
+		gcc \
+		libc6-dev \
+		libpam-dev \
+		libx11-dev \
+		libxcomposite-dev \
+		libxext-dev \
+		libxfixes-dev \
+		libxft-dev \
+		libxmuu-dev \
+		libxrandr-dev \
+		libxss-dev \
+		make \
+		mpv \
+		pkg-config \
+		x11proto-core-dev \
+		xss-lock
 	cd ~/downloads
 	if [[ -d xsecurelock/.git ]]; then
 		cd xsecurelock
@@ -190,15 +217,13 @@ special-install.xsecurelock.install: oneshell.strict
 	./configure --with-pam-service-name=common-auth
 	make
 	sudo make install
-
-special-install.xsecurelock.configure:
 	sudo apt-get remove xfce4-screensaver
 	xfconf-query --channel xfce4-session --property /general/LockCommand --reset
 	xfconf-query --channel xfce4-session --property /general/LockCommand --set "xset s activate" --create --type string
 
 .ONESHELL:
 special-install.postman: oneshell.strict
-	dest=~/apps/postman
+	dest=~/.local/bin/postman
 	if [[ -d "$$dest" ]]; then
 		@echo "Postman already exists"
 	else
@@ -222,6 +247,10 @@ special-install.zoom: oneshell.strict
 special-install.minikube:
 	curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 	sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+special-install.runelite:
+	@echo "Download latest Linux AppImage and put it at: ~/.local/bin/RuneLite.AppImage"
+	open https://runelite.net/
 
 extras.fix-grub: warn-password
 	@echo "Fixing EFI grub.cfg; see ~/kinstall/notes/grub2.md for details."

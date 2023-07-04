@@ -2,6 +2,7 @@ acpi
 build-essential
 chromium-browser
 containerd.io
+default-jre
 docker-ce
 docker-ce-cli
 docker-compose
@@ -25,8 +26,6 @@ redshift-gtk
 rename
 ripgrep
 shellcheck
-spotify-client
-sublime-text
 tcptraceroute
 trash-cli
 xclip
