@@ -101,20 +101,20 @@ for snapname in $( \
 done
 
 # Install XSecureLock (setup is finished in user.sh)
-mkdir -p "/root/downloads"
-cd "/root/downloads"
+cd "/home/$user/downloads"
 if [[ -d xsecurelock/.git ]]; then
 	cd xsecurelock
-	git fetch
-	git reset --hard origin/master
+	su - "$user" -c "git fetch"
+	su - "$user" -c "git reset --hard origin/master"
 else
-	git clone git@github.com:google/xsecurelock.git
+	su - "$user" -c "git clone https://github.com/google/xsecurelock"
 	cd xsecurelock
 fi
-sh autogen.sh
-./configure --with-pam-service-name=common-auth
-make
+su - "$user" -c sh autogen.sh
+su - "$user" -c ./configure --with-pam-service-name=common-auth
+su - "$user" -c make
 make install
+
 
 # Run host-specific system setup.
 "/home/$user/kinstall.$host/system.sh"
