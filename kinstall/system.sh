@@ -1,11 +1,25 @@
 #!/usr/bin/env bash
 
-# We assume that the username is 'kyle', but this could be parameterized later.
-export user=kyle
+# Variables & validation.
+# Export user and host so host-specific system setup can also use them.
+if [[ "$#" -ne 1 ]] ; then
+	echo "error: expected exactly one arg: a username"
+	exit 1
+fi
+export user="$1"
+if [[ ! -d "/home/$user" ]] ; then
+	echo "error: no such home directory: /home/$user"
+	exit 1
+fi
 export host="$(hostname)"
+if [[ ! "$USER" = root ]] ; then
+	echo "error: this script must be run as root."
+	exit 1
+fi
 
 # Make bash stricter and echo lines.
 set -xeuo pipefail
+
 
 # Source our local profile & bashrc, both for root user and regular user.
 touch "/home/$user/.profile" "/home/$user/.bashrc" /root/.profile /root/.bashrc
