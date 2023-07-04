@@ -5,7 +5,7 @@
 # then the profile will have been updated since it was last sourced.
 . ~/.profile
 
-if [[ -z "$KI_SSH_PASSPHRASE" ]] || [[ -z "$KI_EMAIL" ]]A ; then
+if [[ -z "$KI_SSH_PASSPHRASE" ]] || [[ -z "$KI_EMAIL" ]] ; then
 	echo "error: passphrase and/or email hasn't been set in .profile_private"
 	exit 
 fi
@@ -25,7 +25,10 @@ else
 fi
 
 echo
-echo "==================================================================="
+echo
+echo
 cat ~/.ssh/id_rsa.pub
-echo "==================================================================="
-echo "==== Now copy that ^^ into GitHub and run set-up-user.sh =========="
+echo
+echo
+echo
+echo "^^^ That's your public key."

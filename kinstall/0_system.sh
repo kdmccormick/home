@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 # We assume that the username is 'kyle', but this could be parameterized later.
-user=kyle
-hostname="$(hostname)"
+export user=kyle
+export host="$(hostname)"
 
 # Make bash stricter and echo lines.
 set -xeuo pipefail
 
 # Source our local profile & bashrc, both for root user and regular user.
-touch "/home/$user/.profile" "$/home/$user/.bashrc" /root/.profile /root/.bashrc
+touch "/home/$user/.profile" "/home/$user/.bashrc" /root/.profile /root/.bashrc
 if ! (cat "/home/$user/.profile" | grep './profile_local' ) ; then
 	echo                         >> "/home/$user/.profile"
 	echo "# Added by kinstall:"  >> "/home/$user/.profile"
@@ -83,6 +83,7 @@ cat "/home/$user/kinstall/snap-install.list" | xargs snap install bare
 cat "/home/$user/kinstall.$host/apt-install.list" | xargs apt-get install --yes
 cat "/home/$user/kinstall.$host/snap-install.list" | xargs snap install bare
 
+# Install XSecureLock (setup is finished in 2_user.sh)
 mkdir -p "/root/downloads"
 cd "/root/downloads"
 if [[ -d xsecurelock/.git ]]; then
@@ -97,7 +98,6 @@ sh autogen.sh
 ./configure --with-pam-service-name=common-auth
 make
 make install
-apt-get remove xfce4-screensaver
 
 # Run host-specific setup script.
 "/home/$user/kinstall.$host/0_system.sh"
