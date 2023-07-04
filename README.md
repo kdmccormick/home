@@ -8,14 +8,15 @@ For the parts of my environment that can't simply be checked into this repo, the
 
 * Install Xubuntu 22.04, minimal, with full-disk encryption.
 
-* Run:
+* Open a terminal, and run:
 
   ```bash
+  cd ~
   git init
   git remote add origin https://github.com/kdmccormick/home
   git fetch
   git switch master
-  sudo kinstall/0_system.sh
+  sudo kinstall/system.sh "$USER"
   vi ~/.profile_private
   ```
 
@@ -24,25 +25,18 @@ For the parts of my environment that can't simply be checked into this repo, the
 * Run:
 
   ```bash
-  kinstall/1_ssh.sh
+  ensure-ssh-key | xclip -selection -c
   open "https://github.com/settings/ssh/new"
   ```
 
-* Log into GitHub and add the public ssh key.
+* Log into GitHub, paste in the public ssh key, name it `$(hostname)`, and save.
+
+* Load in private GPG key for `pass` and place it at `~/kdmc.key`
 
 * Run:
 
   ```bash
-  kinstall/2_user.sh
-  ```
-
-* Place private key at `~/kdmc.key`
-
-* Run:
-
-  ```bash
-  gpg --import ~/kdmc.key
-  rm ~/kdmc.key
-  echo -e “trust\n5\ny\n” | gpg –command-fd 0 –edit-key kdmc@pm.me
+  kinstall/user.sh
   reboot
   ```
+

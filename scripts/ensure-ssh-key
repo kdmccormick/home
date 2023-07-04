@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Stricter bash.
+set -euo pipefail
+
+# Re-source profile to ensure we have updated KI_* variables.
+. ~/.profile
+
+# Env validation.
+if [[ -z "$KI_SSH_PASSPHRASE" ]] || [[ -z "$KI_EMAIL" ]] ; then
+	echo "error: passphrase and/or email hasn't been set in .profile_private"
+	exit 
+fi
+
+# If key doesn't exist, generate it.
+# Sent everything to STDERR.
+if [[ -f ~/.ssh/id_rsa.pub ]] ; then
+	echo "Public key already exists at ~/.ssh/id_rsa.pub." >&2
+	echo "(to discard it and start fresh, run 'rm ~/.ssh/id_rsa.pub ~/.ssh/id_rsa')" >&2
+else
+	echo "~/.ssh/id_rsa.pub not present. Creating now." >&2
+	cmd_base="ssh-keygen -t rsa -b 4096 -C ${KI_EMAIL} -f $HOME/.ssh/id_rsa"
+	echo "+${cmd_base} -N <PASSPHRASE REDACTED>" &>2
+	$cmd_base -N "$KI_SSH_PASSPHRASE" >&2
+	echo "~/.ssh/id_rsa.pub not present. Creating now." >&2
+	cmd_base="ssh-keygen -t rsa -b 4096 -C '${KI_EMAIL}' -f '$HOME/.ssh/id_rsa'"
+	echo "Generating ssh key with: ${cmd_base} -N <PASSPHRASE REDACTED>" >&2
+	$cmd_base -N "$KI_SSH_PASSPHRASE" >&2
+	echo >&2
+	echo "Done. Printing public key to STDOUT." >&2
+	echo >&2
+fi
+
+# Print public key to STDOUT for easy copying.
+echo >&2
+cat ~/.ssh/id_rsa.pub
+echo >&2
+echo "Printed public key to STDOUT." >&2
+

@@ -52,24 +52,19 @@ rm -rf /etc/apt/sources.list.d
 mkdir /etc/apt/sources.list.d
 sed --in-place -E "s/(^deb.*docker.*)/\# \1/" /etc/apt/sources.list
 
-# Copy fs template to homedir, and merge in host-specific additions/overrides.
-# Then, copy it to system root, respecting existing folders & files.
-rm -rf "/home/$user/.kfs"
-cp -r "/home/$user/kinstall/fs" "/home/$user/.kfs"
-if [[ -d "/home/$user/kinstall.$host/fs" ]] ; then
-	cp -r "/home/$user/kinstall.$host/fs/"* "/home/$kyle/.kfs"
-fi
-cp -r --no-clobber "/home/$user/.kfs/*" /
-
 # Make host-specific install files if they don't exist already.
 # This may dirty the git state, but that's on purpose -- setting up
 # a new host is something that should be intentionally committed.
 mkdir -p "/home/$user/kinstall.$host"
-touch "/home/$user/kinstall.$host/apt-install.list"
-touch "/home/$user/kinstall.$host/snap-install.list"
-touch "/home/$user/kinstall.$host/apt-remove.list"
-cp "/home/$kyle/kinstall/x_template.sh" "/home/$user/kinstall.$host/0_system.sh"
-cp "/home/$kyle/kinstall/x_template.sh" "/home/$user/kinstall.$host/2_user.sh"
+cp -r --no-clobber "/home/$user/kinstall/host-template"/* "/home/$user/kinstall.$host"
+
+# Copy fs template to homedir, and merge in host-specific additions/overrides.
+# Then, copy it to system root, respecting existing folders & files.
+rm -rf "/home/$user/.kfs"
+mkdir -p "/home/$user/.kfs"
+cp -r "/home/$user/kinstall/fs"/* "/home/$user/.kfs"
+cp -r "/home/$user/kinstall.$host/fs/"* "/home/$kyle/.kfs"
+cp -r --no-clobber "/home/$user/.kfs"/* /
 
 # Restore ownership of all home files to regular user.
 chown --recursive --no-dereference "$user" "/home/$user"
@@ -83,7 +78,7 @@ cat "/home/$user/kinstall/snap-install.list" | xargs snap install bare
 cat "/home/$user/kinstall.$host/apt-install.list" | xargs apt-get install --yes
 cat "/home/$user/kinstall.$host/snap-install.list" | xargs snap install bare
 
-# Install XSecureLock (setup is finished in 2_user.sh)
+# Install XSecureLock (setup is finished in user.sh)
 mkdir -p "/root/downloads"
 cd "/root/downloads"
 if [[ -d xsecurelock/.git ]]; then
@@ -99,8 +94,8 @@ sh autogen.sh
 make
 make install
 
-# Run host-specific setup script.
-"/home/$user/kinstall.$host/0_system.sh"
+# Run host-specific system setup.
+"/home/$user/kinstall.$host/system.sh"
 
 # Remove, upgrade & autoremove.
 cat "/home/$user/kinstall/apt-remove.list" | xargs apt-get remove --yes

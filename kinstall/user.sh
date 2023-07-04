@@ -19,12 +19,18 @@ git config --global user.email "$KI_EMAIL"
 git config --global user.name "$KI_FULLNAME"
 git config --global core.excludesfile ~/.global.gitignore
 
-# Pass setup (importing private key is a manual step, see README)
+# Pass setup.
 if [[ ! -d .password-store ]] ; then
 	git clone git@github.com:kdmccormick/kpass
 	mv kpass .password-store
 fi
 gpg --import kinstall/kdmc.pub
+if [[ -f kdmc.key ]] ; then
+	# Also import private GPG key for pass, if present. Remove once imported.
+	gpg --import kdmc.key
+	rm kdmc.key
+	echo -e “trust\n5\ny\n” | gpg –command-fd 0 –edit-key kdmc@pm.me
+fi
 
 # NeoVim plugins
 nvim -c ':PlugInstall' -c ':q' -c ':q'
@@ -32,3 +38,7 @@ nvim -c ':PlugInstall' -c ':q' -c ':q'
 # XSecureLock configuration
 xfconf-query --channel xfce4-session --property /general/LockCommand --reset
 xfconf-query --channel xfce4-session --property /general/LockCommand --set "xset s activate" --create --type string
+
+# Run host-specific system setup.
+"./kinstall.$host/user.sh"
+
