@@ -13,5 +13,6 @@
 #export KI_FULLNAME=""
 
 # MUST override these
+echo "You forgot to override things in .profile_private!" && exit 1  # <- remove this when ready
 export KI_SSH_PASSPHRASE="SET-ME!"
 

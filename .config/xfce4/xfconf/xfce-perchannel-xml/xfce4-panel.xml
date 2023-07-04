@@ -28,7 +28,6 @@
         <value type="int" value="28"/>
         <value type="int" value="15"/>
         <value type="int" value="27"/>
-        <value type="int" value="29"/>
       </property>
       <property name="background-style" type="uint" value="0"/>
       <property name="size" type="uint" value="27"/>
@@ -62,6 +61,13 @@
         <value type="string" value="redshift-gtk"/>
         <value type="string" value="onboard"/>
       </property>
+      <property name="known-items" type="array">
+        <value type="string" value="nm-applet"/>
+      </property>
+      <property name="known-legacy-items" type="array">
+        <value type="string" value="xfce terminal"/>
+        <value type="string" value="javaembeddedframe"/>
+      </property>
     </property>
     <property name="plugin-6" type="string" value="notification-plugin"/>
     <property name="plugin-7" type="string" value="indicator">
@@ -71,6 +77,7 @@
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-indicators" type="array">
         <value type="string" value="com.canonical.indicator.messages"/>
+        <value type="string" value="libayatana-application.so"/>
       </property>
     </property>
     <property name="plugin-8" type="string" value="statusnotifier">
