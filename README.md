@@ -37,7 +37,8 @@ Last tested with Xubuntu 22.04 running on a ThinkPad (amd64).
 * Run:
 
   ```bash
-  ensure-ssh-key | xclip -selection -c
+  . ~/.profile
+  ensure-ssh-key | xcopy
   open "https://github.com/settings/ssh/new"
   ```
 

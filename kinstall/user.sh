@@ -18,6 +18,7 @@ git remote set-url origin git@github.com:kdmccormick/home.git
 git config --global user.email "$KI_EMAIL"
 git config --global user.name "$KI_FULLNAME"
 git config --global core.excludesfile ~/.global.gitignore
+git config --global pull.rebase false
 
 # Pass setup.
 if [[ ! -d .password-store ]] ; then
