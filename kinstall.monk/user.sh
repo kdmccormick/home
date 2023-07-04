@@ -11,5 +11,4 @@ set -xeuo pipefail
 # Install runelite.
 # NOTE: this is a fixed version; there is no non-versioned download link :(
 # It may auto-update, or we may need it update this over time. Not sure.
-curl "https://github.com/runelite/launcher/releases/download/2.6.4/RuneLite.AppImage" > \
-	"~/.local/bin/RuneLine.AppImage"
+curl -L "https://github.com/runelite/launcher/releases/download/2.6.4/RuneLite.AppImage" > ~/.local/bin/RuneLite.AppImage

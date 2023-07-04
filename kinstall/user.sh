@@ -40,5 +40,5 @@ xfconf-query --channel xfce4-session --property /general/LockCommand --reset
 xfconf-query --channel xfce4-session --property /general/LockCommand --set "xset s activate" --create --type string
 
 # Run host-specific system setup.
-"./kinstall.$host/user.sh"
+"./kinstall.$(hostname)/user.sh"
 

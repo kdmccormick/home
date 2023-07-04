@@ -77,7 +77,8 @@ cp -r --no-clobber "/home/$user/kinstall/host-template"/* "/home/$user/kinstall.
 rm -rf "/home/$user/.kfs"
 mkdir -p "/home/$user/.kfs"
 cp -r "/home/$user/kinstall/fs"/* "/home/$user/.kfs"
-cp -r "/home/$user/kinstall.$host/fs/"* "/home/$kyle/.kfs"
+cp -r "/home/$user/kinstall.$host/fs/"* "/home/$user/.kfs"
+mv "/home/$user/.kfs/home/USER" "/home/$user/.kfs/home/$user"
 cp -r --no-clobber "/home/$user/.kfs"/* /
 
 # Restore ownership of all home files to regular user.

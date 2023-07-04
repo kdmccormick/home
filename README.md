@@ -49,3 +49,6 @@ Last tested with Xubuntu 22.04 running on a ThinkPad (amd64).
   reboot
   ```
 
+## Known Issues
+
+* This all tries to be username-agnostic, but unfortunately many of the app-managed dotfiles hardcode '/home/kyle/...' into configuration.
