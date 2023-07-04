@@ -2,20 +2,26 @@
 
 /*
 
+# Files
 !/README.rst
-!/kinstall
-!/pics
-!/scripts
-!/Makefile
-!/*.bash_aliases
+!/.bash_aliases
 !/.bashrc_local
-!/.config
 !/.gitignore
 !/.global.gitignore
+
+# Dirs
+!/kinstall
+!/kinstall.*
+!/Pictures
+!/scripts
+!/.config
 !/.local
-!/.mozilla
 !/.profile_local
-!/.tridactylrc
 !/.xmonad
 
-/.private.bash_aliases
+# Links
+!/docs
+!/downloads
+!/pics
+!/vids
+

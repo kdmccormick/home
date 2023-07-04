@@ -13,25 +13,8 @@ export EDITOR="$VISUAL"
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 
-# Default .kinstall env vars.
-export KI_USER=kyle
-export KI_DIST=xubuntu20
-export KI_PROFILE=self
-export KI_EMAIL=kyle@kylemccormick.me
-export KI_FULLNAME="Kyle McCormick"
-
-# These vars must be set, but purposefully have no defaults.
-unset KI_SSH_PASSPHRASE
-
-# Load up local env vars if we have them.
-if [ -f ~/.profile_private ]; then
-	. ~/.profile_private
-fi
-
-# Environment = user x profile x distribution
-export KI_USER_PROFILE="${KI_USER}-${KI_PROFILE}"
-export KI_ENV="${KI_USER_PROFILE}-${KI_DIST}"
-export KI_ROOT_ENV="root-${KI_PROFILE}-${KI_DIST}"
+# Load up private env vars (not version controlled).
+. ~/.profile_private
 
 # Set xsecurelock parameters
 export XSECURELOCK_WAIT_TIME_MS=10

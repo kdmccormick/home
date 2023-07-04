@@ -39,17 +39,13 @@ alias ea="echo -n é | xcopy"
 alias vi="nvim"
 alias vim="nvim"
 
-# Firefox addons.json prettification/generation
-alias ff-addonsjson-decompile="(cd ~/.mozilla/firefox/_reference && ./addonsjson-decompile $KI_USER_PROFILE)"
-alias ff-addonsjson-compile="(cd ~/.mozilla/firefox/_reference && ./addonsjson-compile)"
-
 # Wifi
 alias w="nmcli c u kyle-home"
 alias w5="nmcli c u kyle-home-5"
 alias wh="nmcli c u kyle-hotspot"
 
 # Load up environ-specific aliases, if defined.
-. ~/."$KI_ENV".bash_aliases 2>/dev/null || true
+. "~/kinstall.$(hostname)/.bash_aliases" 2>/dev/null || true
 
 # Load up private (non-version-controlled) aliases, if defined.
 . ~/.private.bash_aliases 2>/dev/null || true
