@@ -34,6 +34,7 @@ rename
 ripgrep
 shellcheck
 software-properties-common
+vlc
 tcptraceroute
 trash-cli
 xclip
