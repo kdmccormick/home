@@ -8,6 +8,8 @@ Last tested with Xubuntu 22.04 running on a ThinkPad (amd64).
 
 ## Setup
 
+* New ThinkPad? Switch Fn and Ctrl from the boot menu.
+
 * [Download Xubuntu](https://xubuntu.org/download/), plug in a flash drive, and run:
 
    ```bash
@@ -21,10 +23,11 @@ Last tested with Xubuntu 22.04 running on a ThinkPad (amd64).
 
   ```bash
   cd ~
-  git init
+  sudo apt install -y git
+  git init -b master
   git remote add origin https://github.com/kdmccormick/home
   git fetch
-  git switch master
+  git switch master -f
   sudo kinstall/system.sh "$USER"
   vi ~/.profile_private
   ```

@@ -57,7 +57,7 @@ sed --in-place -E "s/(^deb.*docker.*)/\# \1/" /etc/apt/sources.list
 # Install prereqs for using & deugging this script.
 # If you add to this list, add it to apt.list too.
 apt-get update
-apt-get install \
+apt-get install --yes \
 	apt-transport-https \
 	ca-certificates \
 	curl \
