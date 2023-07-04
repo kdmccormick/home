@@ -123,3 +123,17 @@ make install
 cat "/home/$user/kinstall/apt-remove.list" | sed 's/#.*//' | xargs apt-get remove --yes
 cat "/home/$user/kinstall.$host/apt-remove.list" | sed 's/#.*//' | xargs apt-get remove --yes
 apt-get upgrade --autoremove --yes
+
+# Replace some Grub options:
+# 3 second timeout, no splash screen hiding console.
+if ! grep 'kinstall' /etc/default/grub ; then
+	cp /etc/default/grub /etc/default/grub.bak
+	sed -i '/GRUB_CMDLINE_LINUX/d' /etc/default/grub
+	sed -i '/GRUB_TIMEOUT/d' /etc/default/grub
+	echo                                 >> /etc/default/grub
+	echo "# Added by kinstall:"          >> /etc/default/grub
+	echo 'GRUB_CMDLINE_LINUX_DEFAULT=""' >> /etc/default/grub
+	echo 'GRUB_CMDLINE_LINUX=""'         >> /etc/default/grub
+	echo 'GRUB_TIMEOUT=3'                >> /etc/default/grub
+	update-grub
+fi

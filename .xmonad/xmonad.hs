@@ -145,7 +145,6 @@ keybindings =
 
     -- Backslash key for Web browsers
     , (global,        X11T.xK_backslash, spawn cmdFirefox)
-    , (globalShift,   X11T.xK_backslash, spawn cmdFirefoxProfiles)
     , (globalAlt,     X11T.xK_backslash, spawn cmdChromium)
 
     -- Backspace key for file browsers. Shadow built-in 'e' for that function.
@@ -195,9 +194,7 @@ cmdTerminalDropDown       = "xfce4-terminal --drop-down --title='xfce4-terminal-
 cmdTerminal               = "xfce4-terminal"
 cmdTerminalSudo           = "xfce4-terminal -x sudo su"
 
-cmdFirefox                = "firefox -P $KI_USER_PROFILE"
-cmdFirefoxProfiles        = "firefox -P"
-cmdChromium               = "chromium-browser --new-window"
+cmdFirefox                = "firefox"
 
 cmdFolderHome             = "thunar"
 cmdFolderDownloads        = "thunar $HOME/downloads"
