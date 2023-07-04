@@ -28,8 +28,12 @@ gpg --import kinstall/kdmc.pub
 if [[ -f kdmc.key ]] ; then
 	# Also import private GPG key for pass, if present. Remove once imported.
 	gpg --import kdmc.key
+	gpg --command-fd 0 --edit-key kdmc@pm.me <<END
+trust
+5
+y
+END
 	rm kdmc.key
-	echo -e “trust\n5\ny\n” | gpg –command-fd 0 –edit-key kdmc@pm.me
 fi
 
 # NeoVim plugins

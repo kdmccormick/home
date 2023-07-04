@@ -17,5 +17,5 @@ apt-get install --yes ./zoom_amd64.deb
 
 # MiniKube
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-apt-get install minikube-linux-amd64 /usr/local/bin/minikube
+install minikube-linux-amd64 /usr/local/bin/minikube
 

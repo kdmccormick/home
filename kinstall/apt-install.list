@@ -2,12 +2,12 @@ acpi
 build-essential
 ca-certificates
 chromium-browser
-containerd.io
+#containerd.io
 curl
 default-jre
-docker-ce
-docker-ce-cli
-docker-compose
+#docker-ce
+#docker-ce-cli
+#docker-compose
 eslint
 feh
 gh
