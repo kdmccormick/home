@@ -8,18 +8,22 @@
 # Make bash stricter and echo commands.
 set -euo pipefail
 
+root_dir="$HOME"
 
 echo "Cloning all public openedx and overhangio repos."
 echo "Loading repo list from GH API..."
-mkdir -p ~/openedx
-cd ~/openedx
+mkdir -p "$root_dir/openedx" "$root_dir/overhangio"
 while read -r org_repo ; do
-	cd ~/openedx
 	org="$(echo "$org_repo" | sed -E 's|/.+$||')"
 	repo="$(echo "$org_repo" | sed -E 's|^.+/||')"
+	cd "$root_dir/$org"
 	echo "================================================================"
 	echo "Processing $repo (from $org)..."
-	if [[ -d "$HOME/openedx/$repo" ]] ; then
+	if [[ "$org" = overhangio ]] && [[ -d "$root_dir/openedx/$repo" ]] ; then
+		echo "Skipping because this repo exists in ../openedx, so this is probably a fork."
+		continue
+	fi
+	if [[ -d "$repo" ]] ; then
 		cd "$repo"
 		git update-index --really-refresh
 		if git diff-index --quiet HEAD ; then
