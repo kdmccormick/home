@@ -115,9 +115,19 @@ sh autogen.sh
 make
 make install
 
-
 # Run host-specific system setup.
 "/home/$user/kinstall.$host/system.sh"
+
+# Remove snaps we never asked for.
+for snapname in $( \
+		cat "/home/$user/kinstall/snap-remove.list" \
+			"/home/$user/kinstall.$host/snap-remove.list" | \
+		sed 's/#.*//' \
+) ; do
+	if snap list "$snapname" >/dev/null ; then
+		snap remove "$snapname"
+	fi
+done
 
 # Remove, upgrade & autoremove.
 cat "/home/$user/kinstall/apt-remove.list" | sed 's/#.*//' | xargs apt-get remove --yes
