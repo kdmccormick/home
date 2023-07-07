@@ -137,3 +137,8 @@ if ! grep 'kinstall' /etc/default/grub ; then
 	echo 'GRUB_TIMEOUT=3'                >> /etc/default/grub
 	update-grub
 fi
+
+# Start docker daemon
+groupadd docker || true
+usermod -aG docker "$user"
+service docker start
