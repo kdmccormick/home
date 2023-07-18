@@ -47,3 +47,6 @@ xfconf-query --channel xfce4-session --property /general/LockCommand --set "xset
 # Run host-specific system setup.
 "./kinstall.$(hostname)/user.sh"
 
+# Set up link to host-specific lock screen.
+ln -sf "$HOME/kinstall.$(hostname)/lock.jpg" "$HOME/kinstall/lock.jpg"
+

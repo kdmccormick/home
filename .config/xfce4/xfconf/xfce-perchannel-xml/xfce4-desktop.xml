@@ -201,9 +201,15 @@
         <property name="workspace0" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/kyle/pics/lock-screens/lock.jpg"/>
+          <property name="last-image" type="string" value="/home/kyle/kinstall/lock.jpg"/>
           <property name="backdrop-cycle-enable" type="bool" value="false"/>
           <property name="backdrop-cycle-random-order" type="bool" value="true"/>
+          <property name="rgba1" type="array">
+            <value type="double" value="0.207843"/>
+            <value type="double" value="0.517647"/>
+            <value type="double" value="0.894118"/>
+            <value type="double" value="1.000000"/>
+          </property>
         </property>
         <property name="workspace1" type="empty">
           <property name="color-style" type="int" value="0"/>
@@ -255,15 +261,16 @@
     <property name="single-workspace-mode" type="bool" value="false"/>
     <property name="single-workspace-number" type="int" value="0"/>
   </property>
+  <property name="desktop-menu" type="empty">
+    <property name="show" type="empty"/>
+    <property name="show-icons" type="bool" value="true"/>
+  </property>
   <property name="last" type="empty">
-    <property name="window-width" type="int" value="596"/>
-    <property name="window-height" type="int" value="823"/>
+    <property name="window-width" type="int" value="1904"/>
+    <property name="window-height" type="int" value="1004"/>
   </property>
   <property name="windowlist-menu" type="empty">
     <property name="show-submenus" type="bool" value="false"/>
     <property name="show-add-remove-workspaces" type="bool" value="false"/>
-  </property>
-  <property name="desktop-menu" type="empty">
-    <property name="show-icons" type="bool" value="true"/>
   </property>
 </channel>
