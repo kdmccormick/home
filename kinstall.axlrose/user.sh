@@ -10,9 +10,9 @@ set -euo pipefail
 
 root_dir="$HOME"
 
-echo "Cloning all public openedx and overhangio repos."
+echo "Cloning all public openedx, overhangio, and edx repos."
 echo "Loading repo list from GH API..."
-mkdir -p "$root_dir/openedx" "$root_dir/overhangio"
+mkdir -p "$root_dir/openedx" "$root_dir/overhangio" "$root_dir/edx"
 while read -r org_repo ; do
 	org="$(echo "$org_repo" | sed -E 's|/.+$||')"
 	repo="$(echo "$org_repo" | sed -E 's|^.+/||')"
@@ -58,6 +58,10 @@ done < <(
 		done
 		for page in 1 ; do
 			gh api "orgs/overhangio/repos?type=public&per_page=100&page=$page"
+			echo ","
+		done
+		for page in 1 2 ; do
+			gh api "orgs/edx/repos?type=public&per_page=100&page=$page"
 			echo ","
 		done
 		echo '[] ]'
