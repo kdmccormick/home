@@ -18,6 +18,8 @@ set cursorline              " highlight current cursorline
 set ttyfast                 " Speed up scrolling in Vim
 set noswapfile              " disable creating swap file
 
+set tw=0                    " disable auto line break
+
 " KM disabled these for now - they're annoying or don't work right
 "set expandtab               " converts tabs to white space
 "set spell                   " enable spell check
