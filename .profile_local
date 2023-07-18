@@ -24,7 +24,7 @@ export XSECURELOCK_LIST_VIDEOS_COMMAND="echo ${HOME}/kinstall.$(hostname)/lock.j
 export XSECURELOCK_NO_COMPOSITE=1
 
 # Tutor (Open edX)
-export TUTOR_ROOT="${HOME}/openedx/tutor-root"
-export TUTOR_PLUGINS_ROOT="${HOME}/openedx/tutor-plugins"
+export TUTOR_ROOT="${HOME}/tutor-root"
+export TUTOR_PLUGINS_ROOT="${HOME}/tutor-plugins"
 
 . ~/.bashrc_local

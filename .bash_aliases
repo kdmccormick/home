@@ -29,8 +29,8 @@ alias ddx="dd bs=64k status=progress"
 # Virtualenvs
 alias v="source .venv/bin/activate || source venv/bin/activate"
 alias v0="deactivate"
-alias vt="source $HOME/openedx/venv-tutor/bin/activate"
-alias vtr="source $HOME/openedx/venv-tutor/bin/activate && (cd ~/openedx && pip install -r tutor-requirements.txt)"
+alias vt="source $HOME/venv-tutor/bin/activate"
+alias vtr="source $HOME/venv-tutor/bin/activate && (cd ~/overhangio/tutor && pip install -e '.[full]' -r requirements/dev.txt -r requirements/docs.txt)"
 
 # Non-ascii character copying
 alias ea="echo -n é | xcopy"
