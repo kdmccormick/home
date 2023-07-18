@@ -5,15 +5,19 @@
   <property name="Default" type="empty">
     <property name="eDP-1" type="string" value="Laptop">
       <property name="Active" type="bool" value="true"/>
-      <property name="EDID" type="string" value="b720b0e490b10113a347c690cdf3793b8fec76b5"/>
+      <property name="EDID" type="string" value="098e30d707ec3c9ac663bb0baa42960ad159fd3e"/>
       <property name="Resolution" type="string" value="1920x1080"/>
-      <property name="RefreshRate" type="double" value="60.049471"/>
+      <property name="RefreshRate" type="double" value="59.999654"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
       <property name="Primary" type="bool" value="false"/>
       <property name="Position" type="empty">
         <property name="X" type="int" value="0"/>
         <property name="Y" type="int" value="0"/>
+      </property>
+      <property name="Scale" type="empty">
+        <property name="X" type="double" value="1.000000"/>
+        <property name="Y" type="double" value="1.000000"/>
       </property>
     </property>
     <property name="DP-1" type="string" value="Dell 27&quot;">
@@ -46,15 +50,19 @@
   <property name="Fallback" type="empty">
     <property name="eDP-1" type="string" value="Laptop">
       <property name="Active" type="bool" value="true"/>
-      <property name="EDID" type="string" value="b720b0e490b10113a347c690cdf3793b8fec76b5"/>
+      <property name="EDID" type="string" value="098e30d707ec3c9ac663bb0baa42960ad159fd3e"/>
       <property name="Resolution" type="string" value="1920x1080"/>
-      <property name="RefreshRate" type="double" value="60.049471"/>
+      <property name="RefreshRate" type="double" value="59.999654"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
       <property name="Primary" type="bool" value="false"/>
       <property name="Position" type="empty">
         <property name="X" type="int" value="0"/>
         <property name="Y" type="int" value="0"/>
+      </property>
+      <property name="Scale" type="empty">
+        <property name="X" type="double" value="1.000000"/>
+        <property name="Y" type="double" value="1.000000"/>
       </property>
     </property>
     <property name="DP-1" type="string" value="Dell 27&quot;">
