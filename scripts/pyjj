@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+set -x
+python -c "import sys, json; jj = json.load(sys.stdin); $1"

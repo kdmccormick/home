@@ -1,0 +1,11 @@
+#!/bin/sh
+echo 'Stop using checkout.'
+echo
+echo 'For switching revisions, use:'
+echo '   git switch  BRANCH'
+echo '   git switch -c NEW_BRANCH'
+echo '   git switch -d DETACHED_REVISION'
+echo
+echo 'For restoring files, use:'
+echo '   git restore PATH'
+echo '   git restore -s REVISION PATH'
