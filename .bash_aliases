@@ -18,8 +18,8 @@ alias xpaste="xclip -selection clipboard -o"
 alias xfjson="xpaste | fjson | xcopy"
 
 # Upgrades
-alias run-upgrade="sudo apt update && sudo apt upgrade && sudo apt autoremove && cd ~ && make extras.fix-grub"
-alias run-upgrade-yes="sudo apt update && sudo apt upgrade --yes && sudo apt autoremove --yes && cd ~ && make extras.fix-grub"
+alias run-upgrade="sudo apt update && sudo apt upgrade && sudo apt autoremove"
+alias run-upgrade-yes="sudo apt update && sudo apt upgrade --yes && sudo apt autoremove --yes"
 
 # Misc. utilities
 alias reown="sudo chown $(whoami) -R"
@@ -29,8 +29,18 @@ alias ddx="dd bs=64k status=progress"
 # Virtualenvs
 alias v="source .venv/bin/activate || source venv/bin/activate"
 alias v0="deactivate"
+
+# Axim aliases (TODO: move to axlrose!)
 alias vt="source $HOME/venv-tutor/bin/activate"
 alias vtr="source $HOME/venv-tutor/bin/activate && (cd ~/overhangio/tutor && pip install -e '.[full]' -r requirements/dev.txt -r requirements/docs.txt)"
+alias cdo="cd $HOME/openedx"
+alias cdop="cd $HOME/openedx/edx-platform"
+alias cdi="cd $HOME/overhangio"
+alias cdit="cd $HOME/overhangio/tutor"
+alias tutordevrunlmsbash="tutor dev run lms env EDXAPP_TEST_MONGO_HOST=mongodb SERVICE_VARIANT= DJANGO_SETTINGS_MODULE=lms.envs.tutor.test bash -o vi"
+alias tutordevruncmsbash="tutor dev run cms env EDXAPP_TEST_MONGO_HOST=mongodb SERVICE_VARIANT= DJANGO_SETTINGS_MODULE=cms.envs.tutor.test bash -o vi"
+alias tutordevrunlmspytest="tutor dev run lms env EDXAPP_TEST_MONGO_HOST=mongodb SERVICE_VARIANT= DJANGO_SETTINGS_MODULE=lms.envs.tutor.test pytest"
+alias tutordevruncmspytest="tutor dev run cms env EDXAPP_TEST_MONGO_HOST=mongodb SERVICE_VARIANT= DJANGO_SETTINGS_MODULE=cms.envs.tutor.test pytest"
 
 # Non-ascii character copying
 alias ea="echo -n é | xcopy"
