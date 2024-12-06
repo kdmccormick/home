@@ -10,9 +10,9 @@ if [[ "$flag" != -f ]]; then
 	git diff --exit-code
 fi
 
-git checkout master
+git switch master || git switch main
 git fetch --all
-git reset --hard upstream/master || git reset --hard origin/master
+git reset --hard upstream/master || git reset --hard origin/master || git reset --hard upstream/main || git reset --hard origin/main
 git-cleanbranches origin
 git-cleanbranches upstream || true
 

@@ -5,7 +5,7 @@
 
 # Set path.
 # Should already include $HOME/bin, via Ubuntu or whatever.
-export PATH="$HOME/scripts:$HOME/.cabal/bin:$PATH"
+export PATH="$HOME/scripts/$(hostname):$HOME/scripts:$HOME/.cabal/bin:$PATH"
 
 # Set default terminal programs.
 export VISUAL=nvim
@@ -26,5 +26,22 @@ export XSECURELOCK_NO_COMPOSITE=1
 # Tutor (Open edX)
 export TUTOR_ROOT="${HOME}/tutor-root"
 export TUTOR_PLUGINS_ROOT="${HOME}/tutor-plugins"
+
+git() {
+	if [[ "$1" = checkout ]] ; then
+		echo 'Stop using checkout.'
+		echo
+		echo 'For switching revisions, use:'
+		echo '   git switch BRANCH'
+		echo '   git switch -c NEW_BRANCH'
+		echo '   git switch -d DETACHED_REVISION'
+		echo
+		echo 'For restoring files, use:'
+		echo '   git restore PATH'
+		echo '   git restore -s REVISION PATH'
+	else
+		command git "$@"
+	fi
+}
 
 . ~/.bashrc_local
