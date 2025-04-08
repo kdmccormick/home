@@ -1,3 +1,5 @@
+*As of April 2025 I've moved to NixOS: https://github.com/kdmccormick/etc-nixos*
+
 # Kyle's ~
 
 I version control my home diretory to make it easier to set up & reproduce my preferred Linux environment.
